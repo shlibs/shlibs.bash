@@ -54,7 +54,7 @@ if [[ -d "/storage/emulated/0/Download/builtAPKs/$JID$DAY" ]]
 then
        printf "\\n\\e[1;1;38;5;121m%s\\n\\n	%s%s\\n	%s%s\\n" "Results for Download/builtAPKs/:" "$(find /storage/emulated/0/Download/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in Download/builtAPKs/" "$(( $(ls -Al "/storage/emulated/0/Download/builtAPKs/$JID$DAY"/ | wc -l) - 1 ))" " deposited in Download/builtAPKs/$JID$DAY/"
 else
-       printf "\\n\\e[1;1;38;5;122m%s\\n\\n	%s%s\\n	%s%s\\n" "Results for ${RDR##*/}/cache/builtAPKs/:" "$(find "$RDR"/cache/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in ${RDR##*/}/cache/builtAPKs/" "$(( $(ls -Al "$RDR/cache/builtAPKs/$JID$DAY" | wc -l) - 1 ))" " deposited in ${RDR##*/}/cache/builtAPKs/$JID$DAY/"
+       printf "\\n\\e[1;1;38;5;122m%s\\n\\n	%s%s\\n	%s%s\\n" "Results for ~/${RDR##*/}/cache/builtAPKs/:" "$(find "$RDR"/cache/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in ~/${RDR##*/}/cache/builtAPKs/" "$(( $(ls -Al "$RDR/cache/builtAPKs/$JID$DAY" | wc -l) - 1 ))" " deposited in ~/${RDR##*/}/cache/builtAPKs/$JID$DAY/"
 fi
 CA="$(ls --color=always "$RDR/scripts/build/")"
 CAA="$(awk '!/build\./' <<< $CA)"
