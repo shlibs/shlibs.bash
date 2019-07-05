@@ -43,8 +43,8 @@ mkdir -p "$TMPDIR/fa$$"
 printf "\\e[1;1;38;5;118m%s\\n\\n" "Calculating for ~/${RDR##*/}/..."
 find "$RDR/sources/" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible.total" 
 find "$RDR/sources/" -type f -name "*.apk" > "$TMPDIR/fa$$/built.total" 
-find "$JDR" -type f -name AndroidManifest.xml 2 >> "$RDR/log/stnderr.tots.bash.log" > "$TMPDIR/fa$$/possible" ||: 
-find "$JDR" -type f -name "*.apk" 2 >> "$RDR/log/stnderr.tots.bash.log" > "$TMPDIR/fa$$/built" ||: 
+find "$JDR" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible" ||: 
+find "$JDR" -type f -name "*.apk" > "$TMPDIR/fa$$/built" ||: 
 cd "$TMPDIR/fa$$"
 printf "\\e[1;1;38;5;119m%s\\n\\n" "The total increases as modules are added;  The build scripts add modules and create APKs on device.  Results for ~/${RDR##*/}/sources/:"
 wc -l possible.total built.total | sed -n 1,2p # https://www.cyberciti.biz/faq/unix-linux-show-first-10-20-lines-of-file/
