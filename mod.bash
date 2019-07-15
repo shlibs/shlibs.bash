@@ -57,13 +57,13 @@ _UMODS_() {
 	fi
 	if [[ -f "$JDR"/ma.bash ]] 
 	then 
-		. "$RDR"/scripts/shlibs/at.bash 
+		. "$RDR"/scripts/bash/shlibs/at.bash 
 		. "$JDR"/ma.bash 
 	fi
 }
 
-. "$RDR"/scripts/shlibs/lock.bash 
-. "$RDR"/scripts/shlibs/bnchn.bash bch.st 
+. "$RDR"/scripts/bash/shlibs/lock.bash 
+. "$RDR"/scripts/bash/shlibs/bnchn.bash bch.st 
 if [[ -f "$JDR/.git" ]] # file exists in job directory
 then # print modules message
 	_PRINTNMODS_
@@ -71,8 +71,8 @@ else # print updating modules message
 	_PRINTUMODS_
 	_UMODS_
 fi
-find "$JDR" -name AndroidManifest.xml -execdir "$RDR/scripts/build/build.one.bash" "$JID" {} \; 2>>"$RDR/log/stnderr.$JID.log" || (printf "\\n%s\\n" "Unable to find and process jobs in the job directory:  Continuing...")
-. "$RDR"/scripts/shlibs/tots.bash
-. "$RDR"/scripts/shlibs/bnchn.bash bch.gt 
+find "$JDR" -name AndroidManifest.xml -execdir "$RDR/scripts/bash/build/build.one.bash" "$JID" {} \; 2>>"$RDR/log/stnderr.$JID.log" || (printf "\\n%s\\n" "Unable to find and process jobs in the job directory:  Continuing...")
+. "$RDR"/scripts/bash/shlibs/tots.bash
+. "$RDR"/scripts/bash/shlibs/bnchn.bash bch.gt 
 
 #EOF

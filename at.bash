@@ -38,9 +38,9 @@ trap _SATTRPQUIT_ QUIT
 _TB_() { # add git modules from GitHub
 	if [[ -f "$RDR/cache/tarballs/$2" ]]
        	then
-		(cd "$JDR/$1/" && printf "\\n%s\\n" "Populating $JDR/$1/:" && tar xf "$RDR/cache/tarballs/$2" && .  "$RDR"/scripts/init/prep.bash) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+		(cd "$JDR/$1/" && printf "\\n%s\\n" "Populating $JDR/$1/:" && tar xf "$RDR/cache/tarballs/$2" && .  "$RDR"/scripts/bash/init/prep.bash) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 	else
-		(cd "$RDR"/cache/tarballs/ && printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" && curl -OL https://github.com/$1/tarball/$2 &&  cd "$JDR/$1/" && printf "\\n%s\\n" "Populating $JDR/$1/:" && tar xf "$RDR/cache/tarballs/$2" && .  "$RDR"/scripts/init/prep.bash) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+		(cd "$RDR"/cache/tarballs/ && printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" && curl -OL https://github.com/$1/tarball/$2 &&  cd "$JDR/$1/" && printf "\\n%s\\n" "Populating $JDR/$1/:" && tar xf "$RDR/cache/tarballs/$2" && .  "$RDR"/scripts/bash/init/prep.bash) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 	fi
 }
 
