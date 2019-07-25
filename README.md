@@ -11,4 +11,4 @@ cd && git clone https://github.com/BuildAPKs/buildAPKs
 
 https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash
 
-#OEF
+<!-- #OEM -->
