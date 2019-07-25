@@ -11,4 +11,6 @@ cd && git clone https://github.com/BuildAPKs/buildAPKs
 
 https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash
 
+Information about shells: https://developer.ibm.com/tutorials/l-linux-shells/
+
 <!-- #OEM -->
