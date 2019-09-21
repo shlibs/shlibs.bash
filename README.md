@@ -26,7 +26,8 @@ cd && git clone https://github.com/SDRausty/buildAPKs
 ##### -rwxrwx--- [setup.buildAPKs.bash](https://sdrausty.github.io/buildAPKs/scripts/bash/init/setup.buildAPKs.bash)
 ##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/SDRausty/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash)
 
-Information about shells: 
+
+##### Information about shells: 
    * https://developer.ibm.com/tutorials/l-linux-shells/
    * http://tldp.org/guides.html
 
