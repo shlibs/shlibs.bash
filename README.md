@@ -9,7 +9,7 @@ cd && git clone https://github.com/BuildAPKs/buildAPKs
 ./buildAPKs/scripts/bash/init/setup.buildAPKs.bash
 
 ```
-https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash)
+https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash
 
 And
 
