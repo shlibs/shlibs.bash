@@ -49,7 +49,7 @@ _UMODS_() {
 	then
 		mkdir -p "$RDR"/cache/tarballs
 	fi
-	if grep $JID .gitmodules 1>/dev/null
+	if grep -w $JID .gitmodules 1>/dev/null
 	then
 		(git submodule update --init --recursive --remote sources/$JID) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE ~/${RDR##*/}/sources/$JID:  Continuing...") # https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/
 	else
@@ -75,4 +75,4 @@ find "$JDR" -name AndroidManifest.xml -execdir "$RDR/scripts/bash/build/build.on
 . "$RDR"/scripts/bash/shlibs/tots.bash
 . "$RDR"/scripts/bash/shlibs/bnchn.bash bch.gt 
 
-#EOF
+# mod.bash EOF
