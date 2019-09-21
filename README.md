@@ -6,8 +6,7 @@ This repository is a submodule for [buildAPKs](https://github.com/BuildAPKs/buil
 
 cd && git clone https://github.com/BuildAPKs/buildAPKs
 
-./buildAPKs/scripts/bash/init/setup.buildAPKs.bash
-
+[./buildAPKs/scripts/bash/init/setup.buildAPKs.bash](https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash)
 ```
 
 And
@@ -19,8 +18,6 @@ cd && git clone https://github.com/SDRausty/buildAPKs
 ./buildAPKs/scripts/bash/init/setup.buildAPKs.bash
 
 ```
-
-https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash
 
 Information about shells: 
    * https://developer.ibm.com/tutorials/l-linux-shells/
