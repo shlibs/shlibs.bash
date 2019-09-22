@@ -42,7 +42,7 @@ trap _STOTRPSIGNAL_ HUP INT TERM
 trap '_STOTRPQUIT_ $? $LINENO $BASH_COMMAND' QUIT 
 
 mkdir -p "$TMPDIR/fa$$"
-printf "\\e[1;1;38;5;118m%s\\n\\n" "Calculating for ~/${RDR##*/}/..."
+printf "\\e[1;1;38;5;118m%s\\n\\n" "Calculating for ~/${RDR##*/}/.  This may take a while;  Please be patient."
 find "$RDR/sources/" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible.total" 
 find "$RDR/sources/" -type f -name "*.apk" > "$TMPDIR/fa$$/built.total" 
 find "$JDR" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible" ||: 
