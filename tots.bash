@@ -60,4 +60,4 @@ BBSL="$(find "$RDR/scripts/bash/build/" -type f | cut -d "/" -f 8-)"
 printf "\\n\\e[1;1;38;5;123m%s\\n\\n%s\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/bash/build/:" "$BBSL" 
 _WAKEUNLOCK_ ||:
 
-#tots.bash OEF
+# EOF tots.bash
