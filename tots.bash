@@ -7,6 +7,7 @@ set -Eeuo pipefail
 shopt -s nullglob globstar
 
 _STOTRPERROR_ () { # Run on script error.
+	_WAKEUNLOCK_
 	printf "\\e[?25h\\n\\e[1;48;5;138mBuildAPKs tots.bash ERROR:  Generated script error %s near or at line number %s by \`%s\`!\\e[0m\\n" "${1:-UNDEFINED}" "${2:-LINENO}" "${3:-BASH_COMMAND}"
 	exit 197
 }
