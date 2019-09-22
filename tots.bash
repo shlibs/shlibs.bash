@@ -15,8 +15,8 @@ _STOTRPEXIT_ () { # run on exit
 	local RV="$?"
 	if [[ "$RV" != 0 ]]  
 	then 
-		printf "%s\\n" "Signal $RV received by ${0##*/}!"  
-	fi
+		printf "%s\\n" "BuildAPKs tots.bash EXIT: Signal $RV received by ${0##*/}!"
+        fi
 	cd "$RDR" 
 	rm -rf "$TMPDIR"/fa$$
 	printf "\\e[?25h\\e[0m"
