@@ -6,12 +6,12 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 
-_SFATRPERROR_ () { # Run on script error.
+_STOTRPERROR_ () { # Run on script error.
 	printf "\\e[?25h\\n\\e[1;48;5;138mBuildAPKs tots.bash ERROR:  Generated script error %s near or at line number %s by \`%s\`!\\e[0m\\n" "${1:-UNDEFINED}" "${2:-LINENO}" "${3:-BASH_COMMAND}"
 	exit 197
 }
 
-_SFATRPEXIT_ () { # run on exit
+_STOTRPEXIT_ () { # run on exit
 	local RV="$?"
 	if [[ "$RV" != 0 ]]  
 	then 
@@ -24,21 +24,21 @@ _SFATRPEXIT_ () { # run on exit
 	exit 0
 }
 
-_SFATRPSIGNAL_ () { # Run on signal.
+_STOTRPSIGNAL_ () { # Run on signal.
 	printf "\\e[?25h\\e[1;7;38;5;0mBuildAPKs tots.bash WARNING:  Signal %s received!\\e[0m\\n" "$?"
  	exit 198 
 }
 
-_SFATRPQUIT_ () { # Run on quit.
+_STOTRPQUIT_ () { # Run on quit.
 	_WAKEUNLOCK_
         printf "\\e[?25h\\n\\e[1;48;5;138mBuildAPKs tots.bash WARNING:  Quit script %s received near or at line number %s by \`%s\`!\\e[0m\\n" "${1:-UNDEFINED}" "${2:-LINENO}" "${3:-BASH_COMMAND}"
 	exit 199 
 }
 
-trap '_SFATRPERROR_ $? $LINENO $BASH_COMMAND' ERR 
-trap _SFATRPEXIT_ EXIT
-trap _SFATRPSIGNAL_ HUP INT TERM 
-trap '_SFATRPQUIT_ $? $LINENO $BASH_COMMAND' QUIT 
+trap '_STOTRPERROR_ $? $LINENO $BASH_COMMAND' ERR 
+trap _STOTRPEXIT_ EXIT
+trap _STOTRPSIGNAL_ HUP INT TERM 
+trap '_STOTRPQUIT_ $? $LINENO $BASH_COMMAND' QUIT 
 
 mkdir -p "$TMPDIR/fa$$"
 printf "\\e[1;1;38;5;118m%s\\n\\n" "Calculating for ~/${RDR##*/}/..."
