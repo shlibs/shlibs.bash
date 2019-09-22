@@ -58,7 +58,7 @@ else
        printf "\\n\\e[1;1;38;5;122m%s\\n\\n	%s%s\\n	%s%s\\n" "Results for ~/${RDR##*/}/cache/builtAPKs/:" "$(find "$RDR"/cache/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in ~/${RDR##*/}/cache/builtAPKs/" "$(( $(ls -Al "$RDR/cache/builtAPKs/$JID$DAY" | wc -l) - 1 ))" " deposited in ~/${RDR##*/}/cache/builtAPKs/$JID$DAY/"
 fi
 BBSL="$(ls "$RDR/scripts/bash/build/")"
-printf "\\n\\e[1;1;38;5;123m%s\\n\\n%s\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/bash/build/:" "$BBSL" 
+printf "\\n\\e[1;1;38;5;108m%s\\n\\n%s\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/bash/build/:" "$BBSL" 
 _WAKEUNLOCK_
 
 # EOF tots.bash
