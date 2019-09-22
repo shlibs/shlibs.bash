@@ -30,8 +30,9 @@ _SFATRPSIGNAL_ () { # Run on signal.
 }
 
 _SFATRPQUIT_ () { # Run on quit.
-	printf "\\e[?25h\\n\\e[1;48;5;138mBuildAPKs tots.bash WARNING:  Quit script %s received near or at line number %s by \`%s\`!\\e[0m\\n" "${1:-UNDEFINED}" "${2:-LINENO}" "${3:-BASH_COMMAND}"
- 	exit 199 
+	_WAKEUNLOCK_
+        printf "\\e[?25h\\n\\e[1;48;5;138mBuildAPKs tots.bash WARNING:  Quit script %s received near or at line number %s by \`%s\`!\\e[0m\\n" "${1:-UNDEFINED}" "${2:-LINENO}" "${3:-BASH_COMMAND}"
+	exit 199 
 }
 
 trap '_SFATRPERROR_ $? $LINENO $BASH_COMMAND' ERR 
