@@ -25,6 +25,7 @@ _STOTRPEXIT_ () { # run on exit
 }
 
 _STOTRPSIGNAL_ () { # Run on signal.
+	_WAKEUNLOCK_
 	printf "\\e[?25h\\e[1;7;38;5;0mBuildAPKs tots.bash WARNING:  Signal %s received!\\e[0m\\n" "$?"
  	exit 198 
 }
