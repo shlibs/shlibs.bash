@@ -2,7 +2,7 @@
 
 [This repository](https://github.com/shlibs/shlibs.bash) is a submodule for [buildAPKs](https://github.com/BuildAPKs/buildAPKs) and [SDRausty's buildAPKs](https://github.com/SDRausty/buildAPKs).
 
-To make applications on smartphone, tablet and TV, copy and paste the following into [Termux](https://github.com/termux) in order to install shlibs.bash in its' proper place:
+To make Android Application Kits on smartphone, tablet and TV, copy and paste the following into [Termux](https://github.com/termux) in order to install shlibs.bash in its' proper place:
 
 ```
 
