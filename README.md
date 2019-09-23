@@ -28,7 +28,7 @@ cd && git clone https://github.com/SDRausty/buildAPKs
 
 
 ##### Information about shells: 
-   * https://developer.ibm.com/tutorials/l-linux-shells/
-   * http://tldp.org/guides.html
+   * [https://developer.ibm.com/tutorials/l-linux-shells/](https://developer.ibm.com/tutorials/l-linux-shells/)
+   * [http://tldp.org/guides.html](http://tldp.org/guides.html)
 
 <!--OEF README.md-->
