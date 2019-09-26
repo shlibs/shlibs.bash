@@ -71,16 +71,19 @@ _WAKEUNLOCK_() {
 	else 
 		am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService 1>/dev/null 
 		_PRINTDONE_ 
+		_PRINTHELP_
 	fi
 }
 
 _PRINTHELP_() {
-	printf "\\n\\e[1;38;5;107m%s\\e[1;38;5;109m%s\\e[1;38;5;107m%s\\e[0m\\n\\n" "To always have wake lock set to on: " "\`touch ~/${RDR##*/}/lock/set.lock\`" "."
+	if [[ ! -f "$RDR/lock/set.lock" ]] 
+	then 
+		printf "\\n\\e[1;38;5;107m%s\\e[1;38;5;109m%s\\e[1;38;5;107m%s\\e[0m\\n\\n" "To always have wake lock set to on: " "\`touch ~/${RDR##*/}/lock/set.lock\`" "."
+	fi
 }
 
 _PRINTDONE_() {
 	printf "\\e[1;32mDONE  \\e[0m\\n"
-	_PRINTHELP_
 }
 
 _PRINTWLA_() {
@@ -93,4 +96,4 @@ _PRINTWLD_() {
 
 _WAKELOCK_
 
-#EOF
+# lock.bash EOF
