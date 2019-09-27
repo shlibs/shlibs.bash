@@ -52,4 +52,4 @@ then
 	printf "Build time: %s seconds\\n\\n" "$(( $ET-$ST ))"
 fi
 
-#OEF
+# bnchn.bash OEF

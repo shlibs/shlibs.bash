@@ -1,6 +1,6 @@
 #!/bin/env bash
 # Copyright 2017-2019 (c) all rights reserved 
-# by shlibs https://shlibs.github.io
+# by S D Rausty https://sdrausty.github.io
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
@@ -57,4 +57,4 @@ _AT_() { # add git modules from GitHub
 	fi
 }
 
-#EOF
+# at.bash EOF

@@ -63,4 +63,4 @@ BBSL="$(ls "$RDR/scripts/bash/build/")"
 printf "\\n\\e[1;1;38;5;108m%s\\n\\n%s\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/bash/build/:" "$BBSL" 
 _WAKEUNLOCK_
 
-# EOF tots.bash
+# tots.bash EOF
