@@ -66,7 +66,7 @@ _WAKEUNLOCK_() {
 		fi
 		printf "\\n\\n\\e[1;33m"
 		ls "$RDR/lock"
-		printf "\\n\\e[1;38;5;187mYou can safely delete ~/%s/lock if no other jobs are running.\\e[0m\\n" "${RDR##*/}" 
+		printf "\\n\\e[1;38;5;187mYou can safely delete ~/%s/lock if no other jobs are running.\\e[0m\\n\\n" "${RDR##*/}" 
 		_PRINTHELP_
 	else 
 		am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService 1>/dev/null 
