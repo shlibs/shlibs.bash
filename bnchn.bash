@@ -49,7 +49,7 @@ then
 elif [[ "$1" = "bch.gt" ]] 
 then 
 	ET="$(date +%s)"
-	printf "\\nBuild time: %s seconds\\n\\n" "$(( $ET-$ST ))"
+	printf "Build time: %s seconds\\n\\n" "$(( $ET-$ST ))"
 fi
 
 # bnchn.bash OEF
