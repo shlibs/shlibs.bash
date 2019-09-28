@@ -72,6 +72,7 @@ else # print updating modules message
 	_UMODS_
 fi
 find "$JDR" -name AndroidManifest.xml -execdir "$RDR/scripts/bash/build/build.one.bash" "$JID" {} \; 2>>"$RDR/log/stnderr.$JID.log" || (printf "\\n%s\\n" "Unable to find and process jobs in the job directory:  Continuing...")
+. "$RDR"/scripts/bash/init/prep.bash
 . "$RDR"/scripts/bash/shlibs/tots.bash
 . "$RDR"/scripts/bash/shlibs/bnchn.bash bch.gt 
 
