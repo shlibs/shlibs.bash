@@ -45,10 +45,6 @@ _PRINTNMODS_() {
 
 _UMODS_() { 
 	printf "\\e[1;1;38;5;191m%s\\e[0m\\n" "Updating module ~/$SRDR/sources/$JID to the newest version... " 
-	if ! [[ -d "$RDR"/cache/tarballs ]]
-	then
-		mkdir -p "$RDR"/cache/tarballs
-	fi
 	if grep -w $JID .gitmodules 1>/dev/null
 	then
 		(git submodule update --init --recursive --remote sources/$JID) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE ~/${RDR##*/}/sources/$JID:  Continuing...") # https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/
