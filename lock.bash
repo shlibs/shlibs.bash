@@ -60,9 +60,14 @@ _WAKEUNLOCK_() {
 		printf '\033]2;Releasing wake lock: Pending...\007'
 		if [[ $(find "$RDR/lock" -type f | wc -l) -gt 1 ]] 
 		then
-			printf "\\e[1;33mNOT RELEASED.  \\e[1;32mOther lock files are present in ~/%s/lock:" "${RDR##*/}" 
+			printf "\\e[1;33mNOT RELEASED.  \\e[1;32mOther lock files are present in ~/%s/lock:\\e[0m" "${RDR##*/}" 
 		else
-			printf "\\e[1;33mNOT RELEASED.  \\e[1;32mAnother lock file is present in ~/%s/lock:" "${RDR##*/}" 
+			if [[ -f "$RDR/lock/set.lock" ]] 
+			then 
+				printf "\\e[1;33mNOT RELEASED.  \\e[1;32m%s\\e[0m" "File \`set.lock\` is found!"
+			else
+				printf "\\e[1;33mNOT RELEASED.  \\e[1;32mAnother lock file is present in ~/%s/lock:\\e[0m" "${RDR##*/}" 
+			fi
 		fi
 		printf "\\n\\n\\e[1;33m"
 		ls "$RDR/lock"
@@ -78,7 +83,7 @@ _WAKEUNLOCK_() {
 _PRINTHELP_() {
 	if [[ ! -f "$RDR/lock/set.lock" ]] 
 	then 
-		printf "\\n\\e[1;38;5;107m%s\\e[1;38;5;109m%s\\e[1;38;5;107m%s\\e[0m\\n\\n" "To always have wake lock set to on: " "\`touch ~/${RDR##*/}/lock/set.lock\`" "."
+		printf "\\n\\e[1;38;5;107m%s\\e[1;38;5;109m%s\\e[0m\\n\\n" "To always have wake lock set to on: " "touch ~/${RDR##*/}/lock/set.lock" 
 	fi
 }
 
