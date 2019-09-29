@@ -64,7 +64,7 @@ _WAKEUNLOCK_() {
 		else
 			if [[ -f "$RDR/lock/set.lock" ]] 
 			then 
-				printf "\\e[1;33mNOT RELEASED.  \\e[1;32m%s\\e[0m" "Found \`set.lock\` file!"
+				printf "\\e[1;33mNOT RELEASED.  \\e[1;32m%s\\e[0m" "Found set.lock file!"
 			else
 				printf "\\e[1;33mNOT RELEASED.  \\e[1;32mAnother lock file is present in ~/%s/lock:\\e[0m" "${RDR##*/}" 
 			fi
