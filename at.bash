@@ -44,7 +44,7 @@ _TB_() { # add git modules from GitHub to cache directory
 	fi
 }
 
-_AT_() { # add git modules from GitHub to job directory
+_AT_() { # unused : add git modules from GitHub to job directory
 	if [[ -d "$JDR/$1/" ]]
        	then
 		if ! find "$JDR/$1/" -type f -name AndroidManifest.xml
