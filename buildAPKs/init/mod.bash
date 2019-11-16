@@ -9,10 +9,10 @@ shopt -s nullglob globstar
 _CLINKS_() { 
 	ADLINK=(apps buildAPKs buildAPKs.modules clocks compasses developers.tools entertainment flashlights games github live.wallpapers samples top10 tutorials widgets)
 	VSTRING="symlink warning: Continuing..."
-	VSTRINGC="Creating symlinks..."
+	VSTRINGC="Creating symlinks: "
 	if [[ ! -e "$RDR/update.buildAPKs.sh" ]]
 	then
-		printf "%s\\n" "$VSTRINGC"
+		printf "%s" "$VSTRINGC"
 		ln -s "$RDR/scripts/sh/shlibs/buildAPKs/maintenance/up.sh" "$RDR/update.buildAPKs.sh" 2>/dev/null || printf "%s\\n" "update.buildAPKs.sh $VSTRING"
 		ln -s "$RDR/scripts/sh/shlibs/dctar.sh" "$RDR/scripts/maintenance/delete.corrupt.tars.sh" 2>/dev/null || printf "%s\\n" "delete.corrupt.tars.sh $VSTRING"
 		for TYPE in "${ADLINK[@]}"
@@ -20,6 +20,7 @@ _CLINKS_() {
 			ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" 2>/dev/null || printf "%s\\n" "$VSTRING"
 		done
 		ln -s "$RDR/scripts/bash/build/buildAll.bash" "$RDR/buildAll.bash" 2>/dev/null || printf "%s\\n" "buildAll.bash $VSTRING"
+		printf "%s\\n" "DONE"
 		if [[ -e "$RDR/setup.buildAPKs.bash" ]]
 		then
 			rm -f "$RDR/setup.buildAPKs.bash"
