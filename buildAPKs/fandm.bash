@@ -6,6 +6,11 @@ set -Eeuo pipefail
 shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/trap.bash 172 173 174 "${0##*/}" 
 _ANDB_() {
+	if [[ -z "${JDR:-}" ]]
+	then 
+		JDR=$1
+	fi
+	printf "\\e[1;7;38;5;220m%s\\e[0m\\n" "Searching for jobs in the job directory $JDR: Please be patient..."
 	for APP in $(find "$JDR" -type f -name AndroidManifest.xml) 
 	do 
 		cd "${APP%/*}" || printf "\\e[1;7;38;5;220m%s\\e[0m\\n" "Unable to find the job directory:  Continuing..." # search: string manipulation site:www.tldp.org
