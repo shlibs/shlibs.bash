@@ -59,17 +59,17 @@ trap '_SBTRPQUIT_ $LINENO $BASH_COMMAND $?' QUIT
 
 _MAINLOCK_ () {
 	RDR="$HOME/buildAPKs"
-	if [[ -z "${1:-}" ]] 
+	if [[ -z "${5:-}" ]] 
 	then 
 		_WAKELOCK_
-	elif [[ "$1" = "wake.idle" ]] 
+	elif [[ "$5" = "wake.idle" ]] 
 	then 
 		export WAKEST="idle"
-	elif [[ "$1" = "wake.start" ]] 
+	elif [[ "$5" = "wake.start" ]] 
 	then 
 		_WAKELOCK_
 		export WAKEST="block"
-	elif [[ "$1" = "wake.stop" ]] 
+	elif [[ "$5" = "wake.stop" ]] 
 	then 
 		export WAKEST="unblock"
 	fi
@@ -138,20 +138,21 @@ _PRINTWLD_() {
 }
 
 _INITLOCK_ () {
-COMMANDIF="$(command -v am)" ||:
-if [[ "$COMMANDIF" = "" ]] 
-then
-	printf "\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "BuildAPKs WARNING: File ${0##*/} cannot operate wake lock!"
-else
-	_MAINLOCK_ "$@"
-fi
+	COMMANDIF="$(command -v am)" ||:
+	if [[ "$COMMANDIF" = "" ]] 
+	then
+		printf "\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "BuildAPKs WARNING: File ${0##*/} cannot use wake lock!"
+	else
+		_MAINLOCK_ "$5"
+	fi
 }
 
+NARGS="${#@}"
 TQUIT="$1"
 TSIGNAL="$2"
 TERROR="$3"
 TPARENT="${4:-UNDEFINED}"
-if [[ -z "${5:-UNDEFINED}" ]]
+if [[ $NARGS -gt 4 ]]
 then
 	_INITLOCK_ "$5" 
 fi
