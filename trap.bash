@@ -152,8 +152,8 @@ TQUIT="$1"
 TSIGNAL="$2"
 TERROR="$3"
 TPARENT="${4:-UNDEFINED}"
-if [[ $NARGS -gt 4 ]]
-then
-	_INITLOCK_ "${5:-UNDEFINED}" 
+if [[ ! -z "${5:-}" ]] 
+then 
+	_INITLOCK_ "$5" 
 fi
 # trap.bash EOF
