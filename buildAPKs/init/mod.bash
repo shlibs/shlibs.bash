@@ -17,7 +17,7 @@ _CLINKS_() {
 		ln -s "$RDR/scripts/sh/shlibs/dctar.sh" "$RDR/scripts/maintenance/delete.corrupt.tars.sh" 2>/dev/null || printf "%s\\n" "delete.corrupt.tars.sh $VSTRING"
 		for TYPE in "${ADLINK[@]}"
 		do
-			ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" 2>/dev/null || printf "%s\\n" "$VSTRING"
+			ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" 2>/dev/null  || printf "%s\\n" "build.$TYPE.bash $VSTRING"
 		done
 		ln -s "$RDR/scripts/bash/build/buildAll.bash" "$RDR/buildAll.bash" 2>/dev/null || printf "%s\\n" "buildAll.bash $VSTRING"
 		ln -s "$RDR/var/cache/stash" "$RDR/stash" 2>/dev/null || printf "%s\\n" "stash $VSTRING"
