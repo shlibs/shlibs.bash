@@ -13,8 +13,6 @@ _CLINKS_() {
 	if [[ ! -e "$RDR/update.buildAPKs.sh" ]]
 	then
 		printf "%s\\n" "$VSTRINGC"
-		ln -s "$RDR/scripts/bash/shlibs/buildAPKs/init/build.buildAPKs.modules.bash" "$RDR/scripts/bash/build/build.buildAPKs.modules.bash" 2>/dev/null || printf "%s\\n" "build.buildAPKs.modules.bash $VSTRING"
-		ln -s "$RDR/scripts/bash/build/buildAll.bash" "$RDR/buildAll.bash" 2>/dev/null || printf "%s\\n" "buildAll.bash $VSTRING"
 		if [[ -f "$RDR/scripts/sh/.git" ]]
 		then
 			ln -s "$RDR/scripts/sh/shlibs/buildAPKs/maintenance/up.sh" "$RDR/update.buildAPKs.sh" 2>/dev/null || printf "%s\\n" "update.buildAPKs.sh $VSTRING"
@@ -24,6 +22,8 @@ _CLINKS_() {
 		do
 			ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" 2>/dev/null || printf "%s\\n" "$VSTRING"
 		done
+		ln -s "$RDR/scripts/bash/shlibs/buildAPKs/init/build.buildAPKs.modules.bash" "$RDR/scripts/bash/build/build.buildAPKs.modules.bash" 2>/dev/null || printf "%s\\n" "build.buildAPKs.modules.bash $VSTRING"
+		ln -s "$RDR/scripts/bash/build/buildAll.bash" "$RDR/buildAll.bash" 2>/dev/null || printf "%s\\n" "buildAll.bash $VSTRING"
 		if [[ -e "$RDR/setup.buildAPKs.bash" ]]
 		then
 			rm -f "$RDR/setup.buildAPKs.bash"
