@@ -5,7 +5,6 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 export RDR="$HOME/buildAPKs"
-. "$RDR"/scripts/bash/shlibs/lock.bash 
 _SBTRPERROR_() { # run on script error
 	local RV="$?"
 	if [[ "$RV" == 1 ]]  
@@ -57,8 +56,103 @@ trap '_SBTRPERROR_ $LINENO $BASH_COMMAND $?' ERR
 trap _SBTRPEXIT_ EXIT
 trap '_SBTRPSIGNAL_ $LINENO $BASH_COMMAND $?' HUP INT TERM
 trap '_SBTRPQUIT_ $LINENO $BASH_COMMAND $?' QUIT 
+
+_MAINLOCK_ () {
+	RDR="$HOME/buildAPKs"
+	if [[ -z "${1:-}" ]] 
+	then 
+		_WAKELOCK_
+	elif [[ "$1" = "wake.idle" ]] 
+	then 
+		export WAKEST="idle"
+	elif [[ "$1" = "wake.start" ]] 
+	then 
+		_WAKELOCK_
+		export WAKEST="block"
+	elif [[ "$1" = "wake.stop" ]] 
+	then 
+		export WAKEST="unblock"
+	fi
+}
+
+
+_WAKELOCK_() {
+	if [[ -z "${WAKEST:-}" ]] 
+	then
+		_PRINTWLA_ 
+		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null
+		mkdir -p "$RDR/var/lock" "$RDR/var/log"
+		touch "$RDR/var/lock/wake.$PPID.lock"
+		_PRINTDONE_ 
+	fi
+}
+
+_WAKEUNLOCK_() {
+	if [[ -z "${WAKEST:-}" ]] || [[ "$WAKEST" == "unblock" ]] 
+	then
+		_PRINTWLD_
+		rm -f "$RDR/var/lock/wake.$PPID.lock"
+		if [[ -n $(find "$RDR/var/lock" -name "*.lock") ]] # https://unix.stackexchange.com/questions/46541/how-can-i-use-bashs-if-test-and-find-commands-together
+		then 
+			printf '\033]2;Releasing wake lock: Pending...\007'
+			if [[ $(find "$RDR/var/lock" -type f | wc -l) -gt 1 ]] 
+			then
+				printf "\\e[1;33mNOT RELEASED.  \\e[1;32mOther lock files are present in ~/%s/var/lock:\\e[0m" "${RDR##*/}" 
+			else
+				if [[ -f "$RDR/var/lock/set.lock" ]] 
+				then 
+					printf "\\e[1;33mNOT RELEASED.  \\e[1;32m%s\\e[0m" "Found set.lock file!"
+				else
+					printf "\\e[1;33mNOT RELEASED.  \\e[1;32mAnother lock file is present in ~/%s/var/lock:\\e[0m" "${RDR##*/}" 
+				fi
+			fi
+			printf "\\n\\n\\e[1;33m"
+			ls "$RDR/var/lock"
+			printf "\\n\\e[1;38;5;187mYou can safely delete ~/%s/var/lock if no other jobs are running.\\e[0m\\n\\n" "${RDR##*/}" 
+			_PRINTHELP_
+		else 
+			am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService > /dev/null ||:
+			_PRINTDONE_ 
+			_PRINTHELP_
+		fi
+	fi
+}
+
+_PRINTHELP_() {
+	if [[ ! -f "$RDR/var/lock/set.lock" ]] 
+	then 
+		printf "\\e[1;38;5;107m%s\\e[1;38;5;109m%s\\e[0m\\n" "To always have wake lock set to on: " "touch ~/${RDR##*/}/var/lock/set.lock" 
+	fi
+}
+
+_PRINTDONE_() {
+	printf "\\e[1;32mDONE  \\e[0m\\n"
+}
+
+_PRINTWLA_() {
+	printf "\\e[1;34mActivating wake lock: "'\033]2;Activating wake lock: OK\007'
+}
+
+_PRINTWLD_() {
+	printf "\\e[1;34mReleasing wake lock: "'\033]2;Releasing wake lock: OK\007'
+}
+
+_INITLOCK_ () {
+COMMANDIF="$(command -v am)" ||:
+if [[ "$COMMANDIF" = "" ]] 
+then
+	printf "\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "BuildAPKs WARNING: File ${0##*/} cannot operate wake lock!"
+else
+	_MAINLOCK_ "$@"
+fi
+}
+
 TQUIT="$1"
 TSIGNAL="$2"
 TERROR="$3"
-TPARENT="${4:-undefined}"
+TPARENT="${4:-UNDEFINED}"
+if [[ -z "${5:-UNDEFINED}" ]]
+then
+	_INITLOCK_ "$5" 
+fi
 # trap.bash EOF
