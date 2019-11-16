@@ -58,7 +58,6 @@ trap '_SBTRPSIGNAL_ $LINENO $BASH_COMMAND $?' HUP INT TERM
 trap '_SBTRPQUIT_ $LINENO $BASH_COMMAND $?' QUIT 
 
 _MAINLOCK_ () {
-	RDR="$HOME/buildAPKs"
 	if [[ -z "${5:-}" ]] 
 	then 
 		_WAKELOCK_
@@ -87,13 +86,14 @@ _WAKELOCK_() {
 	fi
 }
 
-_WAKEUNLOCK_() {
-	if [[ -z "${WAKEST:-}" ]] || [[ "$WAKEST" == "unblock" ]] 
-	then
+_WAKEUNLOCK_() { # check for state, locks and unlock if lock files are not found
+	cd "$RDR"
+	if [[ -z "${WAKEST:-}" ]] || [[ "$WAKEST" == "unblock" ]] # check for state
+	then	 # https://unix.stackexchange.com/questions/46541/how-can-i-use-bashs-if-test-and-find-commands-together
 		_PRINTWLD_
 		rm -f "$RDR/var/lock/wake.$PPID.lock"
-		if [[ -n $(find "$RDR/var/lock" -name "*.lock") ]] # https://unix.stackexchange.com/questions/46541/how-can-i-use-bashs-if-test-and-find-commands-together
-		then 
+		if [[ -n $(find "$RDR/var/lock" -name "*.lock") ]] # lock files are found
+		then 	# do not release wake lock 
 			printf '\033]2;Releasing wake lock: Pending...\007'
 			if [[ $(find "$RDR/var/lock" -type f | wc -l) -gt 1 ]] 
 			then
@@ -110,8 +110,7 @@ _WAKEUNLOCK_() {
 			ls "$RDR/var/lock"
 			printf "\\n\\e[1;38;5;187mYou can safely delete ~/%s/var/lock if no other jobs are running.\\e[0m\\n\\n" "${RDR##*/}" 
 			_PRINTHELP_
-		else 
-			cd "$RDR"
+		else 	# release wake lock when there are no lock files found
 			am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService > /dev/null ||:
 			_PRINTDONE_ 
 			_PRINTHELP_
