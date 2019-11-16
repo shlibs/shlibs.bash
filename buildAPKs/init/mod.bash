@@ -4,7 +4,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/}" 
+. "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/}" "wake.start" 
 
 _CLINKS_() { 
 	ADLINK=(apps buildAPKs buildAPKs.modules clocks compasses developers.tools entertainment flashlights games github live.wallpapers samples top10 tutorials widgets)
@@ -34,7 +34,6 @@ _MAINMODS_ () {
 	export DAY="$(date +%Y%m%d)"
 	export NUM="$(date +%s)"
 	export JDR="$RDR/sources/$JID"
-	. "$RDR"/scripts/bash/shlibs/lock.bash 
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/bnchn.bash bch.st 
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/fandm.bash 
