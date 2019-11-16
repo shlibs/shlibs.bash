@@ -54,7 +54,7 @@ _MAINMODS_ () {
 }
 
 _PRINTUMODS_() {
-	printf "\\e[1;2;38;5;190m%s%s\\e[0m\\n\\n" "Updating buildAPKs:  \` ${0##*/} \` might want to load sources from submodule repositories into buildAPKs.  This may take a little while to complete.  Please be patient if this script wants to download source code from https://github.com:" 
+	printf "\\e[1;2;38;5;190m%s%s\\e[0m\\n\\n" "Updating buildAPKs: \` ${0##*/} \` might want to load sources from submodule repositories into buildAPKs.  This may take a little while to complete.  Please be patient if this script wants to download source code from https://github.com:" 
 }
 
 _PRINTUSAGE_() {
