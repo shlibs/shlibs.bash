@@ -143,7 +143,7 @@ _INITLOCK_ () {
 	then
 		printf "\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "BuildAPKs WARNING: File ${0##*/} cannot use wake lock!"
 	else
-		_MAINLOCK_ "$5"
+		_MAINLOCK_ "$@"
 	fi
 }
 
