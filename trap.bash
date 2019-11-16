@@ -126,7 +126,7 @@ _PRINTHELP_() {
 }
 
 _PRINTDONE_() {
-	printf "\\e[1;32mDONE  \\e[0m\\n"
+	printf "\\e[1;32mDONE\\e[0m\\n"
 }
 
 _PRINTWLA_() {

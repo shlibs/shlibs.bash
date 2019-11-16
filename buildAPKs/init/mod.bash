@@ -12,7 +12,7 @@ _CLINKS_() {
 	VSTRINGC="Creating symlinks: "
 	if [[ ! -e "$RDR/update.buildAPKs.sh" ]]
 	then
-		printf "%s" "$VSTRINGC"
+		printf "\\e[1;34m%s" "$VSTRINGC"
 		ln -s "$RDR/scripts/sh/shlibs/buildAPKs/maintenance/up.sh" "$RDR/update.buildAPKs.sh" 2>/dev/null || printf "%s\\n" "update.buildAPKs.sh $VSTRING"
 		ln -s "$RDR/scripts/sh/shlibs/dctar.sh" "$RDR/scripts/maintenance/delete.corrupt.tars.sh" 2>/dev/null || printf "%s\\n" "delete.corrupt.tars.sh $VSTRING"
 		for TYPE in "${ADLINK[@]}"
@@ -20,7 +20,8 @@ _CLINKS_() {
 			ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" 2>/dev/null || printf "%s\\n" "$VSTRING"
 		done
 		ln -s "$RDR/scripts/bash/build/buildAll.bash" "$RDR/buildAll.bash" 2>/dev/null || printf "%s\\n" "buildAll.bash $VSTRING"
-		printf "%s\\n" "DONE"
+		ln -s "$RDR/var/cache/stash" "$RDR/stash" 2>/dev/null || printf "%s\\n" "stash $VSTRING"
+		printf "\\e[1;32mDONE\\e[0m\\n"
 		if [[ -e "$RDR/setup.buildAPKs.bash" ]]
 		then
 			rm -f "$RDR/setup.buildAPKs.bash"
@@ -29,7 +30,6 @@ _CLINKS_() {
 }
 
 _MAINMODS_ () {
-	_CLINKS_
 	_TMPDIR_ 
 	export DAY="$(date +%Y%m%d)"
 	export NUM="$(date +%s)"
@@ -41,6 +41,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "log/messages"
 	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/CNAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/RNAMES" "db/XNAMES" "db/ZNAMES"
+	_CLINKS_
 	if [[ -f "$JDR/.git" ]] # file exists in job directory
 	then # print modules message
 		_PRINTNMODS_
