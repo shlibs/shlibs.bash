@@ -154,6 +154,6 @@ TERROR="$3"
 TPARENT="${4:-UNDEFINED}"
 if [[ $NARGS -gt 4 ]]
 then
-	_INITLOCK_ "$5" 
+	_INITLOCK_ "${5:-UNDEFINED}" 
 fi
 # trap.bash EOF
