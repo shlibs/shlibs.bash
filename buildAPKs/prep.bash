@@ -7,6 +7,10 @@ shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/}" 
 
 _IAR_ () { 
+	if [[ ! -z "${JDR:-}" ]] && [[ ! -z "${SFX:-}" ]]
+	then
+		WDIR="$JDR/$SFX"
+	fi
 	if [[ -z "${SFX:-}" ]]
 	then
 		SFX=""
