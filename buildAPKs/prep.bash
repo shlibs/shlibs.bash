@@ -7,6 +7,10 @@ shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/}" 
 
 _IAR_ () { 
+	if [[ ! -z "${WDIR:-}" ]]
+	then
+		:
+	else
 	if [[ ! -z "${JDR:-}" ]] && [[ ! -z "${SFX:-}" ]]
 	then
 		WDIR="$JDR/$SFX"
@@ -18,6 +22,7 @@ _IAR_ () {
 	if [[ -z "${WDIR:-}" ]]
 	then
 		WDIR="$JDR/$SFX"
+	fi
 	fi
 	_AFR_ || printf "%s prep.bash WARNING: Could not parse _AFR_; Continuing...\\n" "${0##*/}"
 }
