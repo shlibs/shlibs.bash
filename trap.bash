@@ -79,7 +79,7 @@ _WAKELOCK_() {
 	if [[ -z "${WAKEST:-}" ]] 
 	then
 		_PRINTWLA_ 
-		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null
+		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null  || printf "%s\\n" "Unable to process am startservice: Continuing..."
 		mkdir -p "$RDR/var/lock" "$RDR/var/log"
 		touch "$RDR/var/lock/wake.$PPID.lock"
 		_PRINTDONE_ 
