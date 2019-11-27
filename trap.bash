@@ -79,7 +79,7 @@ _WAKELOCK_() {
 	if [[ -z "${WAKEST:-}" ]] 
 	then
 		_PRINTWLA_ 
-		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null  || printf "%s\\n" "Unable to process am startservice: Continuing..."
+		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null || printf "%s\\n" "Unable to process am startservice: Continuing..."
 		mkdir -p "$RDR/var/lock" "$RDR/var/log"
 		touch "$RDR/var/lock/wake.$PPID.lock"
 		_PRINTDONE_ 
@@ -137,7 +137,7 @@ _PRINTWLD_() {
 }
 
 _INITLOCK_ () {
-	COMMANDIF="$(command -v am)" ||:
+	COMMANDIF="$(command -v am)" || printf "%s\\n" "Unable to process am startservice: Continuing..."
 	if [[ "$COMMANDIF" = "" ]] 
 	then
 		printf "\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "BuildAPKs WARNING: File ${0##*/} cannot use wake lock!"
