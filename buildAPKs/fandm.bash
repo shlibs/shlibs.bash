@@ -13,7 +13,7 @@ _ANDB_() {
 	printf "\\e[1;7;38;5;222m%s\\e[0m\\n" "Searching for job directories in $JDR: Please be patient..."
 	AMFS=$(find "$JDR" -type f -name AndroidManifest.xml) 
 	NAMFS=$(wc -l <<< $AMFS) 
-	printf "%s" "Writing $NAMFS AndroidManifest.xml files found to ~/${JDR##*/}/var/conf/NAMFS.db  "
+	printf "%s" "Writing $NAMFS AndroidManifest.xml files found to $JDR/var/conf/NAMFS.db  "
 	printf "%s\\n" "$NAMFS" > "$JDR/var/conf/NAMFS.db" 
 	for APP in ${AMFS[@]}
 	do 
