@@ -11,7 +11,9 @@ _ANDB_() {
 		JDR=$1
 	fi
 	printf "\\e[1;7;38;5;222m%s\\e[0m\\n" "Searching for job directories in $JDR: Please be patient..."
-	export NAMFS=$(find "$JDR" -type f -name AndroidManifest.xml) 
+	NAMFS=$(find "$JDR" -type f -name AndroidManifest.xml) 
+	printf "%s" "Writing $NAMFS AndroidManifest.xml files found to ~/${JDR##*/}/var/conf/NAMFS.db  "
+	printf "%s\\n" "$NAMFS" > "$JDR/var/conf/NAMFS.db" 
 	for APP in ${NAMFS[@]}
 	do 
 		cd "${APP%/*}" || printf "\\e[1;7;38;5;220m%s\\e[0m\\n" "Unable to find the job directory:  Continuing..." # search: string manipulation site:www.tldp.org
