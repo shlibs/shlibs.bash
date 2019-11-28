@@ -40,7 +40,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "log/messages"
-	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/CNAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/RNAMES" "db/XNAMES" "db/ZNAMES"
+	_MKFILES_ "db/ANAMES" "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/CNAMES" "db/GNAMES" "db/QNAMES" "db/RNAMES" "db/XNAMES" "db/ZNAMES"
 	_CLINKS_
 	if [[ -f "$JDR/.git" ]] # file exists in job directory
 	then # print modules message
