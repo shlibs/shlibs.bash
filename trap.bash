@@ -4,7 +4,6 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-export RDR="$HOME/buildAPKs"
 _SBTRPERROR_() { # run on script error
 	local RV="$?"
 	if [[ "$RV" == 1 ]]  
