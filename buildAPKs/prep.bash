@@ -32,11 +32,13 @@ _AFR_ () { # finds and removes superfluous directories and files
  		find "$WDIR" -type d -name "$NAME" -exec rm -rf {} \; 2>/dev/null || : # printf "%s prep.bash WARNING: Could not parse %s in directories list; Continuing...\\n" "${0##*/}" "$NAME" 
 		sleep 0.032
 	done
+	set -f
 	for NAME in "${FLIST[@]}"
 	do
  		find "$WDIR" -type f -name "$NAME" -delete || : # printf "%s prep.bash WARNING: Could not parse %s in files list; Continuing...\\n" "${0##*/}" "$NAME"
 		sleep 0.032
 	done
+	set +f
 	find  "$WDIR" -type d -empty -delete || : # printf "%s prep.bash WARNING: Could not parse empty directories; Continuing...\\n" "${0##*/}"
 	printf "\\e[?25h\\n\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE!"
 }
