@@ -4,7 +4,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 172 173 174 "${0##*/}" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 172 173 174 "${0##*/}"
 _ANDB_() {
 	if [[ -z "${JDR:-}" ]]
 	then 
@@ -12,9 +12,12 @@ _ANDB_() {
 	fi
 	printf "\\e[1;7;38;5;222m%s\\e[0m\\n" "Searching for job directories in $JDR: Please be patient..."
 	AMFS=$(find "$JDR" -type f -name AndroidManifest.xml) 
-	NAMFS=$(wc -l <<< $AMFS) 
-	printf "%s" "Writing $NAMFS AndroidManifest.xml files found to $JDR/var/conf/NAMFS.db  "
-	printf "%s\\n" "$NAMFS" > "$JDR/var/conf/NAMFS.db" 
+	if [[ ! -z "${WRAMES:-}" ]]
+	then 
+		NAMFS=$(wc -l <<< $AMFS) 
+		printf "%s" "Writing $NAMFS AndroidManifest.xml files found to $JDR/var/conf/NAMFS.db  "
+		printf "%s\\n" "$NAMFS" > "$JDR/var/conf/NAMFS.db" 
+	fi
 	for APP in ${AMFS[@]}
 	do 
 		cd "${APP%/*}" || printf "\\e[1;7;38;5;220m%s\\e[0m\\n" "Unable to find the job directory:  Continuing..." # search: string manipulation site:www.tldp.org
