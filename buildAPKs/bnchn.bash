@@ -5,14 +5,14 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 169 170 171 "${0##*/}" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 169 170 171 "${0##*/}" "wake.idle"
 
 if [[ "$1" = "bch.st" ]] 
 then 
-	ST="$(date +%s)"
+	export ST="$(date +%s)"
 elif [[ "$1" = "bch.gt" ]] 
 then 
-	ET="$(date +%s)"
+	export ET="$(date +%s)"
 	printf "\\nBuild time: %s seconds\\n\\n" "$(( $ET-$ST ))"
 fi
 
