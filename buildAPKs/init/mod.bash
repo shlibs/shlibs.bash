@@ -31,6 +31,7 @@ _CLINKS_() {
 
 _MAINMODS_ () {
 	_TMPDIR_ 
+	export OAUT="$(cat "$RDR/.conf/GAUTH" | awk 'NR==1')" # loads login:token key from GAUTH file
 	export DAY="$(date +%Y%m%d)"
 	export NUM="$(date +%s)"
 	export JDR="$RDR/sources/$JID"
