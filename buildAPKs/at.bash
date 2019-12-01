@@ -32,17 +32,26 @@ _TB_ () { # add git modules from GitHub to cache directory
        	then
 		mkdir -p "$RDR/var/cache/tarballs"
 	fi
-	if [[ -f "$RDR/var/cache/tarballs/$2" ]]
-       	then
+	if [[ -f "$RDR/var/cache/tarballs/$2" ]] # tarball is found
+       	then # populate from tarball 
 		(cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
-	else
-		if [[ ! -z "${CULR:-}" ]]
-	        then	# curl limit rate to CULR
-	                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl --limit-rate $CULR -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
-	        else	# get files with no rate limit
-	                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+	else # tarball from GitHub 
+		if [[ "$OAUT" != "" ]] # see .conf/GAUTH file  
+		then # use authentication
+			if [[ ! -z "${CULR:-}" ]] # is defined
+		        then	# set curl limit rate to CULR
+		                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl --limit-rate $CULR -u "$OAUT" -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+		        else	# forgo rate limit
+		                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -u "$OAUT" -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+		        fi
+	        else # forgo authentication
+			if [[ ! -z "${CULR:-}" ]] # is defined
+		        then	# set curl limit rate to CULR
+		                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl --limit-rate $CULR -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+		        else	# forgo rate limit
+		                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+		        fi
 	        fi
 	fi
 }
-
 # at.bash EOF
