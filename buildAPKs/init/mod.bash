@@ -22,10 +22,10 @@ _CLINKS_() {
 		ln -s "$RDR/scripts/bash/build/buildAll.bash" "$RDR/buildAll.bash" 2>/dev/null || printf "%s\\n" "buildAll.bash $VSTRING"
 		ln -s "$RDR/var/cache/stash" "$RDR/stash" 2>/dev/null || printf "%s\\n" "stash $VSTRING"
 		printf "\\e[1;32mDONE\\e[0m\\n"
-		if [[ -f "$RDR/setup.buildAPKs.bash" ]]
-		then
-			mv "$RDR/setup.buildAPKs.bash" "$RDR/scripts/bash/init/setup.buildAPKs.bash"
-		fi
+	fi
+	if [[ -f "$RDR/setup.buildAPKs.bash" ]]
+	then
+		mv "$RDR/setup.buildAPKs.bash" "$RDR/scripts/bash/init/setup.buildAPKs.bash"
 	fi
 }
 
