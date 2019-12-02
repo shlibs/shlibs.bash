@@ -4,10 +4,9 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/}" "wake.start" 
-
+. "$RDR/scripts/bash/shlibs/trap.bash" 157 158 159 "${0##*/} mod.bash" "wake.start" 
 _CLINKS_() { 
-	ADLINK=(apps buildAPKs buildAPKs.modules clocks compasses developers.tools entertainment flashlights games github live.wallpapers samples top10 tutorials widgets)
+	ADLINK=(apps buildAPKs buildAPKs.modules browsers clocks compasses developers.tools entertainment flashlights games github live.wallpapers samples top10 tutorials widgets)
 	VSTRING="symlink warning: Continuing..."
 	VSTRINGC="Creating symlinks: "
 	if [[ ! -e "$RDR/update.buildAPKs.sh" ]]
