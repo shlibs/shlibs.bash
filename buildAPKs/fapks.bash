@@ -5,7 +5,7 @@
 #####################################################################
 set -eu
 _APKBC_() {
-	NAPKS=$((find "$JDR" -type f -name "*.apk"))
+	NAPKS=($(find "$JDR" -type f -name "*.apk"))
 	printf "%s" "Writing ${#NAPKS[@]} built APKs found to $JDR/var/conf/NAPKS.db  "
 	printf "%s\\n" "${#NAPKS[@]}" > "$JDR/var/conf/NAPKS.db" 
 	printf "%s" "Writing ${NAPKS[@]##*/} built APK names found to $JDR/var/conf/NAMKS.db  "
