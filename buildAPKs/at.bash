@@ -35,7 +35,7 @@ _TB_ () { # add git modules from GitHub to cache directory
 	if [[ -f "$RDR/var/cache/tarballs/$2" ]] # tarball is found
        	then # populate from tarball 
 		(cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
-	else # tarball from GitHub 
+	else # get tarball from GitHub 
 		if [[ "$OAUT" != "" ]] # see .conf/GAUTH file  
 		then # use authentication
 			if [[ ! -z "${CULR:-}" ]] # is defined
@@ -52,6 +52,7 @@ _TB_ () { # add git modules from GitHub to cache directory
 		                (cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -OL https://github.com/$1/tarball/$2 ; _PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 		        fi
 	        fi
+		sleep 0.$(shuf -i 24-72 -n 1) # add network latency support on fast networks
 	fi
 }
 # at.bash EOF
