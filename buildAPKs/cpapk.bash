@@ -4,7 +4,7 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 . "$RDR"/scripts/bash/init/atrap.bash 237 238 239 "${0##*/} cpapk.bash" 
-_CPAPKS_ () {
+_CPAPK_ () {
 if [[ -w "/storage/emulated/0/" ]] ||  [[ -w "/storage/emulated/legacy/" ]]  
 then
 	if [[ -w "/storage/emulated/0/" ]] 
