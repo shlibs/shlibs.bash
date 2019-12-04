@@ -41,6 +41,7 @@ _APKBC_() {
 }
 
 _CATNAMES_ () {
+	printf "%s\\n" "Results for $USENAME"
 	cat "$JDR"/var/conf/N*.db || printf "%s\\n" "signal received _CATNAMES_ ${0##*/} names.sh"
 }
 # fapks.bash EOF
