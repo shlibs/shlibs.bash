@@ -1,7 +1,8 @@
 #!/bin/env bash
 # Copyright 2019 (c)  all rights reserved by S D Rausty;  see LICENSE  
 # https://sdrausty.github.io hosted courtesy https://pages.github.com
-# adds USENAME and APKs results to files
+# search string: array bash create if statement site:.org
+# adds USENAME and APKs results to files from indexed BASH array
 #####################################################################
 set -eu
 _APKBC_() {
