@@ -6,10 +6,10 @@
 set -eu
 _APKBC_() {
 	NAPKS=($(find "$JDR" -type f -name "*.apk")) # create array of found APK files 
-	printf "%s" "Writing ${#NAPKS[@]} built APKs found to $JDR/var/conf/NAPKS.db" # print number of elements to screen 
-	printf "%s\\n" "${#NAPKS[@]}" > "$JDR/var/conf/NAPKS.db" # write number of elements to file 
-	printf "%s" "Writing ${NAPKS[@]##*/} built APK names found to $JDR/var/conf/NAMKS.db" # print elements to screen 
-	printf "%s\\n" "${NAPKS[@]##*/}" > "$JDR/var/conf/NAMKS.db" # write elements to file 
+	printf "%s" "Writing ${#NAPKS[@]} built APKs found to $JDR/var/conf/NAPKS.db" # print number of array elements to screen 
+	printf "%s\\n" "${#NAPKS[@]}" > "$JDR/var/conf/NAPKS.db" # write number of array elements to file 
+	printf "%s" "Writing ${NAPKS[@]##*/} built APK names found to $JDR/var/conf/NAMKS.db" # print array elements to screen 
+	printf "%s\\n" "${NAPKS[@]##*/}" > "$JDR/var/conf/NAMKS.db" # write array elements to file 
 	if [ "${#NAPKS[@]}" -gt 999 ] # USENAME's work built more than 999 APKs
 	then # add USENAME string to B1000NAMES and log/B1000NAMESNAPKs files
 		_NAMESMAINBLOCK_ B1000NAMES log/B1000NAMESNAPKs
