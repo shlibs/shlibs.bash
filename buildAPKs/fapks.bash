@@ -37,5 +37,10 @@ _APKBC_() {
 		fi
 	fi
 	unset NAPKS
+	_CATNAMES_ 
+}
+
+_CATNAMES_ () {
+	cat "$JDR/var/conf/N*.db" || printf "%s\\n" "signal received _CATNAMES_ ${0##*/} names.sh"
 }
 # fapks.bash EOF
