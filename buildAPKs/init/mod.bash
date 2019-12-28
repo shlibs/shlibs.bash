@@ -14,15 +14,15 @@ _CLINKS_() {
 	then
 		printf "\\e[1;34m%s" "$VSTRINGC"
 		ln -s "$RDR/scripts/sh/shlibs/buildAPKs/maintenance/up.sh" "$RDR/update.buildAPKs.sh" || printf "%s\\n" "update.buildAPKs.sh $VSTRING"
-		[ ! -e  "$RDR/scripts/maintenance/delete.corrupt.tars.sh" ] && ln -s "$RDR/scripts/sh/shlibs/dctar.sh" "$RDR/scripts/maintenance/delete.corrupt.tars.sh" || printf "%s\\n" "delete.corrupt.tars.sh $VSTRING"
+		[[ ! -e  "$RDR/scripts/maintenance/delete.corrupt.tars.sh" ]] && ln -s "$RDR/scripts/sh/shlibs/dctar.sh" "$RDR/scripts/maintenance/delete.corrupt.tars.sh" || printf "%s\\n" "delete.corrupt.tars.sh $VSTRING"
 		for TYPE in "${ADLINK[@]}"
 		do
-			[ ! -e "$RDR/build.$TYPE.bash" ] && ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" || printf "%s\\n" "build.$TYPE.bash $VSTRING"
+			[[ ! -e "$RDR/build.$TYPE.bash" ]] && ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" || printf "%s\\n" "build.$TYPE.bash $VSTRING"
 		done
-		[ ! -e "$RDR/build.github.bash" ] && ln -s "$RDR/scripts/bash/github/build.github.bash" "$RDR/build.github.bash" || printf "%s\\n" "build.github.bash $VSTRING"
-		[ ! -e "$RDR/stash" ] && ln -s "$RDR/var/cache/stash" "$RDR/stash" || printf "%s\\n" "stash $VSTRING"
+		[[ ! -e "$RDR/build.github.bash" ]] && ln -s "$RDR/scripts/bash/github/build.github.bash" "$RDR/build.github.bash" || printf "%s\\n" "build.github.bash $VSTRING"
+		[[ ! -e "$RDR/stash" ]] && ln -s "$RDR/var/cache/stash" "$RDR/stash" || printf "%s\\n" "stash $VSTRING"
 		printf "\\e[1;32mDONE\\e[0m\\n"
-		[ -e "$RDR/setup.buildAPKs.bash" ] && rm -f "$RDR/setup.buildAPKs.bash"
+		[[ -e "$RDR/setup.buildAPKs.bash" ]] && rm -f "$RDR/setup.buildAPKs.bash"
 	fi
 }
 
