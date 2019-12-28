@@ -7,7 +7,7 @@ shopt -s nullglob globstar
 . "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/}" "wake.start" 
 
 _CLINKS_() { 
-	ADLINK=(apps buildAPKs buildAPKs.modules clocks compasses developers.tools entertainment flashlights games live.wallpapers samples top10 tutorials widgets)
+	ADLINK=(apps buildAPKs clocks compasses developers.tools entertainment flashlights games live.wallpapers samples top10 tutorials widgets)
 	VSTRING="symlink warning: Continuing..."
 	VSTRINGC="Creating symlinks: "
 	if [[ ! -e "$RDR/update.buildAPKs.sh" ]]
