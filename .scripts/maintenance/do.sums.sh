@@ -9,7 +9,7 @@ set -eu
 MTIME="$(ls -l --time-style=+"%s" .git/ORIG_HEAD | awk '{print $6}')" || git pull
 TIME="$(date +%s)"
 (if [[ $(($TIME - $MTIME)) -gt 43200 ]]; then git pull; fi) || git pull
-./scripts/maintenance/vgen.sh
+.scripts/maintenance/vgen.sh
 rm -f *.sum
 FILELIST=( $(find . -type f | grep -v .git | sort) )
 CHECKLIST=(sha512sum) # md5sum sha1sum sha224sum sha256sum sha384sum
