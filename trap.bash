@@ -110,6 +110,7 @@ _WAKEUNLOCK_() { # check for state, locks and unlock if lock files are not found
 			printf "\\n\\e[1;38;5;187mYou can safely delete ~/%s/var/lock if no other jobs are running.\\e[0m\\n\\n" "${RDR##*/}" 
 			_PRINTHELP_
 		else 	# release wake lock when there are no lock files found
+			cd "$RDR"
 			am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService > /dev/null || printf "%s\\n" "Unable to process am startservice: Continuing..."
 			_PRINTDONE_ 
 			_PRINTHELP_
