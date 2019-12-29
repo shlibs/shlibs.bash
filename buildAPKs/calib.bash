@@ -13,7 +13,7 @@ _MAINCALIB_() {
 		PV1="$(awk '{print $1}' <<< $PV1)"
 		if [[ "$PV1" == "false" ]] 
 		then
-			printf "%s\\n" "Running \$(cat "$RDR"/.conf/LIBAUTH)"
+			printf "%s\\n" "Running \$(cat "$RDR"/.conf/LIBAUTH):"
 			printf "%s\\n" "$(cat "$RDR"/.conf/LIBAUTH)"
 		fi
 	fi
