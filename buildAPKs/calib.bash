@@ -24,13 +24,13 @@ _MAINCALIB_() { # print information to terminal from file .conf/LIBAUTH
 			printf "%s\\n" "Running \$(cat "$RDR"/.conf/LIBAUTH):"
 			printf "%s\\n" "$(cat "$RDR"/.conf/LIBAUTH)"
 			CALIBCT="$(( CALIBCT - 3 ))"
-			[[ "$CALIBCT" = -1 ]] && VIEWS="showing"|| VIEWS="showings"
-			printf "%s\\n" "${CALIBCT#-} $VIEWS of file  ~/"${RDR##*/}"/.conf/LIBAUTH remaining; Continuing..."
+			[[ "$CALIBCT" = -1 ]] && VIEWS="showing" || VIEWS="showings"
+			printf "%s\\n" "${CALIBCT#-} $VIEWS of file ~/"${RDR##*/}"/.conf/LIBAUTH remaining; Continuing..."
 		fi
 	fi
 }
 
-if [[ ! "$CALIBCT" -gt 3 ]]	# display count is not greater than 3
+if [[ "$CALIBCT" -lt 3 ]]	# display count is less than 3
 then	# print information to terminal 
 	_MAINCALIB_
 fi
