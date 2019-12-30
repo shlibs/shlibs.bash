@@ -30,7 +30,7 @@ _MAINCALIB_() { # print information to terminal from file .conf/LIBAUTH
 	fi
 }
 
-if [[ "$CALIBCT" -lt 3 ]]	# display count is less than 3
+if [[ "$CALIBCT" -lt 4 ]]	# display count is less than 3
 then	# print information to terminal 
 	_MAINCALIB_
 fi
