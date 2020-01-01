@@ -21,8 +21,8 @@ _MAINCALIB_() { # print information to terminal from file .conf/LIBAUTH
 		PV1="$(awk '{print $1}' <<< $PV1)"
 		if [[ "$PV1" == "false" ]] 
 		then
-			printf "%s\\n" "Running \$(cat "$RDR"/.conf/LIBAUTH):"
-			printf "%s\\n" "$(cat "$RDR"/.conf/LIBAUTH)"
+			printf "%s\\n" "Running \$(grep -v EOF "$RDR"/.conf/LIBAUTH):"
+			printf "%s\\n" "$(grep -v EOF "$RDR"/.conf/LIBAUTH)"
 			CALIBCT="$(( CALIBCT - 3 ))"
 			[[ "$CALIBCT" = -1 ]] && VIEWS="showing" || VIEWS="showings"
 			printf "%s\\n" "${CALIBCT#-} $VIEWS of file ~/"${RDR##*/}"/.conf/LIBAUTH remaining; Continuing..."
