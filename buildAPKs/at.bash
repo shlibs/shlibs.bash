@@ -8,7 +8,7 @@ shopt -s nullglob globstar
 
 _AT_ () { 
 	export SFX="$1" 
-	if [[ -d "$JDR/$1/" ]]
+	if [ -d "$JDR/$1/" ]
        	then
 		if ! find "$JDR/$1/" -type f -name AndroidManifest.xml
        		then
@@ -29,32 +29,26 @@ _PTG_ () { # process a *.tar.gz file for errors
 
 _TB_ () { # add git modules from GitHub to cache directory
 	[ ! -d "$RDR/var/cache/tarballs" ] &&  mkdir -p "$RDR/var/cache/tarballs"
-	if [[ -f "$RDR/var/cache/tarballs/$2" ]]
+	if [ -f "$RDR/var/cache/tarballs/$2" ]
        	then
 		(cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 	else
-		if [[ ! -z "${CULR:-}" ]]
+		if [ ! -z "${CULR:-}" ]
 	        then	# curl limit rate to CULR
-			cd "$RDR"/var/cache/tarballs/ 
-			printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" 
-			curl --limit-rate $CULR -OL https://github.com/$1/tarball/$2
+			cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl --limit-rate $CULR -OL https://github.com/$1/tarball/$2
 			if tar tf "$RDR/var/cache/tarballs/$2" 1>/dev/null
 			then
 				_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 			else
-				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" 
-				curl --limit-rate $CULR -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" ; curl --limit-rate $CULR -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 			fi
 	        else	# get files with no rate limit
-			cd "$RDR"/var/cache/tarballs/ 
-			printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" 
-			curl -OL https://github.com/$1/tarball/$2
+			cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -OL https://github.com/$1/tarball/$2
 			if tar tf "$RDR/var/cache/tarballs/$2" 1>/dev/null
 			then
 				_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 			else
-				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" 
-				curl -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
+				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" ; curl -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || (printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing...")
 			fi
 	        fi
 	fi
