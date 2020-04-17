@@ -21,7 +21,7 @@ _AT_ () {
 }
 
 _DS_() {
-	_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_
+	_PTG_ "$2" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_
 }
 
 _PTG_ () { # process a *.tar.gz file for errors
@@ -55,10 +55,10 @@ _TB_ () { # add git modules from GitHub to cache directory
 			curl -OL https://github.com/$1/tarball/$2
 			if tar xf "$RDR/var/cache/tarballs/$2"
 			then
-				_DS_ $@
+				cd "$JDR/$1/" && _DS_ $@
 			else
 				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/tarball/$2" 
-				curl -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _DS_ "$@"
+				curl -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && cd "$JDR/$1/" && _DS_ "$@"
 			fi
 	        fi
 	fi
