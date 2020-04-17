@@ -21,7 +21,7 @@ _AT_ () {
 }
 
 _DS_() {
-	_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$PWD" ; _IAR_
+	_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_
 }
 
 _PTG_ () { # process a *.tar.gz file for errors
