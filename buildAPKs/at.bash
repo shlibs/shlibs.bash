@@ -1,6 +1,6 @@
 #!/bin/env bash
-# Copyright 2017-2020 (c) all rights reserved 
-# by S D Rausty https://sdrausty.github.io	 see LICENSE 
+# Copyright 2017-2020 (c) all rights reserved by SDRausty see LICENSE 
+# https://sdrausty.github.io hosted  courtesy https://pages.github.io
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
@@ -32,7 +32,6 @@ _PRTCU_ () { # print message
 }
 
 _TB_ () { # add git modules from GitHub to cache directory
-	[ ! -d "$RDR/var/cache/tarballs" ] &&  mkdir -p "$RDR/var/cache/tarballs"
 	if [ -f "$RDR/var/cache/tarballs/$2" ]
        	then
 		(cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ ) || _PRTCU_
@@ -42,7 +41,7 @@ _TB_ () { # add git modules from GitHub to cache directory
 			cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl --limit-rate $CULR -OL https://github.com/$1/tarball/$2
 			if tar tf "$RDR/var/cache/tarballs/$2" 1>/dev/null
 			then
-				_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
+				cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
 			else
 				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" ; curl --limit-rate $CULR -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || _PRTCU_
 			fi
@@ -50,7 +49,7 @@ _TB_ () { # add git modules from GitHub to cache directory
 			cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -OL https://github.com/$1/tarball/$2
 			if tar tf "$RDR/var/cache/tarballs/$2" 1>/dev/null
 			then
-				_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
+				cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
 			else
 				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" ; curl -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || _PRTCU_
 			fi
