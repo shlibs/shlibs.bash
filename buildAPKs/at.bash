@@ -41,7 +41,7 @@ _TB_ () { # add git modules from GitHub to cache directory
 			cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl --limit-rate $CULR -OL https://github.com/$1/tarball/$2
 			if tar tf "$RDR/var/cache/tarballs/$2" 1>/dev/null
 			then
-				cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
+				_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
 			else
 				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" ; curl --limit-rate $CULR -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || _PRTCU_
 			fi
@@ -49,7 +49,7 @@ _TB_ () { # add git modules from GitHub to cache directory
 			cd "$RDR"/var/cache/tarballs/ ; printf "\\n%s\\n" "Getting https://github.com/$1/tarball/$2" ; curl -OL https://github.com/$1/tarball/$2
 			if tar tf "$RDR/var/cache/tarballs/$2" 1>/dev/null
 			then
-				cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
+				_PTG_ "$2" ; cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml) ; export WDIR="$PWD" ; _IAR_ || _PRTCU_
 			else
 				printf "\\n%s\\n" "Getting https://github.com/BuildAPKs/buildAPKs.tarballs/$2" ; curl -OL "https://raw.githubusercontent.com/BuildAPKs/buildAPKs.tarballs/master/$2" && _PTG_ "$2" && cd "$JDR/$1/" ; printf "\\n%s\\n" "Populating $JDR/$1/:" ; (tar xvf "$RDR/var/cache/tarballs/$2" | grep AndroidManifest.xml ) ; export WDIR="$JDR/$1/" ; _IAR_ || _PRTCU_
 			fi
