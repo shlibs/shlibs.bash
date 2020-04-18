@@ -1,6 +1,6 @@
 #!/bin/env bash
 # Copyright 2017-2020 (c) all rights reserved 
-# by S D Rausty https://sdrausty.github.io
+# by S D Rausty https://sdrausty.github.io	 see LICENSE 
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
@@ -27,7 +27,7 @@ _PTG_ () { # process a *.tar.gz file for errors
 	fi
 }
 
-_PRTCU_ () { # process a *.tar.gz file for errors
+_PRTCU_ () { # print message
 	printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE:  Continuing..."
 }
 
@@ -57,5 +57,4 @@ _TB_ () { # add git modules from GitHub to cache directory
 	        fi
 	fi
 }
-
 # at.bash EOF
