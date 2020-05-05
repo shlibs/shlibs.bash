@@ -89,7 +89,6 @@ _TMPDIR_ () {
 	if [[ ! -d "$TMPDIR" ]]
 	then
 		 mkdir -p "$TMPDIR"
-		 printf "%s" "This temporary directory can be safely deleted if no other jobs are running." > "$TMPDIR/README.md"
 	fi
 }
 
