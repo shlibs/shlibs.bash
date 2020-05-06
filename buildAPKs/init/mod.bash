@@ -38,7 +38,6 @@ _CLINKS_() {
 			ln -s "$RDR/scripts/bash/github/build.github.bash" "$RDR/build.github.bash" || printf "%s\\n" "build.github.bash $VSTRING"
 		fi
 		[ ! -e "$RDR/stash" ] && ln -s "$RDR/var/cache/stash" "$RDR/stash" || printf "%s\\n" "stash $VSTRING"
-		[ ! -e "$RDR/var/db/README.md" ] && ln -s "$RDR/opt/db/README.md"  "$RDR/var/db/README.md" || printf "%s\\n" "stash $VSTRING"
 		[ -e "$RDR/setup.buildAPKs.bash" ] && mv "$RDR/setup.buildAPKs.bash" "$RDR/scripts/bash/init/setup.buildAPKs.bash"
 		printf "\\e[1;32mDONE\\e[0m\\n"
 	fi
