@@ -80,8 +80,7 @@ _WAKELOCK_() {
 	then
 		_PRINTWLA_ 
 		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null || printf "%s\\n" "Unable to process am startservice: Continuing..."
-		[ ! -d "$RDR/var/lock" ] && mkdir -p "$RDR/var/lock"
-		[ ! -d "$RDR/var/log" ] && mkdir -p "$RDR/var/log"
+		[ ! -e "$RDR/var/lock" ] && mkdir -p "$RDR/var/lock"
 		touch "$RDR/var/lock/wake.$PPID.lock"
 		_PRINTDONE_ 
 	fi

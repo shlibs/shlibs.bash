@@ -55,7 +55,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	# create directories and files in ~/buildAPKs/var if not exist
-	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake"
+	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "lock" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake"
 	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
 	# create symlinks in ~/buildAPKs if not exist
 	_CLINKS_
