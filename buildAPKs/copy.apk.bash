@@ -5,6 +5,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
+. "$RDR"/scripts/bash/shlibs/trap.bash 145 146 147 "${0##*/} copy.apk.bash" 
 _COPYAPK_ () {
 	# if directories are writable
 	if [ -w "/storage/emulated/0/" ] || [ -w "/storage/emulated/legacy/" ]
