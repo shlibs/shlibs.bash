@@ -5,7 +5,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 169 170 171 "${0##*/} bnchn.bash" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 169 170 171 "${0##*/}" 
 
 if [[ "$1" = "bch.st" ]] 
 then 
