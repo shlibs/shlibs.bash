@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # Copyright 2019-2020 (c) all rights reserved
 # by S D Rausty https://sdrausty.github.io
 #####################################################################

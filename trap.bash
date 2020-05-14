@@ -1,7 +1,7 @@
-#!/bin/env bash 
-# Copyright 2019-2020 (c) all rights reserved ; See LICENSE 
-# by S D Rausty https://sdrausty.github.io
-#####################################################################
+#!/usr/bin/env bash 
+# Copyright 2019-2020 (c) all rights reserved by S D Rausty; see LICENSE
+# https://sdrausty.github.io published courtesy https://pages.github.com
+################################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
 export RDR="$HOME/buildAPKs"
@@ -80,7 +80,8 @@ _WAKELOCK_() {
 	then
 		_PRINTWLA_ 
 		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null || printf "%s\\n" "Unable to process am startservice: Continuing..."
-		mkdir -p "$RDR/var/lock" "$RDR/var/log"
+		[ ! -d "$RDR/var/lock" ] && mkdir -p "$RDR/var/lock"
+		[ ! -d "$RDR/var/log" ] && mkdir -p "$RDR/var/log"
 		touch "$RDR/var/lock/wake.$PPID.lock"
 		_PRINTDONE_ 
 	fi

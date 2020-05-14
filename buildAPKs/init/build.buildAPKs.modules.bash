@@ -1,4 +1,4 @@
-#!/bin/env bash 
+#!/usr/bin/env bash
 # Copyright 2017-2020 (c) all rights reserved 
 # by buildAPKs https://buildapks.github.io/docsBuildAPKs/
 # Update repository and update submodules.
