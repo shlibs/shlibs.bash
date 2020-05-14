@@ -4,7 +4,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 166 167 168 "${0##*/}" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 166 167 168 "${0##*/} at.bash" 
 
 _AT_ () { 
 	export SFX="$1" 

@@ -5,7 +5,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 177 178 179 "${0##*/}" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 177 178 179 "${0##*/} tots.bash" 
 . "$RDR"/scripts/bash/shlibs/buildAPKs/calib.bash
 BBSL="$(find "$RDR/scripts/" -name build -exec ls {} \;)"
 printf "\\n\\e[1;1;38;5;108m%s\\n%s\\e[0m\\n\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/{bash,sh,zsh}/build/:" "$BBSL" 

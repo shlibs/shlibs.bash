@@ -6,7 +6,7 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 RDR="$HOME/buildAPKs"
-. "$RDR/scripts/bash/shlibs/trap.bash" 180 181 182 "${0##*/}" 
+. "$RDR/scripts/bash/shlibs/trap.bash" 180 181 182 "${0##*/} build.buildAPKs.modules.bash" 
 
 _2GSU_() {
 	if [[ "$SBMI" = "" ]] 
