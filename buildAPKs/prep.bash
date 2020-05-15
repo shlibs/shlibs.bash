@@ -23,7 +23,7 @@ _IAR_ () {
 		fi
 	fi
 	_AFR_ || _SIGNAL_ "84" "_AFR_ _IAR_"
-	unset WDIR
+	unset JDR SFX WDIR
 }
 
 _AFR_ () { # finds and removes superfluous directories and files
