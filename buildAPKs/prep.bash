@@ -36,7 +36,6 @@ _AFR_ () { # finds and removes superfluous directories and files
 		find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null || : # _SIGNAL_ "87" "find \${FLIST[@]} _AFR_"
 	done
 	printf "\\e[?25h\\n\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
-	unset JDR SFX WDIR
 }
 
 _SIGNAL_ () {
