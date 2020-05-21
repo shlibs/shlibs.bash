@@ -8,7 +8,7 @@ To make Android Application Kits on smartphone, tablet and TV, copy and paste th
 
 cd && git clone https://github.com/BuildAPKs/buildAPKs
 
-./buildAPKs/setup.buildAPKs.bash
+~/buildAPKs/setup.buildAPKs.bash
 
 ```
 ##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/setup.buildAPKs.bash)
@@ -20,11 +20,11 @@ Also to make Android Application Kits on smartphone, tablet and TV, copy and pas
 
 cd && git clone https://github.com/SDRausty/buildAPKs
 
-./buildAPKs/setup.buildAPKs.bash
+~/buildAPKs/setup.buildAPKs.bash
 
 ```
-##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/setup.buildAPKs.bash)
-##### -rwxrwxrwx [setup.buildAPKs.bash](https://buildapks.github.io/buildAPKs/setup.buildAPKs.bash)
+##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/SDRausty/buildAPKs/master/setup.buildAPKs.bash)
+##### -rwxrwxrwx [setup.buildAPKs.bash](https://sdrausty.github.io/buildAPKs/setup.buildAPKs.bash)
 
 
 ##### Information about shells: 
