@@ -11,8 +11,8 @@ cd && git clone https://github.com/BuildAPKs/buildAPKs
 ./buildAPKs/setup.buildAPKs.bash
 
 ```
-##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash)
-##### -rwxrwxrwx [setup.buildAPKs.bash](https://buildapks.github.io/buildAPKs/scripts/bash/init/setup.buildAPKs.bash)
+##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/setup.buildAPKs.bash)
+##### -rwxrwxrwx [setup.buildAPKs.bash](https://buildapks.github.io/buildAPKs/setup.buildAPKs.bash)
 
 Also to make Android Application Kits on smartphone, tablet and TV, copy and paste the following into Termux in order to install shlibs.bash in its' proper place:
 
@@ -23,8 +23,8 @@ cd && git clone https://github.com/SDRausty/buildAPKs
 ./buildAPKs/setup.buildAPKs.bash
 
 ```
-##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/SDRausty/buildAPKs/master/scripts/bash/init/setup.buildAPKs.bash)
-##### -rwxrwxrwx [setup.buildAPKs.bash](https://sdrausty.github.io/buildAPKs/scripts/bash/init/setup.buildAPKs.bash)
+##### -r--r--r-- [setup.buildAPKs.bash](https://raw.githubusercontent.com/BuildAPKs/buildAPKs/master/setup.buildAPKs.bash)
+##### -rwxrwxrwx [setup.buildAPKs.bash](https://buildapks.github.io/buildAPKs/setup.buildAPKs.bash)
 
 
 ##### Information about shells: 
