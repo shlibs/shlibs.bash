@@ -70,7 +70,7 @@ _GSU_() { # update submodules to latest version
 
 declare -A GBMS # declare associative array for available submoldules
 export GBMS=([sources/applications]="SDRausty/buildAPKsApps"  [sources/apps]="BuildAPKs/buildAPKs.apps" [sources/bits]="BuildAPKs/buildAPKs.bits" [sources/browsers]="SDRausty/buildAPKsBrowsers" [sources/clocks]="BuildAPKs/buildAPKs.clocks" [sources/compasses]="BuildAPKs/buildAPKs.compasses" [sources/demos]="BuildAPKs/buildAPKs.demos" [sources/entertainment]="BuildAPKs/buildAPKs.entertainment" [sources/flashlights4]="BuildAPKs/buildAPKs.flashlights" [sources/gamez]="BuildAPKs/buildAPKs.games" [sources/gaming]="SDRausty/buildAPKsGames" [sources/hellos]="BuildAPKs/buildAPKs.hellos" [sources/launchers]="BuildAPKs/buildAPKs.launchers" [sources/live.wallpapers]="BuildAPKs/buildAPKs.live.wallpapers" [sources/samples4]="SDRausty/buildAPKsSamples" [sources/samps]="BuildAPKs/buildAPKs.samples" [sources/top10]="SDRausty/buildAPKsTop10" [sources/tools]="BuildAPKs/buildAPKs.developers.tools" [sources/torches]="SDRausty/buildAPKsFlashlights" [sources/tutorials]="SDRausty/buildAPKsTutorials" [sources/widgets]="SDRausty/buildAPKsWidgets" [sources/widgets4]="BuildAPKs/buildAPKsWidgets")
-SIAD="https://github.com"
+SIAD="git://github.com"
 if [[ -z "${1:-}" ]] 
 then
 	cd "$RDR/"
