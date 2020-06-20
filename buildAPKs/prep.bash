@@ -7,20 +7,25 @@ shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} prep.bash" 
 
 _IAR_ () { 
-	if [[ -z "${WDIR:-}" ]]
+	if [[ -z "${1:-}" ]] # no argument is given
 	then
-		if [[ ! -z "${JDR:-}" ]] && [[ ! -z "${SFX:-}" ]]
-		then
-			export WDIR="$JDR/$SFX"
-		fi
-		if [[ -z "${SFX:-}" ]]
-		then
-			export SFX=""
-		fi
 		if [[ -z "${WDIR:-}" ]]
 		then
-			export WDIR="$JDR/$SFX"
+			if [[ ! -z "${JDR:-}" ]] && [[ ! -z "${SFX:-}" ]]
+			then
+				export WDIR="$JDR/$SFX"
+			fi
+			if [[ -z "${SFX:-}" ]]
+			then
+				export SFX=""
+			fi
+			if [[ -z "${WDIR:-}" ]]
+			then
+				export WDIR="$JDR/$SFX"
+			fi
 		fi
+	else
+		export WDIR="$1"
 	fi
 	_AFR_ || _SIGNAL_ "84" "_AFR_ _IAR_"
 }
