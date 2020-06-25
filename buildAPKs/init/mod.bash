@@ -92,7 +92,6 @@ _TMPDIR_ () {
 }
 
 _UMODS_() { 
-	cd "$RDR"
 	printf "\\e[1;1;38;5;191m%s\\e[0m\\n" "Updating module ~/${RDR##*/}/sources/$JID to the newest version... " 
 	if grep -w "$JID" .gitmodules 1>/dev/null
 	then
