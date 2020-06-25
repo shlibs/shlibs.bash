@@ -92,16 +92,17 @@ _TMPDIR_ () {
 }
 
 _UMODS_() { 
+	cd "$RDR"
 	printf "\\e[1;1;38;5;191m%s\\e[0m\\n" "Updating module ~/${RDR##*/}/sources/$JID to the newest version... " 
 	if grep -w "$JID" .gitmodules 1>/dev/null
 	then
-		(git submodule update --init --recursive --remote sources/"$JID" && _IAR_) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE ~/${RDR##*/}/sources/$JID:  Continuing..." # chaining operators
+		(git submodule update --init --recursive --remote "$JDR" && _IAR_) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE ~/${RDR##*/}/sources/$JID:  Continuing..." # chaining operators
 		if [[ -f "$JDR/ma.bash" ]] 
 		then 
 			. "$JDR/ma.bash"
 		fi
 	else
-		(git submodule add --depth 1 git://"$JAD" sources/"$JID" && git submodule update --init --recursive --remote sources/"$JID" && _IAR_) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
+		(git submodule add --depth 1 git://"$JAD" "$JDR" && git submodule update --init --recursive --remote "$JDR" && _IAR_) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
 		if [[ -f "$JDR/ma.bash" ]] 
 		then 
 			. "$JDR/ma.bash"
