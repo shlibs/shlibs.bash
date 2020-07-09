@@ -59,5 +59,5 @@ _SIGNAL_ () {
 declare -a DLIST # declare array for all superfluous directories
 declare -a FLIST # declare array for all superfluous files
 DLIST=("bin" "gen" "obj" "out")
-FLIST=("*-debug.key" "*.apk"  "*.aar" "lint.xml" "R.java")
+FLIST=("*-debug.key" "*.apk"  "lint.xml" "R.java")
 # prep.bash EOF
