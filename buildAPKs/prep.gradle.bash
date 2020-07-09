@@ -59,5 +59,5 @@ _SIGNAL_ () {
 declare -a DLIST # declare array for all superfluous directories
 declare -a FLIST # declare array for all superfluous files
 DLIST=(".idea" "bin" "gen" "gradle" "obj" "out")
-FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" "*.jar" ".gitignore" ".project" ".settings" "Android.kpf" "ant.properties" "app.iml" "build.gradle" "build.properties" "build.xml" ".classpath" "default.properties" "gradle-wrapper.jar" "gradle-wrapper.properties" "gradlew" "gradlew.bat" "gradle.properties" "gradle.xml" "lint.xml" "local.properties" "makefile" "makefile.linux_pc" "org.eclipse.jdt.core.prefs" "pom.xml" "proguard.cfg" "proguard-project.txt" "proguard-rules.pro" "project.properties" "R.java" "settings.gradle" "WebRTCSample.iml")
+FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" "*.jar" ".gitignore" ".project" ".settings" "Android.kpf" "ant.properties" "app.iml" "build.gradle" "build.properties" "build.xml" "default.properties" "gradle-wrapper.jar" "gradle-wrapper.properties" "gradlew" "gradlew.bat" "gradle.properties" "gradle.xml" "lint.xml" "local.properties" "makefile" "makefile.linux_pc" "org.eclipse.jdt.core.prefs" "pom.xml" "proguard.cfg" "proguard-project.txt" "proguard-rules.pro" "project.properties" "R.java" "settings.gradle" "WebRTCSample.iml")
 # prep.gradle.bash EOF

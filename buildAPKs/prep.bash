@@ -58,6 +58,6 @@ _SIGNAL_ () {
 
 declare -a DLIST # declare array for all superfluous directories
 declare -a FLIST # declare array for all superfluous files
-DLIST=(".idea" "bin" "gen" "obj" "out")
-FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" ".gitignore" ".project" ".settings" "app.iml" "build.properties" "build.xml" ".classpath" "default.properties" "lint.xml" "local.properties" "org.eclipse.jdt.core.prefs" "pom.xml" "proguard.cfg" "proguard-project.txt" "proguard-rules.pro" "project.properties" "R.java" "WebRTCSample.iml")
+DLIST=("bin" "gen" "obj" "out")
+FLIST=("*-debug.key" "*.apk"  "*.aar" "lint.xml" "R.java")
 # prep.bash EOF
