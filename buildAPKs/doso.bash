@@ -5,7 +5,7 @@
 set -Eeuox pipefail
 shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} doso.bash" 
-printf "%s\\n" "This file is under development."
+printf "%s\\n" "File \`doso.bash\` is being developed."
 declare CPUABI=""
 CPUABI="$(getprop ro.product.cpu.abi)" 
 declare -A AMKARR # associative array
