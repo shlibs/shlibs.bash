@@ -11,7 +11,7 @@ CPUABI="$(getprop ro.product.cpu.abi)"
 declare -A AMKARR # associative array
 # populate target architecture directory structure:
 # PRSTARR=([arm64-v8a]=lib/arm64-v8a/libname.so [armeabi-v7a]=lib/armeabi-v7a/libname.so [x86]=lib/x86/libname.so [x86_64]=lib/x86_64/libname.so)
-echo $CPUABI
+printf "%s\\n" "$CPUABI"
 AMKFS=($(find "$JDR" -type f -name "Android.mk")-0) # Parameter Substitution
 for FAMK in ${!AMKFS[@]}
 do 
