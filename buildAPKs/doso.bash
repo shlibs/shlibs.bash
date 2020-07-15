@@ -4,6 +4,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
+"$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
 printf "%s\\n" "File \`doso.bash\` is being developed."
 _FUNZIP_() {
 	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib"" ||:
