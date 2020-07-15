@@ -4,7 +4,6 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} doso.bash" 
 printf "%s\\n" "File \`doso.bash\` is being developed."
 _FUNZIP_() {
 	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib""
@@ -27,7 +26,7 @@ else
 	do 
 		if [[ $(echo $FAMK) = 0 ]]
 		then
-			printf "%s\\n" "0 Android.mk files found."
+			printf "%s\\n" "Zero (0) Android.mk files found."
 		else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< $FAMK)."
 			cd  "${FAMK%/*}" 
@@ -37,7 +36,7 @@ else
 			SOARR=($(ls | egrep '\.o$|\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
-				printf "%s\\n\\n" "0 *.o and *.so files were found;  There is nothing to do."
+				printf "%s\\n\\n" "Zero (0) *.o and *.so files were found;  There is nothing to do."
 			else
 				mkdir -p "${APP%/*}/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
@@ -49,6 +48,7 @@ else
 			printf "Finishing cmake && make in ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			cd  "${APP%/*}"
 			printf "Change directory to ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
+			_FUNZIP_
 		fi
 	done
 fi
