@@ -18,6 +18,8 @@ _ANDB_() { # find and process AndroidManifest.xml file
 	for APP in ${AMFS[@]}	# all elements in this array 
 	do	# cd to directory where file is found  
 		cd "${APP%/*}" || printf "\\e[1;7;38;5;220m%s\\e[0m\\n" "Unable to find the job directory:  Continuing..." # search: string manipulation site:www.tldp.org
+		[[ $(head -n 1 "$RDR/.conf/DOSO") = 1 ]] && printf "%s\\n" "To include \`*.so\` files in the APK build change the 1 in file ~/${RDR##*/}/.conf/DOSO to a 0."
+		[[ $(head -n 1 "$RDR/.conf/DOSO") = 0 ]] && printf "%s\\n" "Including \`*.so\` files in the APK build.  This feature is being developed." && . "$RDR"/scripts/bash/shlibs/buildAPKs/doso.bash 
 		# envoke ` build.one.bash ` in this directory
 		"$RDR/scripts/bash/build/build.one.bash" "${APP%/*}" 2>>"$RDR/var/log/stnderr.$JID.log" || printf "\\e[1;7;38;5;220m%s\\e[0m\\n" "Unable to parse jobs in the job directory:  Continuing..."
 	done
