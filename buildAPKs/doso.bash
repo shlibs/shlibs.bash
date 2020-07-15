@@ -20,6 +20,12 @@ do
 		printf "%s\\n" "0 Android.mk files found."
 	else
 		printf "%s\\n" "Found $FAMK."
+		cd  "${FAMK%/*}" 
+		echo $PWD
+		cmake .
+		make
+		cd $1
+		echo $PWD
 	fi
 done
 # doso.bash EOF
