@@ -2,7 +2,7 @@
 # Copyright 2020 (c) all rights reserved by S D Rausty; See LICENSE
 # File `doso.bash` is under development
 #####################################################################
-set -Eeuox pipefail
+set -Eeuo pipefail
 shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} doso.bash" 
 printf "%s\\n" "File \`doso.bash\` is being developed."
