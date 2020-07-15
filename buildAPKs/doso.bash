@@ -46,9 +46,9 @@ else
 				done
 			fi
 			printf "Finishing cmake && make in ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			cd  "${APP%/*}"
+			cd  "$JDR"
 			printf "Change directory to ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			_FUNZIP_
+			_FUNZIP_ ||:
 		fi
 	done
 fi
