@@ -12,8 +12,12 @@ declare -A AMKARR # associative array
 # populate target architecture directory structure:
 # PRSTARR=([arm64-v8a]=lib/arm64-v8a/libname.so [armeabi-v7a]=lib/armeabi-v7a/libname.so [x86]=lib/x86/libname.so [x86_64]=lib/x86_64/libname.so)
 printf "%s\\n" "$CPUABI"
-AMKFS=($(find "$JDR" -type f -name "Android.mk")-0) # Parameter Substitution
-for FAMK in ${!AMKFS[@]}
+AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt)) # Parameter Substitution
+for FAMK in ${AMKFS[@]}
+do
+	echo $FAMK 
+done
+for FAMK in ${AMKFS[@]}
 do 
 	if [[ $(echo $FAMK) = 0 ]]
 	then
@@ -22,9 +26,9 @@ do
 		printf "%s\\n" "Found $FAMK."
 		cd  "${FAMK%/*}" 
 		echo $PWD
-		cmake .
-		make
-		cd $1
+		cmake . || printf "%s\\n" "Signal 42 gernerated in cmake ${0##/*} doso.bash"
+		make || printf "%s\\n" "Signal 44 gernerated in make ${0##/*} doso.bash"
+		cd  "${APP%/*}"
 		echo $PWD
 	fi
 done
