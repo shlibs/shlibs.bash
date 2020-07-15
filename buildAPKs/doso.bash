@@ -17,7 +17,7 @@ CPUABI="$(getprop ro.product.cpu.abi)"
 declare -A AMKARR # associative array
 # populate target architecture directory structure:
 # PRSTARR=([arm64-v8a]=lib/arm64-v8a/libname.so [armeabi-v7a]=lib/armeabi-v7a/libname.so [x86]=lib/x86/libname.so [x86_64]=lib/x86_64/libname.so)
-printf "%s\\n" "Found $CPUABI architecture.  Search for \`CMakeLists.txt\` files;  Please ber patient..."
+printf "%s\\n" "Found $CPUABI architecture.  Search for \`CMakeLists.txt\` files;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name CMakeLists.txt)) 
 # AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
@@ -38,15 +38,13 @@ else
 		else
 			printf "%s\\n" "Found $FAMK."
 			cd  "${FAMK%/*}" 
-			echo
-			echo "Beginning cmake && make in $PWD"
+			printf "Beginning cmake && make in %s/.\\n" "$PWD"
 			cmake . || printf "%s\\n" "Signal 42 gernerated in cmake ${0##*/} doso.bash"
 			make || printf "%s\\n" "Signal 44 gernerated in make ${0##*/} doso.bash"
-			echo
 			SOARR=($(ls | egrep '\.o$|\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
-				echo nothing to do
+				printf "%s\\n" "0 *.o and *.so files were found;  There is nothing to do."
 			else
 				mkdir -p "${APP%/*}/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
@@ -55,12 +53,9 @@ else
 					cp "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
-			echo
-			echo "Finishing cmake && make in $PWD"
+			printf "\\nFinishing cmake && make in %s/.\\n" "$PWD"
 			cd  "${APP%/*}"
-			echo
-			echo "Change directory to $PWD"
-			echo
+			printf "Change directory to %s/.\\n\\n" "$PWD"
 		fi
 	done
 fi
