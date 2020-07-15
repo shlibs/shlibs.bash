@@ -16,8 +16,8 @@ declare CPUABI=""
 CPUABI="$(getprop ro.product.cpu.abi)" 
 declare -A AMKARR # associative array
 # populate target architecture directory structure:
-# PRSTARR=([arm64-v8a]=lib/arm64-v8a/libname.so [armeabi-v7a]=lib/armeabi-v7a/libname.so [x86]=lib/x86/libname.so [x86_64]=lib/x86_64/libname.so)
-printf "%s\\n" "Found $CPUABI architecture.  Search for \`CMakeLists.txt\` files;  Please be patient..."
+# PRSTARR=([arm64-v8a]=lib/arm64-v8a [armeabi-v7a]=lib/armeabi-v7a [x86]=lib/x86 [x86_64]=lib/x86_64)
+printf "%s\\n" "Found $CPUABI architecture.  Searching for \`CMakeLists.txt\` files;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name CMakeLists.txt)) 
 # AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
