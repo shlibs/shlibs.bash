@@ -6,9 +6,9 @@ set -Eeuo pipefail
 shopt -s nullglob globstar
 printf "%s\\n" "File \`doso.bash\` is being developed."
 _FUNZIP_() {
-	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib""
-	zip -r -u "$PKGNAM.apk" "${APP%/*}/lib"
-	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib": done"
+	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib"" ||:
+	zip -r -u "$PKGNAM.apk" "${APP%/*}/lib" ||:
+	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib": done" ||:
 }
 declare CPUABI=""
 CPUABI="$(getprop ro.product.cpu.abi)" 
