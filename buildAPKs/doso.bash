@@ -51,6 +51,7 @@ else
 				mkdir -p "${APP%/*}/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
 				do
+					printf "%s\\n" "Copying %s to %s/." "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${##*/}i ${0##/*} doso.bash" 
 					cp "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${##*/}i ${0##/*} doso.bash" 
 				done
 			fi
