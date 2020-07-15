@@ -40,10 +40,10 @@ else
 			cd  "${FAMK%/*}" 
 			echo
 			echo "Beginning cmake && make in $PWD"
-			cmake . || printf "%s\\n" "Signal 42 gernerated in cmake ${0##/*} doso.bash"
-			make || printf "%s\\n" "Signal 44 gernerated in make ${0##/*} doso.bash"
+			cmake . || printf "%s\\n" "Signal 42 gernerated in cmake ${0##*/} doso.bash"
+			make || printf "%s\\n" "Signal 44 gernerated in make ${0##*/} doso.bash"
 			echo
-			SOARR=($(ls | egrep '\.o$|\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##/*} doso.bash"
+			SOARR=($(ls | egrep '\.o$|\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
 				echo nothing to do
@@ -51,8 +51,8 @@ else
 				mkdir -p "${APP%/*}/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
 				do
-					printf "Copying %s to %s/." "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${##*/}i ${0##/*} doso.bash" 
-					cp "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${##*/}i ${0##/*} doso.bash" 
+					printf "Copying %s to %s/." "$i" "${APP%/*}/lib/armeabi-v7a"
+					cp "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
 			echo
