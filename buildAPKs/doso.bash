@@ -20,7 +20,7 @@ AMKFS=($(find "$JDR" -type f -name CMakeLists.txt))
 # AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
 then
-	echo "No CMakeLists.txt files found."
+	echo "No CMakeLists.txt files were found; Continuing..."
 else
 	for FAMK in ${AMKFS[@]}
 	do 
