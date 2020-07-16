@@ -6,6 +6,34 @@ set -Eeuo pipefail
 shopt -s nullglob globstar
 "$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
 printf "%s\\n" "File \`doso.bash\` is being developed."
+declare COMMANDR
+declare COMMANDIF
+declare STRING1
+declare STRING2
+STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
+STRING2="Cannot update ~/${RDR##*/} prerequisite: Continuing..."
+PKGS=(make cmake)
+printf "\\e[1;38;5;115m%s\\e[0m\\n" "Beginning buildAPKs setup:"
+COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1") 
+COMMANDIF="${COMMANDR##*/}"
+_INPKGS_() {
+	if [[ "$COMMANDIF" = au ]] 
+	then 
+		au "${PKGS[@]}" || printf "\\e[1;38;5;117m%s\\e[0m\\n" "$STRING2"
+	else
+		apt install "${PKGS[@]}" || printf "\\e[1;37;5;116m%s\\e[0m\\n" "$STRING2"
+	fi
+}
+for PKG in "${PKGS[@]}"
+do
+	COMMANDP="$(command -v "$PKG")" || printf "Command %s not found: Continuing...\\n" "$PKG" # test if command exists
+	COMMANDPF="${COMMANDP##*/}"
+	if [[ "$COMMANDPF" != "$PKG" ]] 
+	then 
+		_INPKGS_
+	fi
+done
+
 _FUNZIP_() {
 	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib"" ||:
 	zip -r -u "$PKGNAM.apk" "${APP%/*}/lib" ||:
