@@ -13,7 +13,7 @@ declare STRING1
 declare STRING2
 STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
 STRING2="Cannot update ~/${RDR##*/} prerequisite: Continuing..."
-PKGS=(make cmake)
+PKGS=(make cmake zip)
 COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1") 
 COMMANDIF="${COMMANDR##*/}"
 _INPKGS_() {
