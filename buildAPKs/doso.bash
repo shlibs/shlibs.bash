@@ -5,7 +5,6 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 "$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
-printf "%s\\n" "File \`doso.bash\` is being developed."
 declare COMMANDR
 declare COMMANDIF
 declare CPUABI=""
