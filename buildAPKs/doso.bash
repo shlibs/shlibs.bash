@@ -36,7 +36,7 @@ do
 done
 
 CPUABI="$(getprop ro.product.cpu.abi)" 
-printf "%s\\n" "Detected $CPUABI architecture. Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
+printf "%s\\n" "Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
 then
@@ -63,7 +63,7 @@ else
 				mkdir -p "$JDR/bin/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
 				do
-					printf "Copying %s to ~/%s/lib/armeabi-v7a/...\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/armeabi-v7a")"
+					printf "Copying %s to ~/%s/lib/$CPUABI/...\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/$CPUABI")"
 					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
