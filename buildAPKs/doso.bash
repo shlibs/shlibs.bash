@@ -35,7 +35,7 @@ do
 done
 
 CPUABI="$(getprop ro.product.cpu.abi)" 
-printf "%s\\n" "Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
+printf "\\e[1;38;5;113m%s\\n" "Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
 then
@@ -66,7 +66,7 @@ else
 					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
-			printf "Finished cmake && make in ~/%s/.\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
+			printf "Finished cmake && make in ~/%s/.\\e[0m\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 		fi
 	done
 fi
