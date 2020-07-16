@@ -13,7 +13,7 @@ declare STRING2
 STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
 STRING2="Cannot update ~/${RDR##*/} prerequisite: Continuing..."
 PKGS=(make cmake)
-printf "\\e[1;38;5;115m%s\\e[0m\\n" "Beginning buildAPKs setup:"
+printf "\\e[1;38;5;115m%s\\e[0m\\n" "Beginning buildAPKs \`doso.bash\` setup:"
 COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1") 
 COMMANDIF="${COMMANDR##*/}"
 _INPKGS_() {
