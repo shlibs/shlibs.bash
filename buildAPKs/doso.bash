@@ -13,7 +13,7 @@ declare STRING1
 declare STRING2
 STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
 STRING2="Cannot update ~/${RDR##*/} prerequisite: Continuing..."
-PKGS=(make cmake zip)
+PKGS=(make cmake)
 COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1") 
 COMMANDIF="${COMMANDR##*/}"
 _INPKGS_() {
@@ -35,11 +35,6 @@ do
 	fi
 done
 
-_FUNZIP_() {
-	cd  "$JDR/bin"
-	printf "Running zip -r -u %s.apk lib...\\n" "$PKGNAM" 
-	zip -r -u "$PKGNAM.apk" "lib" 
-}
 CPUABI="$(getprop ro.product.cpu.abi)" 
 printf "%s\\n" "Detected $CPUABI architecture. Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
@@ -72,8 +67,7 @@ else
 					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
-			printf "Finishing cmake && make in ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			_FUNZIP_ ||:
+			printf "Finished cmake && make in ~/%s/.\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 		fi
 	done
 fi
