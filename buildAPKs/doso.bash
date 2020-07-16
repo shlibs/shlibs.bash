@@ -73,7 +73,6 @@ else
 				done
 			fi
 			printf "Finishing cmake && make in ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			cd  "$JDR"
 			_FUNZIP_ ||:
 		fi
 	done
