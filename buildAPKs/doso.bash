@@ -60,7 +60,7 @@ else
 			printf "Beginning make in ~/%s/...\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			make || printf "%s\\n" "Signal 44 gernerated in make ${0##*/} doso.bash"
 			printf "Searching for *.so files in ~/%s/...\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			SOARR=($(ls | egrep '\.o$|\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
+			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
 				printf "%s\\n\\n" "Zero (-1) *.o and *.so files were found;  There is nothing to do."
