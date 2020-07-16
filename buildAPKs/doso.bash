@@ -63,7 +63,7 @@ else
 				mkdir -p "$JDR/bin/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
 				do
-					printf "Copying %s to ~/%s/lib/armeabi-v7a/.\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/armeabi-v7a")"
+					printf "Copying %s to ~/%s/lib/armeabi-v7a/...\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/armeabi-v7a")"
 					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
