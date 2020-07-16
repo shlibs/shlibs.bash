@@ -8,6 +8,7 @@ shopt -s nullglob globstar
 printf "%s\\n" "File \`doso.bash\` is being developed."
 declare COMMANDR
 declare COMMANDIF
+declare CPUABI=""
 declare STRING1
 declare STRING2
 STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
@@ -35,16 +36,12 @@ do
 done
 
 _FUNZIP_() {
-	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib"" ||:
-	zip -r -u "$PKGNAM.apk" "${APP%/*}/lib" ||:
-	echo "zip -r -u "$PKGNAM.apk" "${APP%/*}/lib": done" ||:
+	cd  "$JDR/bin"
+	printf "Running zip -r -u %s.apk lib...\\n" "$PKGNAM" 
+	zip -r -u "$PKGNAM.apk" "lib" 
 }
-declare CPUABI=""
 CPUABI="$(getprop ro.product.cpu.abi)" 
-declare -A AMKARR # associative array
-# populate target architecture directory structure:
-# PRSTARR=([arm64-v8a]=lib/arm64-v8a [armeabi-v7a]=lib/armeabi-v7a [x86]=lib/x86 [x86_64]=lib/x86_64)
-printf "%s\\n" "Found $CPUABI architecture.  Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
+printf "%s\\n" "Detected $CPUABI architecture. Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
 then
@@ -52,7 +49,7 @@ then
 else
 	for FAMK in ${AMKFS[@]}
 	do 
-		if [[ $(echo $FAMK) = 0 ]]
+		if [[ $FAMK = 0 ]]
 		then
 			printf "%s\\n" "Zero (0) Android.mk and CMakeLists.txt files found."
 		else
@@ -66,18 +63,17 @@ else
 			SOARR=($(ls | egrep '\.o$|\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
-				printf "%s\\n\\n" "Zero (0) *.o and *.so files were found;  There is nothing to do."
+				printf "%s\\n\\n" "Zero (-1) *.o and *.so files were found;  There is nothing to do."
 			else
-				mkdir -p "${APP%/*}/lib/armeabi-v7a"
+				mkdir -p "$JDR/bin/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
 				do
-					printf "\\nCopying %s to ~/%s/.\\n\\n" "$i" "$(cut -d"/" -f7-99 <<< ${APP%/*})/lib/armeabi-v7a"
-					cp "$i" "${APP%/*}/lib/armeabi-v7a" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
+					printf "\\nCopying %s to ~/%s/lib/armeabi-v7a/.\\n\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/armeabi-v7a")"
+					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
 			printf "Finishing cmake && make in ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			cd  "$JDR"
-			printf "Change directory to ~/%s/.\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			_FUNZIP_ ||:
 		fi
 	done
