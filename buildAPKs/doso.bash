@@ -44,18 +44,17 @@ CPUABI="$(getprop ro.product.cpu.abi)"
 declare -A AMKARR # associative array
 # populate target architecture directory structure:
 # PRSTARR=([arm64-v8a]=lib/arm64-v8a [armeabi-v7a]=lib/armeabi-v7a [x86]=lib/x86 [x86_64]=lib/x86_64)
-printf "%s\\n" "Found $CPUABI architecture.  Searching for \`CMakeLists.txt\` files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
-AMKFS=($(find "$JDR" -type f -name CMakeLists.txt)) 
-# AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
+printf "%s\\n" "Found $CPUABI architecture.  Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
+AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
 if [[ -z "${AMKFS[@]:-}" ]]
 then
-	echo "No CMakeLists.txt files were found; Continuing..."
+	printf "%s\\n" "No Android.mk and CMakeLists.txt files were found; Continuing..."
 else
 	for FAMK in ${AMKFS[@]}
 	do 
 		if [[ $(echo $FAMK) = 0 ]]
 		then
-			printf "%s\\n" "Zero (0) CMakeLists.txt files found."
+			printf "%s\\n" "Zero (0) Android.mk and CMakeLists.txt files found."
 		else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< $FAMK)."
 			cd  "${FAMK%/*}" 
