@@ -58,12 +58,12 @@ else
 			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
-				printf "%s\\n\\n" "Zero (-1) *.o and *.so files were found;  There is nothing to do."
+				printf "%s\\n" "Zero (-1) *.o and *.so files were found;  There is nothing to do."
 			else
 				mkdir -p "$JDR/bin/lib/armeabi-v7a"
 				for i in ${SOARR[@]}
 				do
-					printf "\\nCopying %s to ~/%s/lib/armeabi-v7a/.\\n\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/armeabi-v7a")"
+					printf "Copying %s to ~/%s/lib/armeabi-v7a/.\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/armeabi-v7a")"
 					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
