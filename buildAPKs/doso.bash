@@ -50,11 +50,11 @@ else
 		else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< $FAMK)."
 			cd  "${FAMK%/*}" 
-			printf "Beginning cmake in ~/%s/...\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
+			printf "Beginning cmake in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			cmake . || printf "%s\\n" "Signal 42 gernerated in cmake ${0##*/} doso.bash"
-			printf "Beginning make in ~/%s/...\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
+			printf "Beginning make in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			make || printf "%s\\n" "Signal 44 gernerated in make ${0##*/} doso.bash"
-			printf "Searching for *.so files in ~/%s/...\\n\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
+			printf "Searching for *.so files in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
