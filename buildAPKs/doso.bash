@@ -60,10 +60,10 @@ else
 				printf "%s\\n" "Zero (-1) *.o and *.so files were found;  There is nothing to do."
 			else
 				mkdir -p "$JDR/bin/lib/armeabi-v7a"
-				for i in ${SOARR[@]}
+				for SOFILE in ${SOARR[@]}
 				do
-					printf "Copying %s to ~/%s/lib/$CPUABI/...\\n" "$i" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/$CPUABI")"
-					cp "$i"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
+					printf "Copying %s to ~/%s/lib/$CPUABI/...\\n" "$SOFILE" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/$CPUABI")"
+					cp "$SOFILE"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
 			printf "Finished cmake && make in ~/%s/.\\e[0m\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
