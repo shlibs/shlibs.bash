@@ -45,7 +45,7 @@ else
 	do 
 		if [[ $FAMK = 0 ]]
 		then
-			printf "%s\\n" "Zero (0) Android.mk and CMakeLists.txt files found."
+			printf "%s\\n" "No Android.mk and CMakeLists.txt files were found; Continuing..."
 		else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< $FAMK)."
 			cd  "${FAMK%/*}" 
@@ -57,7 +57,7 @@ else
 			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
-				printf "%s\\n" "Zero (-1) *.o and *.so files were found;  There is nothing to do."
+				printf "%s\\n" "No *.so files were found;  There is nothing to do."
 			else
 				mkdir -p "$JDR/bin/lib/armeabi-v7a"
 				for SOFILE in ${SOARR[@]}
