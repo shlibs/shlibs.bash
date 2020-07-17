@@ -50,11 +50,11 @@ else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< $FAMK)."
 			cd  "${FAMK%/*}" 
 			printf "Beginning cmake in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			cmake . || printf "%s\\n" "Signal 42 gernerated in cmake ${0##*/} doso.bash"
+			cmake . || printf "%s\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
 			printf "Beginning make in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			make || printf "%s\\n" "Signal 44 gernerated in make ${0##*/} doso.bash"
+			make || printf "%s\\n" "Signal 44 generated in make ${0##*/} doso.bash"
 			printf "Searching for *.so files in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 gernerated in SOAR ${0##*/} doso.bash"
+			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 generated in SOAR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
 				printf "%s\\n" "No *.so files were found;  There is nothing to do."
@@ -63,7 +63,7 @@ else
 				for SOFILE in ${SOARR[@]}
 				do
 					printf "Copying %s to ~/%s/lib/$CPUABI/...\\n" "$SOFILE" "$(cut -d"/" -f7-99 <<< "$JDR/bin/lib/$CPUABI")"
-					cp "$SOFILE"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 gernerated in mv ${i##*/} ${0##/*} doso.bash" 
+					cp "$SOFILE"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 generated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
 			printf "Finished cmake && make in ~/%s/.\\e[0m\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
