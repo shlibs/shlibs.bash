@@ -5,35 +5,8 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 "$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
-declare COMMANDR
-declare COMMANDIF
-declare CPUABI=""
-declare STRING1
-declare STRING2
-STRING1="COMMAND \`au\` enables rollback, available at https://wae.github.io/au/ IS NOT FOUND: Continuing... "
-STRING2="Cannot update ~/${RDR##*/} prerequisite: Continuing..."
-PKGS=(make cmake)
-COMMANDR="$(command -v au)" || (printf "%s\\n\\n" "$STRING1") 
-COMMANDIF="${COMMANDR##*/}"
-_INPKGS_() {
-	if [[ "$COMMANDIF" = au ]] 
-	then 
-		au "${PKGS[@]}" || printf "\\e[1;38;5;117m%s\\e[0m\\n" "$STRING2"
-	else
-		apt install "${PKGS[@]}" || printf "\\e[1;37;5;116m%s\\e[0m\\n" "$STRING2"
-	fi
-}
-for PKG in "${PKGS[@]}"
-do
-	COMMANDP="$(command -v "$PKG")" || printf "Command %s not found: Continuing...\\n" "$PKG" # test if command exists
-	COMMANDPF="${COMMANDP##*/}"
-	if [[ "$COMMANDPF" != "$PKG" ]] 
-	then 
-		printf "\\e[1;38;5;115m%s\\e[0m\\n" "Beginning buildAPKs \`doso.bash\` setup:"
-		_INPKGS_
-	fi
-done
-
+. "$RDR/scripts/sh/shlibs/inst.sh"
+_INST_ "make cmake" "make cmake" "doso.bash" 
 CPUABI="$(getprop ro.product.cpu.abi)" 
 printf "\\e[1;38;5;113m%s\\n" "Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
