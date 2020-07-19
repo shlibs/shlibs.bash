@@ -54,7 +54,7 @@ else
 			printf "Beginning make in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 			make || printf "%s\\n" "Signal 44 generated in make ${0##*/} doso.bash"
 			printf "Searching for *.so files in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
-			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 generated in SOAR ${0##*/} doso.bash"
+			SOARR=($(ls | egrep '\.so$')) || printf "%s\\n" "Signal 46 generated in SOARR ${0##*/} doso.bash"
 			if [[ -z "${SOARR[@]:-}" ]]
 			then
 				printf "%s\\n" "No *.so files were found;  There is nothing to do."
@@ -66,6 +66,9 @@ else
 					cp "$SOFILE"  "$JDR/bin/lib/$CPUABI/" || printf "%s\\n" "Signal 48 generated in mv ${i##*/} ${0##/*} doso.bash" 
 				done
 			fi
+			printf "Cleaning cmake files in ~/%s/: " "$(cut -d"/" -f7-99 <<< $PWD)"
+			find . -iwholename '*cmake*' -not -name CMakeLists.txt -delete
+			printf "DONE\\n"
 			printf "Finished cmake && make in ~/%s/.\\e[0m\\n" "$(cut -d"/" -f7-99 <<< $PWD)"
 		fi
 	done
