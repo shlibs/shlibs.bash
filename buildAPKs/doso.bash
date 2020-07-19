@@ -6,7 +6,8 @@ set -Eeuo pipefail
 shopt -s nullglob globstar
 "$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
 . "$RDR/scripts/sh/shlibs/inst.sh"
-_INST_ "make cmake" "make cmake" "doso.bash" 
+_INST_ "cmake" "cmake" "doso.bash" 
+_INST_ "make" "make" "doso.bash" 
 CPUABI="$(getprop ro.product.cpu.abi)" 
 printf "\\e[1;38;5;113m%s\\n" "Searching for Android.mk and CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< $JDR)/;  Please be patient..."
 AMKFS=($(find "$JDR" -type f -name Android.mk -or -name CMakeLists.txt))
