@@ -23,7 +23,9 @@ _MAINCALIB_() { # print information to terminal from file .conf/LIBAUTH
 		then
 			printf "\\e[7;38;5;122m%s\\e[0m\\n" "File ~/"${RDR##*/}"/.conf/LIBAUTH has information regarding the integration of artifacts and libraries into compilations.  The functionality of this option is being enhanced.  To improve this automation see https://github.com/BuildAPKs/buildAPKs/issues and pulls..."
 			printf "\\n\\e[2;38;5;28m%s\\e[0m\\n" "Running \$(grep -v EOF "$RDR"/.conf/LIBAUTH):"
-			printf "\\e[1;38;5;29m\\n%s\\e[0m\\n" "$(grep -v EOF "$RDR"/.conf/LIBAUTH)"
+			printf "\\e[1;38;5;29m\\n%s\\e[0m\\n" "$(tail -n +2 <<< $(grep -v EOF "$RDR"/.conf/LIBAUTH))"
+			find -mindepth 5 -maxdepth 5 -name *S*.db
+			tail -n +2 <<< $(ls)
 			CALIBCT="$(( CALIBCT - 3 ))"
 			[[ "$CALIBCT" = -1 ]] && VIEWS="showing" || VIEWS="showings"
 			printf "\\e[1;38;5;30m\\n%s\\e[0m\\n" "${CALIBCT#-} $VIEWS of file ~/"${RDR##*/}"/.conf/LIBAUTH remaining; Continuing..."
