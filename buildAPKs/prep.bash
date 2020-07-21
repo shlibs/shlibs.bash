@@ -4,9 +4,9 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} prep.bash" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} prep.bash"
 
-_IAR_ () { 
+_IAR_ () {
 	if [[ -z "${1:-}" ]] # no argument is given
 	then
 		if [[ -z "${WDIR:-}" ]]
@@ -47,11 +47,11 @@ _SIGNAL_ () {
  	if [[ -z ${3:-} ]]
 	then
 		STRING="SIGNAL $1 generated in $2 ${0##*/} prep.bash!  Continuing...  "
-		printf "\\e[2;7;38;5;210m%s\\e[0m" "$STRING" 
+		printf "\\e[2;7;38;5;210m%s\\e[0m" "$STRING"
 	else
 		SG="$3"
 		STRING="EXIT SIGNAL $1 generated in $2 ${0##*/} prep.bash!  Exiting with signal $SG..."
-		printf "\\e[2;7;38;5;203m%s\\e[0m" "$STRING" 
+		printf "\\e[2;7;38;5;203m%s\\e[0m" "$STRING"
 		exit "$SG"
 	fi
 }

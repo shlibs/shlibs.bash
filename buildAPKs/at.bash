@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# Copyright 2017-2020 (c) all rights reserved by SDRausty see LICENSE 
+# Copyright 2017-2020 (c) all rights reserved by SDRausty see LICENSE
 # https://sdrausty.github.io hosted  courtesy https://pages.github.io
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 166 167 168 "${0##*/} at.bash" 
+. "$RDR"/scripts/bash/shlibs/trap.bash 166 167 168 "${0##*/} at.bash"
 
-_AT_ () { 
-	export SFX="$1" 
+_AT_ () {
+	export SFX="$1"
 	if [ -d "$JDR/$1/" ]
        	then
 		if ! find "$JDR/$1/" -type f -name AndroidManifest.xml
        		then
 			_TB_ "$@"
-		fi	
+		fi
 	else
 		mkdir -p "$JDR/$1/"
 		_TB_ "$@"
