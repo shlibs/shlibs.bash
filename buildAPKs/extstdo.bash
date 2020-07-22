@@ -11,6 +11,7 @@ _CP2EXTSTTD_() {
 	cp -r "$RDR/" "$EXTSTTD/"
 }
 
+_EXTSTDO_() {
 	( [[ -w "$EXTSTTD/buildAPKs" ]] && echo "Detected writable external storage : Continuing with external storage feature$EXTSTTD/buildAPKs folder" && export EXTSTBD=0 ) || (echo -n "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Not continuing with external storage feature" && _CP2EXTSTTD_ && export EXTSTBD=0 )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && echo -n "Found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID" && export EXTSTBD=0 || EXTSTBD=1 
 
@@ -25,4 +26,6 @@ _CP2EXTSTTD_() {
 	else
 		echo "Could not find file $EXTSTTD/buildAPKs/.conf/VERSIONID : Not continuing with external storage installation" && EXTSTBD=1 
 	fi
+}
+_EXTSTDO_
 # extstdo.bash EOF
