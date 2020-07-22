@@ -13,7 +13,7 @@ printf "%s\\n" "EXTSTBD is set to $EXTSTBD"
 printf "%s\\n" "External storage installation $FILENDSTRING: DONE"
 }
 _CP2EXTSTTD_() {
-	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " && cp -r "$RDR/" "$EXTSTTD/" && cp -r "$RDR/.*" "$EXTSTTD/${RDR##*/}/" && printf "%s" "done "
+	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " && cp -r "$RDR/" "$EXTSTTD/" 2>/dev/null && cp -r "$RDR/.*" "$EXTSTTD/${RDR##*/}/" && printf "%s" "done "
 }
 _CK2EXTSTBD_
 }
