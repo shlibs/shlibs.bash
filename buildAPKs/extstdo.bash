@@ -5,6 +5,7 @@
 #####################################################################
 set -eu
 . "$RDR/scripts/bash/shlibs/android/extstck.bash" 
+_EXTSTCK_
 
 _CP2EXTSTTD_() {
 	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " 
@@ -18,7 +19,6 @@ _EXTSTDO_() {
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "Found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=0 || EXTSTBD=1 
 
 
-	_EXTSTCK_
 	if [[ "$EXTSTBD" = 0 ]] 
 	then
 # 		[[ "$EXTSTCK" = 0 ]] && _EXTSTTD_
