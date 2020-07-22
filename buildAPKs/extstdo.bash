@@ -19,5 +19,5 @@ _CP2EXTSTTD_() {
 
 ( [[ "$EXTSTCK" = 0 ]] && _CK2EXTSTBD_ ) || :
 }
-( [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_ ) || printf "%s" "Signal generated in L#21 extstdo.bash : $FILENDSTRING continuing : "
+( [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_ ) || :
 # extstdo.bash EOF
