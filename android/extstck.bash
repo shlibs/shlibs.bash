@@ -11,7 +11,8 @@ EXTSTST="$(echo -n $EXTSTST)"
 EXTSTCW="$(wc -w <<< $EXTSTST )"
 EXTSTTD="/storage/$EXTSTST/Android/data/com.termux/files"
 _EXTSTCK_() { # check if external storage is writable 
-	[[ "$EXTSTCW" != 1 ]] && echo Did not detect writable external storage : not continuing with external storage  && EXTSTCK=1 
-	[[ -w "$EXTSTTD" ]] && echo Detected writable external storage && EXTSTCK=0  
+	[[ "$EXTSTCW" = 0 ]] && echo "Did not detect writable external storage : Not continuing with external storage feature" && EXTSTCK=1 
+	[[ "$EXTSTCW" >= 2 ]] && echo "Detect multiple writable external storage spaces : Not continuing with external storage feature" && EXTSTCK=1 
+	[[ -w "$EXTSTTD" ]] && echo "Detected writable external storage : Continuing with external storage feature" && EXTSTCK=0  
 }
 # extstck.bash EOF
