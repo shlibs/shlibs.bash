@@ -17,7 +17,7 @@ _EXTSTCK_() {
 	# check if multiple external storage space were found
 	[[ "$EXTSTCW" -ge 2 ]] &&  printf "%s" "Detected multiple writable external storage spaces : Not continuing with external storage $FILECKSTRING feature : This feature is being developed : " && export EXTSTCK=1 
 	# check if external storage space is writable 
-	[[ -w "$EXTSTTD" ]] &&  printf "%s" "Detected writable external storage $EXTSTTD space : $FILECKSTRING continuing : " && export EXTSTCK=0  
-	printf "%s" "Check external storage installation : $FILECKSTRING DONE : "
+	[[ -w "$EXTSTTD" ]] &&  printf "%s" "Detected writable external $EXTSTTD storage space : $FILECKSTRING continuing : " && export EXTSTCK=0  
+	printf "%s" "Check external storage installation $FILECKSTRING : DONE : "
 }
 # extstck.bash EOF
