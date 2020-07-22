@@ -14,7 +14,7 @@ printf "%s" "EXTSTBD is set to $EXTSTBD : "
 printf "%s\\n" "External storage installation : $FILEDOSTRING DONE"
 }
 _CP2EXTSTTD_() {
-	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " 
+	printf "%s" "Copying $RDR/ to $EXTSTTD/ : Please be patient : " 
 	cd "$HOME/" 
 	tar zcf "${RDR##*/}.tar.gz" "${RDR##*/}"
 	mv "${RDR##*/}.tar.gz" "$EXTSTTD"
