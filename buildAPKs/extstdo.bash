@@ -5,6 +5,7 @@
 #####################################################################
 set -eu
 . "$RDR/scripts/bash/shlibs/android/extstck.bash" 
+FILENDSTRING="${0##*/} extstdo.bash"
 _EXTSTDO_() {
 _CK2EXTSTBD_() {
 	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILENDSTRING found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || ( printf "%s" "$FILENDSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && _CP2EXTSTTD_ && cd "$EXTSTTD/${RDR##*/}/" && git pull && cd "$RDR" ) && export EXTSTBD=0
@@ -18,6 +19,5 @@ _CP2EXTSTTD_() {
 
 ( [[ "$EXTSTCK" = 0 ]] && _CK2EXTSTBD_ ) || :
 }
-FILENDSTRING="${0##*/} extstdo.bash"
 ( [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_ ) || printf "%s" "Signal generated in L#21 extstdo.bash : $FILENDSTRING continuing : "
 # extstdo.bash EOF
