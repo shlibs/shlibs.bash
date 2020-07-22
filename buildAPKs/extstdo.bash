@@ -9,10 +9,12 @@ set -eu
 _CP2EXTSTTD_() {
 	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " 
 	cp -r "$RDR/" "$EXTSTTD/"
+	cp -r "$RDR/.*" "$EXTSTTD/${RDR##*/}/"
+	printf "%s" "done "
 }
 
 _EXTSTDO_() {
-	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "Continuing with writable external storage $FILENDSTRING installation : Found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || (printf "%s" "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Continuing with external storage $FILENDSTRING installation : " && _CP2EXTSTTD_ && export EXTSTBD=0 )
+	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "Continuing with writable external storage $FILENDSTRING installation : Found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || (printf "%s" "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Continuing with external storage $FILENDSTRING installation : " && _CP2EXTSTTD_ && cd "$EXTSTTD/${RDR##*/}/" && git pull && cd "$RDR" && export EXTSTBD=0 )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "Found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=0 || EXTSTBD=1 
 
 
