@@ -102,7 +102,7 @@ _UMODS_() {
 			. "$JDR/ma.bash"
 		fi
 	else
-		(git submodule add --depth 1 git://"$JAD" "$JDR/" && git submodule update --init --recursive --remote "$JDR/" && _IAR_) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
+		(git submodule add --depth 1 git://"$JAD" "$JDR/" && _IAR_) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
 		if [[ -f "$JDR/ma.bash" ]]
 		then
 			. "$JDR/ma.bash"
