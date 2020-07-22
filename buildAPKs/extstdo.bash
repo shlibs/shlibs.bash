@@ -7,12 +7,12 @@ set -eu
 . "$RDR/scripts/bash/shlibs/android/extstck.bash" 
 
 _CP2EXTSTTD_() {
-	printf "%s" "Continuing with external storage $FILENDSTRING installation : Copying $RDR/ to $EXTSTTD/ : " 
+	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " 
 	cp -r "$RDR/" "$EXTSTTD/"
 }
 
 _EXTSTDO_() {
-	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "Detected writable external storage : Continuing with external storage $FILENDSTRING installation : Found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || (printf "%s" "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Not continuing with external storage $FILENDSTRING installation : " && _CP2EXTSTTD_ && export EXTSTBD=0 )
+	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "Continuing with writable external storage $FILENDSTRING installation : Found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || (printf "%s" "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Continuing with external storage $FILENDSTRING installation : " && _CP2EXTSTTD_ && export EXTSTBD=0 )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "Found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=0 || EXTSTBD=1 
 
 
