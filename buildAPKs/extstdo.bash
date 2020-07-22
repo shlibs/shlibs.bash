@@ -12,7 +12,7 @@ _CP2EXTSTTD_() {
 }
 
 _EXTSTDO_() {
-	( [[ -w "$EXTSTTD/buildAPKs" ]] && echo -n "Detected writable external storage : Continuing with external storage feature : $EXTSTTD/buildAPKs folder " && export EXTSTBD=0 ) || (echo -n "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Not continuing with external storage feature : " && _CP2EXTSTTD_ && export EXTSTBD=0 )
+	( [[ -w "$EXTSTTD/buildAPKs" ]] && echo -n "Detected writable external storage : Continuing with external storage : $EXTSTTD/buildAPKs folder " && export EXTSTBD=0 ) || (echo -n "Did not detect writable external storage $EXTSTTD/buildAPKs folder : Not continuing with external storage : " && _CP2EXTSTTD_ && export EXTSTBD=0 )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && echo -n "Found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=0 || EXTSTBD=1 
 
 
@@ -27,6 +27,5 @@ _EXTSTDO_() {
 	fi
 }
 [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTDO_
-_EXTSTDO_
 echo "External storage installation : DONE"
 # extstdo.bash EOF

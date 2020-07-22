@@ -51,7 +51,7 @@ _MAINMODS_ () {
 	export JDR="$RDR/sources/$JID"
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/bnchn.bash bch.st
-# 	. "$RDR"/scripts/bash/shlibs/buildAPKs/extstdo.bash
+	. "$RDR"/scripts/bash/shlibs/buildAPKs/extstdo.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/fandm.bash
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
