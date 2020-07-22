@@ -7,15 +7,14 @@ set -eu
 . "$RDR/scripts/bash/shlibs/android/extstck.bash" 
 _EXTSTDO_() {
 _CK2EXTSTBD_() {
-	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "Found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || (printf "%s" "Did not detect writable external storage $EXTSTTD/buildAPKs folder : " && _CP2EXTSTTD_ && cd "$EXTSTTD/${RDR##*/}/" && git pull && cd "$RDR" )
- 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "Found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=0 
-printf "%s\\n" "External storage installation : DONE"
+	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILENDSTRING found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || ( printf "%s" "$FILENDSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && _CP2EXTSTTD_ && cd "$EXTSTTD/${RDR##*/}/" && git pull && cd "$RDR" ) && export EXTSTBD=0
+ 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "$FILENDSTRING found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=0 || printf "%s" "$FILENDSTRING found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && export EXTSTBD=1   
+printf "%s\\n" "EXTSTBD is set to $EXTSTBD"
+printf "%s\\n" "ESVERSIONID is set to $ESVERSIONID" 
+printf "%s\\n" "External storage installation $FILENDSTRING: DONE"
 }
 _CP2EXTSTTD_() {
-	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " 
-	cp -r "$RDR/" "$EXTSTTD/"
-	cp -r "$RDR/.*" "$EXTSTTD/${RDR##*/}/"
-	printf "%s" "done "
+	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " && cp -r "$RDR/" "$EXTSTTD/" && cp -r "$RDR/.*" "$EXTSTTD/${RDR##*/}/" && printf "%s" "done "
 }
 _CK2EXTSTBD_
 }
