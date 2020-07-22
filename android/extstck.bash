@@ -8,7 +8,7 @@ EXTSTST="$(ls /storage/)"
 EXTSTST="${EXTSTST/self/}"
 EXTSTST="${EXTSTST/emulated/}"
 EXTSTST="$(echo -n $EXTSTST)"
-EXTSTCW="$(wc -w <<< $EXTSTST )"
+EXTSTCW="$(wc -w <<< $EXTSTST)"
 EXTSTTD="/storage/$EXTSTST/Android/data/com.termux/files"
 FILENSTRING="${0##*/} extstck.bash"
 _EXTSTCK_() { # check if external storage is writable 
