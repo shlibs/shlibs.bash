@@ -18,5 +18,5 @@ _CP2EXTSTTD_() {
 _CK2EXTSTBD_
 }
 FILENDSTRING="${0##*/} extstdo.bash"
-[[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_
+( [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_) ||:
 # extstdo.bash EOF
