@@ -5,8 +5,6 @@
 #####################################################################
 set -eu
 . "$RDR/scripts/bash/shlibs/android/extstck.bash" 
-
-
 _EXTSTDO_() {
 _CK2EXTSTBD_() {
 	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "Found writable $EXTSTTD/buildAPKs folder : " && export EXTSTBD=0 ) || (printf "%s" "Did not detect writable external storage $EXTSTTD/buildAPKs folder : " && _CP2EXTSTTD_ && cd "$EXTSTTD/${RDR##*/}/" && git pull && cd "$RDR" )
