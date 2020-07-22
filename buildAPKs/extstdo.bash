@@ -5,7 +5,7 @@
 #####################################################################
 set -eu
 . "$RDR/scripts/bash/shlibs/android/extstck.bash" 
-_EXTSTCK_
+
 
 _EXTSTDO_() {
 _CP2EXTSTTD_() {
@@ -19,5 +19,5 @@ _CP2EXTSTTD_() {
 printf "%s\\n" "External storage installation : DONE"
 }
 FILENDSTRING="${0##*/} extstdo.bash"
-[[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTDO_
+[[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_
 # extstdo.bash EOF
