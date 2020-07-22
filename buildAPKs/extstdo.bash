@@ -28,4 +28,5 @@ _EXTSTDO_() {
 	fi
 }
 [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTDO_
+_EXTSTDO_
 # extstdo.bash EOF
