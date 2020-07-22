@@ -27,5 +27,5 @@ _EXTSTDO_() {
 		echo "Could not find file $EXTSTTD/buildAPKs/.conf/VERSIONID : Not continuing with external storage installation" && EXTSTBD=1 
 	fi
 }
-_EXTSTDO_
+[[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTDO_
 # extstdo.bash EOF
