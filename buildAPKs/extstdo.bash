@@ -15,8 +15,9 @@ printf "%s\\n" "External storage installation $FILENDSTRING : DONE"
 _CP2EXTSTTD_() {
 	printf "%s" "Copying $RDR/ to $EXTSTTD/ : " && cp -r "$RDR/" "$EXTSTTD/" 2>/dev/null && cp -r "$RDR/.*" "$EXTSTTD/${RDR##*/}/" && printf "%s" "DONE : "
 }
-_CK2EXTSTBD_
+
+( [[ "$EXTSTCK" = 0 ]] && _CK2EXTSTBD_ ) || printf "%s" "Signal generated in L#21 extstdo.bash : $FILENDSTRING continuing : "
 }
 FILENDSTRING="${0##*/} extstdo.bash"
-( [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_) ||:
+( [[ -f  $RDR/.conf/EXTSTDO ]] && EXTSTDO="$(head -n 1 $RDR/.conf/EXTSTDO)" && [[ $EXTSTDO = 0 ]] && _EXTSTCK_ && _EXTSTDO_ ) || printf "%s" "Signal generated in L#21 extstdo.bash : $FILENDSTRING continuing : "
 # extstdo.bash EOF
