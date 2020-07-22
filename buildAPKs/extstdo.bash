@@ -17,7 +17,6 @@ _EXTSTDO_() {
 
 
 	_EXTSTCK_
-	echo "$EXTSTTD"
 	if [[ "$EXTSTBD" = 0 ]] 
 	then
 # 		[[ "$EXTSTCK" = 0 ]] && _EXTSTTD_
