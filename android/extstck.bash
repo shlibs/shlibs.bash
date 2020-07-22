@@ -10,9 +10,10 @@ EXTSTST="${EXTSTST/emulated/}"
 EXTSTST="$(echo -n $EXTSTST)"
 EXTSTCW="$(wc -w <<< $EXTSTST )"
 EXTSTTD="/storage/$EXTSTST/Android/data/com.termux/files"
+FILENSTRING="${0##*/} extstck.bash"
 _EXTSTCK_() { # check if external storage is writable 
-	[[ "$EXTSTCW" = 0 ]] && echo -n "Did not detect writable external storage : Not continuing with external storage feature : " && export EXTSTCK=1 
-	[[ "$EXTSTCW" -ge 2 ]] && echo -n "Detect multiple writable external storage spaces : Not continuing with external storage feature : " && export EXTSTCK=1 
-	[[ -w "$EXTSTTD" ]] && echo -n "Detected writable external storage : Continuing with external storage feature : " && export EXTSTCK=0  
+	[[ "$EXTSTCW" = 0 ]] && printf "%s" "Did not detect writable external storage : Not continuing with external storage $FILENSTRING feature: " && export EXTSTCK=1 
+	[[ "$EXTSTCW" -ge 2 ]] &&  printf "%s" "Detect multiple writable external storage spaces : Not continuing with external storage $FILENSTRING feature : " && export EXTSTCK=1 
+	[[ -w "$EXTSTTD" ]] &&  printf "%s" "Detected writable external storage : Continuing with external storage $FILENSTRING feature : " && export EXTSTCK=0  
 }
 # extstck.bash EOF
