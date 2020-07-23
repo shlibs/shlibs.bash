@@ -20,8 +20,7 @@ _DOMAKES_() {
 		else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
 			mkdir -p "$JDR/bin/lib/$CPUABI"
-			echo cp -r  "${FAMK%/*}/*" "$JDR/bin/lib/armeabi-v7a"
-			cp -r  "${FAMK%/*}/*" "$JDR/bin/lib/armeabi-v7a"
+			cp -r "${FAMK%/*}/*" "$JDR/bin/lib/armeabi-v7a"
 			cd "$JDR/bin/lib/$CPUABI"
 			printf "Beginning cmake in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< "$PWD")"
 			cmake "${FAMK%/*}" || printf "%s\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
