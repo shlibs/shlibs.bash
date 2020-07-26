@@ -30,7 +30,6 @@ _DOMAKES_() {
 		fi
 	done
 }
-
 if [[ -z "${AMKFS[@]:-}" ]] # is undefined
 then # no files found
 	printf "%s\\n" "No Android.mk and CMakeLists.txt files were found; Continuing..."
