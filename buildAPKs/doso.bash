@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Copyright 2020 (c) all rights reserved by S D Rausty; See LICENSE
-# File `doso.bash` is under development
+# Copyright 2020 (c) all rights reserved by SDRausty; See LICENSE
+# File `doso.bash` is currently being developed
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
@@ -20,7 +20,7 @@ _DOMAKES_() {
 		else
 			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
 			mkdir -p "$JDR/bin/lib/$CPUABI"
-			cp -r "${FAMK%/*}/*" "$JDR/bin/lib/armeabi-v7a"
+			cp -r "${FAMK%/*}/*" "$JDR/bin/lib/$CPUABI"
 			cd "$JDR/bin/lib/$CPUABI"
 			printf "Beginning cmake in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< "$PWD")"
 			cmake "${FAMK%/*}" || printf "%s\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
