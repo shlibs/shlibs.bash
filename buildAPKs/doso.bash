@@ -22,11 +22,11 @@ _DOMAKES_() {
 			mkdir -p "$JDR/bin/lib/$CPUABI"
 			cp -r "${FAMK%/*}/*" "$JDR/bin/lib/$CPUABI"
 			cd "$JDR/bin/lib/$CPUABI"
-			printf "Beginning cmake in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< "$PWD")"
+			printf "%s\\n" "Beginning cmake in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
 			cmake "${FAMK%/*}" || printf "%s\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
-			printf "Beginning make in ~/%s/...\\n" "$(cut -d"/" -f7-99 <<< "$PWD")"
+			printf "%s\\n" "Beginning make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
 			make || printf "%s\\n" "Signal 44 generated in make ${0##*/} doso.bash"
-			printf "Finished cmake && make in ~/%s/.\\e[0m\\n" "$(cut -d"/" -f7-99 <<< "$PWD")"
+			printf "%s\\e[0m\\n" "Finished cmake && make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/."
 		fi
 	done
 }

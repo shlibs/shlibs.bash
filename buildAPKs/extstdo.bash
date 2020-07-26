@@ -19,7 +19,7 @@ _CP2EXTSTTD_() {
 	tar zcf "${RDR##*/}.tar.gz" "${RDR##*/}"
 	mv "${RDR##*/}.tar.gz" "$EXTSTTD"
 	cd "$EXTSTTD/" 
-	tar xf "${RDR##*/}.tar.gz" 2>/dev/null ||:
+	tar xf "${RDR##*/}.tar.gz" 2>/dev/null || printf "%s\\n" "Signal generated at tar xf "${RDR##*/}.tar.gz" ${0##*/} extstdo.bash : Continuing...."
 	export EXTSTBD=0 
 	rm -f "${RDR##*/}.tar.gz"
 	cd "$RDR" 
