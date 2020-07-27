@@ -4,6 +4,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
+export RDR="$HOME/buildAPKs"
 . "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/} mod.bash" "wake.start"
 
 _CLINKS_() {
