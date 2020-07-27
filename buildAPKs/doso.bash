@@ -19,9 +19,9 @@ _DOMAKES_() {
 		for FAMK in "${AMKFS[@]}"
 		do
 				printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
-				mkdir -p "$JDR/bin/lib/$CPUABI"
-				cp -r "${FAMK%/*}/*" "$JDR/bin/lib/$CPUABI"
-				cd "$JDR/bin/lib/$CPUABI"
+				mkdir -p "$JDR/bin/lib/$CPUABI/${FAMK*##/}"
+				cp -r "${FAMK%/*}/*" "$JDR/bin/lib/$CPUABI/${FAMK*##/}"
+				cd "$JDR/bin/lib/$CPUABI/${FAMK*##/}"
 				printf "%s\\n" "Beginning cmake in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
 				cmake "${FAMK%/*}" || printf "\\e[1;48;5;167m%s\\e[0m\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
 				printf "%s\\n" "Beginning make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
