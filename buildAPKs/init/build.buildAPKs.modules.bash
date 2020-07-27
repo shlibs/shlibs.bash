@@ -45,27 +45,22 @@ _GSMU_() {
 	. "$RDR"/scripts/bash/init/ushlibs.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/prep.bash
+	. "$RDR"/scripts/bash/shlibs/buildAPKs/init/mod.bash 0
 	. "$RDR"/scripts/bash/shlibs/lock.bash
-	if [[ ! -d "$RDR/sources" ]]
-	then
-		mkdir -p "$RDR/sources"
-	fi
+	[[ ! -d "$RDR/sources" ]] && mkdir -p "$RDR/sources"
 	for LOC in "${!GBMS[@]}"
 	do
 		export JDR="$RDR/$LOC"
 		cd "$RDR/"
-		_GSU_
+		_GSU_ || ( JAD="$SIAD/${GBMS[$LOC]}" JAD="${JAD:6}" JID="${LOC##*/}" ; _UMODS_ ; _GRUP_)
 	done
 	_WAKEUNLOCK_
 	printf "\\e[1;7;38;5;114mBuildAPKs %s build.buildAPKs.modules.bash: DONE!\\e[0m\\n" "${0##*/}"
 }
 
 _GSU_() { # update submodules to latest version
-	((printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Updating ~/buildAPKs/$LOC..." && git submodule update --init --recursive --remote "$LOC" && _IAR_ "$JDR") || ( _GSA_ )) ||  (printf "\\e[1;7;38;5;66m%s\\e[0m\\n" "Cannot update ~/buildAPKs/$LOC: Continuing...") # https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/
-	if [[ -f "$JDR"/ma.bash ]]
-	then
-		. "$JDR"/ma.bash
-	fi
+	((printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Updating ~/buildAPKs/$LOC..." && git submodule update --init --recursive --remote "$LOC" && _IAR_ "$JDR") || ( _GSA_ || (JAD="${!GBMS[@]}" ; JID="${LOC##*/}" ; _UMODS_ ; _GTSAM_ ))) ||  (printf "\\e[1;7;38;5;66m%s\\e[0m\\n" "Cannot update ~/buildAPKs/$LOC: Continuing...") # https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/
+	[[ -f "$JDR"/ma.bash ]] && . "$JDR"/ma.bash
 }
 
 declare -A GBMS # declare associative array for available submoldules

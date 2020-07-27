@@ -102,9 +102,9 @@ _GTSAM_() {	# clone submodule as git repository
 		RBRANCH="${RBRANCH# }" # strip leading space
 		cd "$RDR/sources"
 		printf "%s\\n" "Getting branch $RBRANCH from git repository git://$JAD..."
-		git clone --depth 1 git://"$JAD" --branch $RBRANCH --single-branch "${JDR##*/}"  ; cd $JDR ; git fsck || ( cd $JDR && echo "32" "_GTGF_ git clone" )
+		git clone --depth 1 git://"$JAD" --branch $RBRANCH --single-branch "${JDR##*/}"  ; cd $JDR ; git fsck || ( cd $JDR && _SIGNAL_ "32" "_GTGF_ git clone" )
 	else
-		_GRUP_ ; git fsck || ( cd $JDR && echo "32" "_GTGF_ git clone" )
+		_GRUP_ ; git fsck || ( cd $JDR && _SIGNAL_ "32" "_GTGF_ git clone" )
 	fi
 	_IAR_ "$JDR/$JDR" || _SIGNAL_ "34" "_GTGF_ _IAR_"
 }
@@ -129,13 +129,16 @@ _GRUP_() {	# clone submodule as git repository
 	fi
 }
 
-if [ -z "${1:-}" ]
+if [[ -z "${1:-}" ]] # undefined
 then
 	_MAINMODS_
 ## [[c]url rate] limit download transmission rate for curl
-elif [ "${1//-}" = [Cc]* ]
+elif [[ "${1//-}" = 0 ]]
+then	# do nothing
+	:
+elif [[ "${1//-}" = [Cc]* ]]
 then	# the second option is required
-	if [ -z "${2:-}" ]
+	if [[ -z "${2:-}" ]]
 	then
 		printf "\\e[1;31m%s\\e[0;31m%s\\e[0m\\n" "Add a numerical rate limit to ${0##*/} $1 as the second arguement to continue with curl --rate-limit:" " Exiting..."
 		exit 0
