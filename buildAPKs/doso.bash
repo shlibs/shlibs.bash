@@ -19,14 +19,18 @@ _DOMAKES_() {
 		for FAMK in "${AMKFS[@]}"
 		do
 				printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
-				mkdir -p "$JDR/bin/lib/$CPUABI/${FAMK*##/}"
-				cp -r "${FAMK%/*}/*" "$JDR/bin/lib/$CPUABI/${FAMK*##/}"
-				cd "$JDR/bin/lib/$CPUABI/${FAMK*##/}"
+				UNUM="$(date +%s)"
+				sleep 1
+				mkdir -p "$JDR/bin/lib/$CPUABI/$UNUM"
+ 				cp -r "${FAMK%/*}/*" "$JDR/bin/lib/$CPUABI/$UNUM"
+ 				cd "$JDR/bin/lib/$CPUABI/$UNUM"
 				printf "%s\\n" "Beginning cmake in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
-				cmake "${FAMK%/*}" || printf "\\e[1;48;5;167m%s\\e[0m\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
+				cmake "${FAMK%/*}" || printf "\\e[1;48;5;166m%s\\e[0m\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
 				printf "%s\\n" "Beginning make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
 				make || printf "\\e[1;48;5;167m%s\\e[0m\\n" "Signal 44 generated in make ${0##*/} doso.bash"
+				find . -type f -name "*.so" -exec mv {} "$JDR/bin/lib/$CPUABI" \; || printf "\\e[1;48;5;168m%s\\e[0m\\n" "Signal 44 generated in find -name *.so ${0##*/} doso.bash"
 				printf "%s\\n" "Finished cmake && make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/."
+ 				cd "$JDR"
 		done
 	fi
 }
