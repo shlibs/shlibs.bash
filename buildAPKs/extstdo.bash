@@ -23,8 +23,8 @@ _TOUCHUP_() {
 	ln -s "$EXTSTTD/buildAPKs/var/log" "$RDR/var/log" 
 	mv "$RDR/var/cache/tarballs" "$RDR/var/cache/stash/"
 	ln -s "$EXTSTTD/buildAPKs/var/cache/tarballs" "$RDR/var/cache/tarballs"
-	[[ -d $RDR/sources/github ]] && mv "$RDR/sources/github" "$RDR/var/cache/stash/" || printf "%s\\n" "Signal generated at mv $RDR/sources/github ${0##*/} extstdo.bash : Continuing : "
-	[[ -d $EXTSTTD/buildAPKs/sources/github ]] && ln -s "$EXTSTTD/buildAPKs/sources/github" "$RDR/sources/github" || printf "%s\\n" "Signal generated at ln -s $EXTSTTD/buildAPKs/sources/github ${0##*/} extstdo.bash : Continuing : "
+	[[ -d $RDR/sources ]] && mv "$RDR/sources" "$RDR/var/cache/stash/" || printf "%s\\n" "Signal generated at mv $RDR/sources ${0##*/} extstdo.bash : Continuing : "
+	[[ -d $EXTSTTD/buildAPKs/sources ]] && ln -s "$EXTSTTD/buildAPKs/sources" "$RDR/sources" || printf "%s\\n" "Signal generated at ln -s $EXTSTTD/buildAPKs/sources ${0##*/} extstdo.bash : Continuing : "
 
 }
 [[ "$EXTSTCK" = 0 ]] && _CK2EXTSTBD_
