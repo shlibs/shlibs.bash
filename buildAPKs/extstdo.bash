@@ -19,11 +19,11 @@ _CP2EXTSTTD_() {
 }
 _TOUCHUP_() {
 	printf "%s" "Moving and linking directories : "
-	mv "$RDR/var/log" "$RDR/var/cache/stash/"
+	mv "$RDR/var/log" "$RDR/var/tmp"
 	ln -s "$EXTSTTD/buildAPKs/var/log" "$RDR/var/log" 
-	mv "$RDR/var/cache/tarballs" "$RDR/var/cache/stash/"
-	ln -s "$EXTSTTD/buildAPKs/var/cache/tarballs" "$RDR/var/cache/tarballs"
-	[[ -d $RDR/sources ]] && mv "$RDR/sources" "$RDR/var/cache/stash/" || printf "%s\\n" "Signal generated at mv $RDR/sources ${0##*/} extstdo.bash : Continuing : "
+	mv "$RDR/var/cache" "$RDR/var/tmp"
+	ln -s "$EXTSTTD/buildAPKs/var/cache" "$RDR/var/cache"
+	[[ -d $RDR/sources ]] && mv "$RDR/sources" "$RDR/var/tmp" || printf "%s\\n" "Signal generated at mv $RDR/sources ${0##*/} extstdo.bash : Continuing : "
 	[[ -d $EXTSTTD/buildAPKs/sources ]] && ln -s "$EXTSTTD/buildAPKs/sources" "$RDR/sources" || printf "%s\\n" "Signal generated at ln -s $EXTSTTD/buildAPKs/sources ${0##*/} extstdo.bash : Continuing : "
 
 }
