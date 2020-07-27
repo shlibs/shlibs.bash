@@ -8,23 +8,15 @@ set -eu
 FILEDOSTRING="${0##*/} extstdo.bash"
 _EXTSTDO_() {
 _CK2EXTSTBD_() {
-	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILEDOSTRING found writable $EXTSTTD/buildAPKs folder : " && EXTSTBD=0 ) || ( printf "%s" "$FILEDOSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && _CP2EXTSTTD_ && _TOUCHUP_)
+	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILEDOSTRING found writable $EXTSTTD/buildAPKs folder : " && EXTSTBD=0 ) || ( printf "%s" "$FILEDOSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && ( _CP2EXTSTTD_ && _TOUCHUP_ ) )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "$FILEDOSTRING found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && EXTSTBD=0
 printf "%s\\n" "External storage installation : $FILEDOSTRING DONE"
 }
 _CP2EXTSTTD_() {
 	printf "%s" "Copying $RDR/ to $EXTSTTD/ : Please be patient : "
-	cd "$HOME/" 
-	tar zcf "${RDR##*/}.tar.gz" "${RDR##*/}/"
-	mv "${RDR##*/}.tar.gz" "$EXTSTTD/"
-	cd "$EXTSTTD/" 
-	tar xf "${RDR##*/}.tar.gz" 2>/dev/null || printf "%s\\n" "Signal generated at tar xf "${RDR##*/}.tar.gz" ${0##*/} extstdo.bash : Continuing : "
-	export EXTSTBD=0 
-	rm -f "${RDR##*/}.tar.gz"
-	cd "$RDR" 
+	cp -a "$RDR/" "$EXTSTTD/"
 	printf "%s" "DONE : "
 }
-
 _TOUCHUP_() {
 	printf "%s" "Moving and linking directories : "
 	mv "$RDR/var/log" "$RDR/var/cache/stash/"
