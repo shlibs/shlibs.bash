@@ -20,7 +20,7 @@ _DOMAKES_() {
 			mkdir -p "$JDR/bin/lib/$CPUABI/$UNUM"
 			cp -ar "${FAMK%/*}"/* "$JDR/bin/lib/$CPUABI/$UNUM"
 			cd "$JDR/bin/lib/$CPUABI/$UNUM"
-			pwd
+			printf "%s\\n" "Building in $(pwd)"
 			tree || ls 
 			printf "%s\\n" "Beginning cmake and make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/..."
 			cmake . || printf "\\e[1;48;5;166m%s\\e[0m\\n" "Signal 42 generated in cmake ${0##*/} doso.bash"
