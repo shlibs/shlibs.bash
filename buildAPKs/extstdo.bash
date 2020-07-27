@@ -10,7 +10,6 @@ _EXTSTDO_() {
 _CK2EXTSTBD_() {
 	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILEDOSTRING found writable $EXTSTTD/buildAPKs folder : " && EXTSTBD=0 ) || ( printf "%s" "$FILEDOSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && _CP2EXTSTTD_ )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "$FILEDOSTRING found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && EXTSTBD=0
-printf "%s" "EXTSTBD is set to $EXTSTBD : "
 printf "%s" "Moving and linking directories : "
 mv "$RDR/var/log" "$RDR/var/cache/stash/"
 ln -s "$EXTSTTD/buildAPKs/var/log" "$RDR/var/log" 
