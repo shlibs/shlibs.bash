@@ -152,8 +152,5 @@ TQUIT="$1"
 TSIGNAL="$2"
 TERROR="$3"
 TPARENT="${4:-UNDEFINED}"
-if [[ ! -z "${5:-}" ]]
-then
-	_INITLOCK_ "$5"
-fi
+[[ ! -z "${5:-}" ]] && INITLOCK="$5" && _INITLOCK_ "$5"
 # trap.bash EOF
