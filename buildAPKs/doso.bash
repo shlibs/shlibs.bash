@@ -11,10 +11,11 @@ _INST_ "make" "make" "${0##*/} doso.bash"
 CPUABI="$(getprop ro.product.cpu.abi)"
 printf "\\e[1;38;5;113m%s\\n" "Searching for CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< "$JDR")/;  Please be patient..."
 AMKFS=("$(find "$JDR" -type f -name CMakeLists.txt)")
+printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt files."
 _DOMAKES_() {
 	for FAMK in ${AMKFS[@]}
 	do
-			printf "%s\\n" "Found ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
+			printf "%s\\n" "Processing ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
 			UNUM="$(date +%s)"
 			sleep 1
 			mkdir -p "$JDR/bin/lib/$CPUABI/$UNUM"
