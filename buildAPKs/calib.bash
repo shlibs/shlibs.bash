@@ -25,7 +25,7 @@ _MAINCALIB_() { # print information to terminal from file .conf/LIBAUTH
 			printf "\\n\\e[7;38;5;122m%s\\e[0m\\n" "Running \$(cat "$RDR"/.conf/GAUTH "$RDR"/.conf/LIBAUTH):"
 			printf "%s\\e[0m\\n" "$(cat "$RDR"/.conf/GAUTH "$RDR"/.conf/LIBAUTH):"
 			CALIBCT="$(( CALIBCT - 3 ))"
-			[[ "$CALIBCT" = 1 ]] && VIEWS="showing" || VIEWS="showings"
+			[[ "$CALIBCT" = -1 ]] && VIEWS="showing" || VIEWS="showings"
 			printf "\\e[7;38;5;122m%s\\e[0m\\n" "${CALIBCT#-} $VIEWS of files ~/"${RDR##*/}"/.conf/{GAUTH,LIBAUTH} remaining; Continuing..."
 		fi
 	fi
