@@ -32,7 +32,7 @@ if [[ -z "${AMKFS[@]:-}" ]] # is undefined
 then # no files found
 	printf "%s\\n" "No CMakeLists.txt files were found; Continuing..."
 else # call cmake and make
-	printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt files."
+	[[ "${#AMKFS[@]}" = 1 ]] && printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt file." || printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt files."
 	_DOMAKES_
 fi
 # doso.bash EOF
