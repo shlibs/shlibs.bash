@@ -4,7 +4,7 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-"$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
+. "$RDR"/scripts/bash/shlibs/trap.bash 146 147 148 "${0##*/} doso.bash"
 . "$RDR/scripts/sh/shlibs/inst.sh"
 _INST_ "cmake" "cmake" "${0##*/} doso.bash"
 _INST_ "make" "make" "${0##*/} doso.bash"
