@@ -11,7 +11,6 @@ _INST_ "make" "make" "${0##*/} doso.bash"
 CPUABI="$(getprop ro.product.cpu.abi)"
 printf "\\e[1;38;5;113m%s\\n" "Searching for CMakeLists.txt files in ~/$(cut -d"/" -f7-99 <<< "$JDR")/;  Please be patient..."
 AMKFS=("$(find "$JDR" -type f -name CMakeLists.txt)")
-printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt files."
 _DOMAKES_() {
 	for FAMK in ${AMKFS[@]}
 	do
@@ -34,6 +33,7 @@ if [[ -z "${AMKFS[@]:-}" ]] # is undefined
 then # no files found
 	printf "%s\\n" "No CMakeLists.txt files were found; Continuing..."
 else # call cmake and make
+	printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt files."
 	_DOMAKES_
 fi
 # doso.bash EOF
