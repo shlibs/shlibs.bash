@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Copyright 2020 (c) all rights reserved by SDRausty; See LICENSE
-# File `doso.bash` assists in creating `.so` files.
+# File `doso.bash` assists in creating `.so` files;  This file is being developed suggestions are welcome here https://github.com/shlibs/shlibs.bash/issues and https://github.com/shlibs/shlibs.bash/pulls here.
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
@@ -29,6 +29,7 @@ _DOMAKES_() {
 			mkdir -p "$JDR/bin/lib/$CPUABI/$UNUM"
 			cp -ar "${FAMK%/*}"/* "$JDR/bin/lib/$CPUABI/$UNUM"
 			cd "$JDR/bin/lib/$CPUABI/$UNUM"
+			find -type f -name "A*k"
 			[[ $(head -n 1 "$RDR/.conf/DOSON") = 0 ]] && _DNINJA_ || _DMAKE_
 			find . -type f -name "*.so" -exec mv {} "$JDR/bin/lib/$CPUABI" \; || printf "\\e[1;48;5;168m%s\\e[0m\\n" "Signal 46 generated in find -name *.so ${0##*/} doso.bash"
 			printf "%s\\n" "Finished cmake and make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/."
