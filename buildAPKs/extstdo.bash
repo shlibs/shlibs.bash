@@ -8,7 +8,7 @@ set -eu
 FILEDOSTRING="${0##*/} extstdo.bash"
 _EXTSTDO_() {
 _CK2EXTSTBD_() {
-	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILEDOSTRING found writable $EXTSTTD/buildAPKs folder : " ) || ( printf "%s" "$FILEDOSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && ( _CP2EXTSTTD_ && _TOUCHUP_ ) )
+	( [[ -w "$EXTSTTD/buildAPKs" ]] && printf "%s" "$FILEDOSTRING found writable $EXTSTTD/buildAPKs folder : " && _TOUCHUP_ ) || ( printf "%s" "$FILEDOSTRING did not detect writable external storage $EXTSTTD/buildAPKs folder : " && ( _CP2EXTSTTD_ && _TOUCHUP_ ) )
 	[[ -f "$EXTSTTD/buildAPKs/.conf/VERSIONID" ]] && ESVERSIONID="$(head -n 1 $EXTSTTD/buildAPKs/.conf/VERSIONID)" && printf "%s" "$FILEDOSTRING found file $EXTSTTD/buildAPKs/.conf/VERSIONID : $ESVERSIONID : " && printf "%s\\n" "1" > "$RDR"/.conf/EXTSTDO
 printf "%s\\n" "External storage installation : $FILEDOSTRING DONE"
 }
