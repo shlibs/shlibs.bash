@@ -45,21 +45,21 @@ _CLINKS_() {
 }
 
 _MAINMODS_ () {
-	# create TMPDIR in ~/buildAPKs/var if not exist
+	# create TMPDIR in RDR/var if not exist
 	_TMPDIR_
 	export DAY="$(date +%Y%m%d)"
 	export NUM="$(date +%s)"
 	export JDR="$RDR/sources/$JID"
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/bnchn.bash bch.st
-# 	. "$RDR"/scripts/bash/shlibs/buildAPKs/extstdo.bash
+	[[ $(head -n 1 "$RDR"/.conf/EXTSTDO) -eq 0 ]] && . "$RDR"/scripts/bash/shlibs/buildAPKs/extstdo.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/fandm.bash
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
-	# create directories and files in ~/buildAPKs/var if not exist
+	# create directories and files in RDR/var if not exist
 	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "lock" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake"
 	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
-	# create symlinks in ~/buildAPKs if not exist
+	# create symlinks in RDR if not exist
 	_CLINKS_
 	if [ -f "$JDR/.git" ] # file exists in job directory
 	then	# print modules message
