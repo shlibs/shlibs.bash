@@ -10,10 +10,10 @@ _ANDB_() { # find and process AndroidManifest.xml file
 	[[ -z "${JDR:-}" ]] && JDR=$1
 	printf "\\e[1;7;38;5;222m%s\\e[0m\\n" "Searching for job directories in $JDR: Please be patient..."
 	# create array of found AndroidManifest.xml files
-	AMFS=($(find "$JDR" -type f -name AndroidManifest.xml))
+	AMFS=($(find "$JDR/" -type f -name AndroidManifest.xml))
 	# if the number of elements in the array is one, use the singular noun form of the word files, otherwise use the plural form
 	[[ "${#AMFS[@]}" = 1 ]] && NAMFILES="file" || NAMFILES="files"
-	# if the directory $JDR/var/conf exists, write files
+	# if the directory JDR/var/conf exists, write files
 	[[ -d "$JDR/var/conf" ]] && printf "%s" "Writing ${#AMFS[@]} AndroidManifest.xml $NAMFILES found to $JDR/var/conf/NAMFS.db  " && printf "%s\\n" "${#AMFS[@]}" > "$JDR/var/conf/NAMFS.db" && printf "%s" "Writing ${AMFS[@]} AndroidManifest.xml $NAMFILES found to $JDR/var/conf/NAMFS.db  " && printf "%s\\n" "${AMFS[@]}" > "$JDR/var/conf/NAMEFS.db"
 	for APP in ${AMFS[@]}	# all elements in this array
 	do	# cd to directory where file is found
