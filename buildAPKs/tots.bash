@@ -11,8 +11,8 @@ BBSL="$(find "$RDR/scripts/" -name build -exec ls {} \;)"
 printf "\\n\\e[1;1;38;5;108m%s\\n%s\\e[0m\\n\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/{bash,sh,zsh}/build/:" "$BBSL"
 mkdir -p "$TMPDIR/fa$$"
 printf "\\e[1;1;38;5;118m%s\\e[0m\\n\\n" "Calculating for ~/${RDR##*/}/.  This may take a while;  Please be patient..."
-find "$RDR/sources/" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible.total"
-find "$RDR/sources/" -type f -name "*.apk" > "$TMPDIR/fa$$/built.total"
+find "$RDR/sources/" -path "$RDR/sources/github/*" -prune -o -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible.total"
+find "$RDR/sources/" -path "$RDR/sources/github/*" -prune -o -type f -name "*.apk" > "$TMPDIR/fa$$/built.total"
 find "$JDR" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible" ||:
 find "$JDR" -type f -name "*.apk" > "$TMPDIR/fa$$/built" ||:
 cd "$TMPDIR/fa$$"
