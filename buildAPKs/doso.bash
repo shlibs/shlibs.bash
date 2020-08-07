@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Copyright 2020 (c) all rights reserved by SDRausty; See LICENSE
-# File `doso.bash` assists in creating `.so` files;  This file is being developed suggestions are welcome here https://github.com/shlibs/shlibs.bash/issues and https://github.com/shlibs/shlibs.bash/pulls here.
+# File `doso.bash` assists in creating `.so` files from source code.  This file is being developed;  Suggestions are welcome here https://github.com/shlibs/shlibs.bash/issues and https://github.com/shlibs/shlibs.bash/pulls here.
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
@@ -38,9 +38,9 @@ _DOMAKES_() {
 	done
 }
 if [[ -z "${AMKFS[@]:-}" ]] # is undefined
-then # no files found
+then # no CMakeLists.txt files are found
 	printf "%s\\n" "No CMakeLists.txt files were found; Continuing..."
-else # call cmake and make
+else # call cmake and make/ninja to build shared objects
 	[[ "${#AMKFS[@]}" = 1 ]] && printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt file." || printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt files."
 	_DOMAKES_
 fi
