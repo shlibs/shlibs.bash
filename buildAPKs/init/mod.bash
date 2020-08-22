@@ -8,7 +8,7 @@ export RDR="$HOME/buildAPKs"
 . "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/} mod.bash" "wake.start"
 
 _CLINKS_() {
-	ADLINK=(apps buildAPKs clocks compasses demos developers.tools entertainment flashlights games launchers live.wallpapers native samples top10 tutorials widgets)
+	ADLINK=(apps bits browsers buildAPKs clocks compasses demos developers.tools entertainment flashlights games launchers live.wallpapers native samples top10 tutorials widgets)
 	VSTRING="symlink warning: Continuing...  "
 	VSTRINGC="Creating symlinks:  "
 	if [ ! -e "$RDR/update.buildAPKs.sh" ]
