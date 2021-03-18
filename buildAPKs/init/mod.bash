@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2017-2020 (c) all rights reserved
+# Copyright 2017-2021 (c) all rights reserved
 # by S D Rausty https://sdrausty.github.io
 #####################################################################
 set -Eeuo pipefail
@@ -97,12 +97,12 @@ _UMODS_() {
 _GTSAM_() {	# clone submodule as git repository
 	if [[ ! -f "$JDR/.git/config" ]]
 	then
-		printf "%s\\n" "Checking HEAD branch in git://$JAD..."
-		RBRANCH="$(git remote show git://$JAD | grep "HEAD branch" | cut -d ":" -f 2)"
+		printf "%s\\n" "Checking HEAD branch in https://$JAD..."
+		RBRANCH="$(git remote show https://$JAD | grep "HEAD branch" | cut -d ":" -f 2)"
 		RBRANCH="${RBRANCH# }" # strip leading space
 		cd "$RDR/sources"
-		printf "%s\\n" "Getting branch $RBRANCH from git repository git://$JAD..."
-		git clone --depth 1 git://"$JAD" --branch $RBRANCH --single-branch "${JDR##*/}"  ; cd $JDR ; git fsck || ( cd $JDR && _SIGNAL_ "32" "_GTGF_ git clone" )
+		printf "%s\\n" "Getting branch $RBRANCH from git repository https://$JAD..."
+		git clone --depth 1 https://"$JAD" --branch $RBRANCH --single-branch "${JDR##*/}"  ; cd $JDR ; git fsck || ( cd $JDR && _SIGNAL_ "32" "_GTGF_ git clone" )
 	else
 		_GRUP_ ; git fsck || ( cd $JDR && _SIGNAL_ "32" "_GTGF_ git clone" )
 	fi
@@ -121,7 +121,7 @@ _GRUP_() {	# clone submodule as git repository
 			. "$JDR/ma.bash"
 		fi
 	else
-		( git submodule add --depth 1 git://"$JAD" "sources/${JDR##*/}" && _IAR_ || _GTSAM_ ) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
+		( git submodule add --depth 1 https://"$JAD" "sources/${JDR##*/}" && _IAR_ || _GTSAM_ ) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
 		if [[ -f "$JDR/ma.bash" ]]
 		then
 			. "$JDR/ma.bash"

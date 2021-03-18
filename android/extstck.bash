@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2019-2020 (c) all rights reserved by SDRausty; see LICENSE  
+# Copyright 2019-2021 (c) all rights reserved by SDRausty; see LICENSE  
 # https://sdrausty.github.io hosted courtesy https://pages.github.com
 # Detect external storage: This feature is being developed 
 #####################################################################

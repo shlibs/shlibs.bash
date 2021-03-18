@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2020 (c) all rights reserved by SDRausty; See LICENSE
+# Copyright 2020-2021 (c) all rights reserved by SDRausty; See LICENSE
 # File `doso.bash` assists in creating `.so` files from source code.  This file is being developed;  Suggestions are welcome here https://github.com/shlibs/shlibs.bash/issues and https://github.com/shlibs/shlibs.bash/pulls here.
 #####################################################################
 set -Eeuo pipefail

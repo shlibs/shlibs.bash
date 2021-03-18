@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2017-2020 (c) all rights reserved
+# Copyright 2017-2021 (c) all rights reserved
 # by buildAPKs https://buildapks.github.io/docsBuildAPKs/
 # Update repository and update submodules.
 #####################################################################
@@ -65,7 +65,7 @@ _GSU_() { # update submodules to latest version
 
 declare -A GBMS # declare associative array for available submoldules
 export GBMS=([sources/applications]="SDRausty/buildAPKsApps"  [sources/apps]="BuildAPKs/buildAPKs.apps" [sources/bits]="BuildAPKs/buildAPKs.bits" [sources/browsers]="SDRausty/buildAPKsBrowsers" [sources/clocks]="BuildAPKs/buildAPKs.clocks" [sources/compasses]="BuildAPKs/buildAPKs.compasses" [sources/demos]="BuildAPKs/buildAPKs.demos" [sources/entertainment]="BuildAPKs/buildAPKs.entertainment" [sources/flashlights4]="BuildAPKs/buildAPKs.flashlights" [sources/gamez]="BuildAPKs/buildAPKs.games" [sources/gaming]="SDRausty/buildAPKsGames" [sources/hellos]="BuildAPKs/buildAPKs.hellos" [sources/launchers]="BuildAPKs/buildAPKs.launchers" [sources/live.wallpapers]="BuildAPKs/buildAPKs.live.wallpapers" [sources/native]="BuildAPKs/buildAPKs.native" [sources/samples4]="SDRausty/buildAPKsSamples" [sources/samps]="BuildAPKs/buildAPKs.samples" [sources/top10]="SDRausty/buildAPKsTop10" [sources/tools]="BuildAPKs/buildAPKs.developers.tools" [sources/torches]="SDRausty/buildAPKsFlashlights" [sources/tutorials]="SDRausty/buildAPKsTutorials" [sources/widgets]="SDRausty/buildAPKsWidgets" [sources/widgets4]="BuildAPKs/buildAPKsWidgets")
-SIAD="git://github.com"
+SIAD="https://github.com"
 if [[ -z "${1:-}" ]]
 then
 	cd "$RDR/"
