@@ -37,6 +37,13 @@ _SBTRPEXIT_() { # run on exit
 _SBTRPSIGNAL_() { # run on signal
 	local RV="$?"
 	printf "\\n\\e[1;48;5;138mBuildAPKs %s trap.bash WARNING:  Signal signal %s received near or at line number %s by \`%s\` with return value %s:  Exiting...\\e[0m\\n" "$TPARENT" "${0##*/} trap.bash" "${3:-SIGNAL}" "${1:-LINENO}" "${2:-BASH_COMMAND}" "$RV"
+	if [ "$RV" != 0 ]]
+	then
+		if [[ -f "$JDR/.git" ]]
+		then
+			rm -f "$JDR/.git"
+		fi
+	fi
 	_WAKEUNLOCK_
 	printf "\\e[?25h"
 	set +Eeuo pipefail
