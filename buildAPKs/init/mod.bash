@@ -110,7 +110,10 @@ _GTSAM_() {	# clone submodule as git repository
 }
 _GRUP_() {	# clone submodule as git repository
 	cd "$JDR"
-	git pull || _SIGNAL_ "36" "git pull _GTGF_ _UMODS_"
+	if [ -e .git/config ]
+	then
+		git pull || _SIGNAL_ "36" "git pull _GTGF_ _UMODS_"
+	fi
 }
 	printf "\\e[1;1;38;5;191m%s\\e[0m\\n" "Updating module ~/${RDR##*/}/sources/$JID to the newest version... "
 	if grep -w "$JID" .gitmodules 1>/dev/null
