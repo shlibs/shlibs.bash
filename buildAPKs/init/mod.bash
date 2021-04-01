@@ -32,7 +32,7 @@ _CLINKS_() {
 		fi
 		if [ ! -e "$RDR/build.github.repository.bash" ] && [ -e "$RDR/opt/api/github/build.github.repository.bash" ]
 		then
-			ln -s "$RDR/opt/api/github/build.github.repository.bash" "$RDR/build.github.repository.bash" || printf "%s\\n" "build.github.repository.bash $VSTRING"
+			ln -s "$RDR/opt/api/github/build.github.repository.bash" "$RDR/build.repository.bash" || printf "%s\\n" "build.repository.bash $VSTRING"
 		fi
 		if [ -f "$RDR/opt/api/github/.git" ]
 		then
