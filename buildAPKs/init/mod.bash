@@ -49,11 +49,10 @@ _CLINKS_() {
 }
 
 _MAINMODS_ () {
-	# create TMPDIR in RDR/var if not exist
-	_TMPDIR_
 	export DAY="$(date +%Y%m%d)"
-	export NUM="$(date +%s)"
 	export JDR="$RDR/sources/$JID"
+	export NUM="$(date +%s)"
+	export TMPDIR="$RDR/var/tmp"
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/bnchn.bash bch.st
 	[[ $(head -n 1 "$RDR"/.conf/EXTSTDO) -eq 0 ]] && . "$RDR"/scripts/bash/shlibs/buildAPKs/extstdo.bash
@@ -61,7 +60,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	# create directories and files in RDR/var if not exist
-	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "lock" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake"
+	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "lock" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake" "tmp"
 	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
 	# create symlinks in RDR if not exist
 	_CLINKS_
@@ -87,14 +86,6 @@ _PRINTUSAGE_() {
 
 _PRINTNMODS_() {
 	printf "\\e[1;7;38;5;100m%s%s\\e[0m\\n" "To update module ~/${RDR##*/}/sources/$JID to the newest version remove the ~/${RDR##*/}/sources/$JID/.git file and run ${0##*/} again."
-}
-
-_TMPDIR_ () {
-	export TMPDIR="$RDR/var/tmp"
-	if [[ ! -d "$TMPDIR" ]]
-	then
-		 mkdir -p "$TMPDIR"
-	fi
 }
 
 _UMODS_() {
