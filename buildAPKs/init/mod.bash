@@ -60,7 +60,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	# create directories and files in RDR/var if not exist
-	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "lock" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake" "tmp"
+	_MKDIRS_ "bin" "tmp" "var/cache/stash" "var/cache/tarballs" "var/db" "var/db/log" "var/lock" "var/log/messages" "var/log/github/orgs" "var/log/github/users" "var/run/lock/auth" "var/run/lock/wake" "var/tmp"
 	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
 	# create symlinks in RDR if not exist
 	_CLINKS_
