@@ -8,7 +8,8 @@ export RDR="$HOME/buildAPKs"
 . "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/} mod.bash" "wake.start"
 
 _CLINKS_() {
-	ADLINK=(apps bits browsers buildAPKs clocks compasses demos developers.tools entertainment flashlights games keyboards launchers live.wallpapers native samples top10 tutorials widgets)
+	ADLINK=(apps browsers clocks developers.tools flashlights games keyboards launchers live.wallpapers native samples tutorials widgets)
+	ADBLINK=(apps bits browsers buildAPKs clocks compasses demos developers.tools entertainment flashlights games keyboards launchers live.wallpapers native samples top10 tutorials widgets)
 	VSTRING="symlink warning: Continuing...  "
 	VSTRINGC="Creating symlinks:  "
 	if [ ! -e "$RDR/update.buildAPKs.sh" ]
@@ -24,6 +25,11 @@ _CLINKS_() {
 			if [ ! -e "$RDR/build.$TYPE.bash" ]
 			then
 				ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" || printf "%s\\n" "build.$TYPE.bash $VSTRING"
+				if [ ! -e "$RDR/bin" ] # directory RDR/bin exists
+				then # create symlinks in directory RDR/bin
+					find "$RDR/opt/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find exec ln $VSTRING"
+					find "$RDR/scripts/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find exec ln $VSTRING"
+				fi
 			fi
 		done
 		if [ ! -e "$RDR/build.github.bash" ] && [ -e "$RDR/opt/api/github/build.github.bash" ]
