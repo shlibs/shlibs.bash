@@ -25,13 +25,13 @@ _CLINKS_() {
 			if [ ! -e "$RDR/build.$TYPE.bash" ]
 			then
 				ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" || printf "%s\\n" "build.$TYPE.bash $VSTRING"
-				if [ -e "$RDR/bin" ] # directory RDR/bin exists
-				then # create symlinks in directory RDR/bin
-					find "$RDR/opt/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
-					find "$RDR/scripts/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
-				fi
 			fi
 		done
+		if [ -e "$RDR/bin" ] # directory RDR/bin exists
+		then # create symlinks in directory RDR/bin
+			find "$RDR/opt/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
+			find "$RDR/scripts/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
+		fi
 		if [ ! -e "$RDR/build.github.bash" ] && [ -e "$RDR/opt/api/github/build.github.bash" ]
 		then
 			ln -s "$RDR/opt/api/github/build.github.bash" "$RDR/build.github.bash" || printf "%s\\n" "build.github.bash $VSTRING"
