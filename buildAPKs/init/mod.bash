@@ -29,8 +29,8 @@ _CLINKS_() {
 		done
 		if [ -e "$RDR/bin" ] # directory RDR/bin exists
 		then # create symlinks in directory RDR/bin
-			find "$RDR/opt/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
-			find "$RDR/scripts/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
+			find "$RDR/opt/" -type f -name "build*sh" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find opt ln $VSTRING"
+			find "$RDR/scripts/" -type f -name "build*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find scripts ln $VSTRING"
 		fi
 		if [ ! -e "$RDR/build.github.bash" ] && [ -e "$RDR/opt/api/github/build.github.bash" ]
 		then
