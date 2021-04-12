@@ -27,8 +27,8 @@ _CLINKS_() {
 				ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" || printf "%s\\n" "build.$TYPE.bash $VSTRING"
 				if [ -e "$RDR/bin" ] # directory RDR/bin exists
 				then # create symlinks in directory RDR/bin
-					find "$RDR/opt/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find exec ln $VSTRING"
-					find "$RDR/scripts/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find exec ln $VSTRING"
+					find "$RDR/opt/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
+					find "$RDR/scripts/" -type f -name "b*zsh" -o -name "build*sh" -exec ln -s {} "$RDR/bin/" \;
 				fi
 			fi
 		done
