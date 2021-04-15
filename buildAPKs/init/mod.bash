@@ -8,7 +8,8 @@ export RDR="$HOME/buildAPKs"
 . "$RDR/scripts/bash/shlibs/trap.bash" 207 208 209 "${0##*/} mod.bash" "wake.start"
 
 _CLINKS_() {
-	ADLINK=(apps bits browsers buildAPKs clocks compasses demos developers.tools entertainment flashlights games keyboards launchers live.wallpapers native samples top10 tutorials widgets)
+	ADLINK=(apps browsers clocks developers.tools flashlights games keyboards launchers live.wallpapers native samples tutorials widgets)
+	ADBLINK=(apps bits browsers buildAPKs clocks compasses demos developers.tools entertainment flashlights games keyboards launchers live.wallpapers native samples top10 tutorials widgets)
 	VSTRING="symlink warning: Continuing...  "
 	VSTRINGC="Creating symlinks:  "
 	if [ ! -e "$RDR/update.buildAPKs.sh" ]
@@ -26,9 +27,18 @@ _CLINKS_() {
 				ln -s "$RDR/scripts/bash/build/build.$TYPE.bash" "$RDR/build.$TYPE.bash" || printf "%s\\n" "build.$TYPE.bash $VSTRING"
 			fi
 		done
+		if [ -e "$RDR/bin" ] # directory RDR/bin exists
+		then # create symlinks in directory RDR/bin
+			find "$RDR/opt/" -type f -name "build*bash" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find opt ln $VSTRING"
+			find "$RDR/scripts/" -type f -name "build*bash" -exec ln -s {} "$RDR/bin/" \; || printf "%s\\n" "find scripts ln $VSTRING"
+		fi
 		if [ ! -e "$RDR/build.github.bash" ] && [ -e "$RDR/opt/api/github/build.github.bash" ]
 		then
 			ln -s "$RDR/opt/api/github/build.github.bash" "$RDR/build.github.bash" || printf "%s\\n" "build.github.bash $VSTRING"
+		fi
+		if [ ! -e "$RDR/build.repo.bash" ] && [ -e "$RDR/opt/api/github/build.repo.bash" ]
+		then
+			ln -s "$RDR/opt/api/github/build.repo.bash" "$RDR/build.repo.bash" || printf "%s\\n" "build.repo.bash $VSTRING"
 		fi
 		if [ -f "$RDR/opt/api/github/.git" ]
 		then
@@ -45,11 +55,10 @@ _CLINKS_() {
 }
 
 _MAINMODS_ () {
-	# create TMPDIR in RDR/var if not exist
-	_TMPDIR_
 	export DAY="$(date +%Y%m%d)"
-	export NUM="$(date +%s)"
 	export JDR="$RDR/sources/$JID"
+	export NUM="$(date +%s)"
+	export TMPDIR="$RDR/var/tmp"
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/bnchn.bash bch.st
 	[[ $(head -n 1 "$RDR"/.conf/EXTSTDO) -eq 0 ]] && . "$RDR"/scripts/bash/shlibs/buildAPKs/extstdo.bash
@@ -57,7 +66,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	# create directories and files in RDR/var if not exist
-	_MKDIRS_ "cache/stash" "cache/tarballs" "db" "db/log" "lock" "log/messages" "log/github/orgs" "log/github/users" "run/lock/auth" "run/lock/wake"
+	_MKDIRS_ "bin" "tmp" "var/cache/stash" "var/cache/tarballs" "var/db" "var/db/log" "var/lock" "var/log/messages" "var/log/github/orgs" "var/log/github/users" "var/run/lock/auth" "var/run/lock/wake" "var/tmp"
 	_MKFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
 	# create symlinks in RDR if not exist
 	_CLINKS_
@@ -85,14 +94,6 @@ _PRINTNMODS_() {
 	printf "\\e[1;7;38;5;100m%s%s\\e[0m\\n" "To update module ~/${RDR##*/}/sources/$JID to the newest version remove the ~/${RDR##*/}/sources/$JID/.git file and run ${0##*/} again."
 }
 
-_TMPDIR_ () {
-	export TMPDIR="$RDR/var/tmp"
-	if [[ ! -d "$TMPDIR" ]]
-	then
-		 mkdir -p "$TMPDIR"
-	fi
-}
-
 _UMODS_() {
 _GTSAM_() {	# clone submodule as git repository
 	if [[ ! -f "$JDR/.git/config" ]]
@@ -110,7 +111,10 @@ _GTSAM_() {	# clone submodule as git repository
 }
 _GRUP_() {	# clone submodule as git repository
 	cd "$JDR"
-	git pull || _SIGNAL_ "36" "git pull _GTGF_ _UMODS_"
+	if [ -e .git/config ]
+	then
+		git pull || _SIGNAL_ "36" "git pull _GTGF_ _UMODS_"
+	fi
 }
 	printf "\\e[1;1;38;5;191m%s\\e[0m\\n" "Updating module ~/${RDR##*/}/sources/$JID to the newest version... "
 	if grep -w "$JID" .gitmodules 1>/dev/null

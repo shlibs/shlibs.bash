@@ -60,4 +60,4 @@ declare -a DLIST # declare array for all superfluous directories
 declare -a FLIST # declare array for all superfluous files
 DLIST=("bin" "gen" "obj" "out")
 FLIST=("*-debug.key" "*.apk" "*.so" "R.java")
-# prep.bash EOF
+# prep.lite.bash EOF
