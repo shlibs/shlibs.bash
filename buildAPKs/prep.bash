@@ -4,7 +4,6 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/bash/shlibs/trap.bash 175 176 177 "${0##*/} prep.bash"
 
 _IAR_ () {
 	if [[ -z "${1:-}" ]] # no argument is given
