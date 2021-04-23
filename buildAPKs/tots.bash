@@ -31,6 +31,12 @@ then	# count the built APKs
 	then
 		printf "\\n\\e[1;1;38;5;121m%s\\e[0m\\n\\n	%s%s\\n	%s%s\\n" "Results for Download/builtAPKs/:" "$(find /storage/emulated/legacy/Download/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in Download/builtAPKs/" "$(( $(ls -Al "/storage/emulated/legacy/Download/builtAPKs/$JID.$DAY"/ | wc -l) - 1 ))" " deposited in Download/builtAPKs/$JID.$DAY/"
 	fi
+	elif [[ -w "/storage/emulated/0/Android/media/com.termux/builtAPKs/$JID.$DAY" ]]
+	then
+		printf "\\n\\e[1;1;38;5;121m%s\\e[0m\\n\\n	%s%s\\n	%s%s\\n" "Results for /storage/emulated/0/Android/media/com.termux/builtAPKs/:" "$(find /storage/emulated/0/Android/media/com.termux/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in /storage/emulated/0/Android/media/com.termux/builtAPKs/" "$(( $(ls -Al "/storage/emulated/0/Android/media/com.termux/builtAPKs/$JID.$DAY"/ | wc -l) - 1 ))" " deposited in /storage/emulated/0/Android/media/com.termux/builtAPKs/$JID.$DAY/"
+	elif [[ -w "/storage/emulated/0/Android/data/com.termux/builtAPKs/$JID.$DAY" ]]
+	then
+		printf "\\n\\e[1;1;38;5;121m%s\\e[0m\\n\\n	%s%s\\n	%s%s\\n" "Results for /storage/emulated/0/Android/data/com.termux/builtAPKs/:" "$(find /storage/emulated/0/Android/data/com.termux/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in /storage/emulated/0/Android/data/com.termux/builtAPKs/" "$(( $(ls -Al "/storage/emulated/0/Android/data/com.termux/builtAPKs/$JID.$DAY"/ | wc -l) - 1 ))" " deposited in /storage/emulated/0/Android/data/com.termux/builtAPKs/$JID.$DAY/"
 else	# count the built APKs
 	printf "\\n\\e[1;1;38;5;122m%s\\e[0m\\n\\n	%s%s\\n	%s%s\\n" "Results for ~/${RDR##*/}/var/cache/builtAPKs/:" "$(find "$RDR"/var/cache/builtAPKs/ -type f -name "*.apk" | wc -l)" " deposited in ~/${RDR##*/}/var/cache/builtAPKs/" "$(( $(ls -Al "$RDR/var/cache/builtAPKs/$JID.$DAY" | wc -l) - 1 ))" " deposited in ~/${RDR##*/}/var/cache/builtAPKs/$JID.$DAY/"
 fi

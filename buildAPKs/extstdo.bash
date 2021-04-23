@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Copyright 2019-2021 (c) all rights reserved by SDRausty; see LICENSE  
+# Copyright 2019-2021 (c) all rights reserved by SDRausty; see LICENSE
 # https://sdrausty.github.io hosted courtesy https://pages.github.com
-# External storage installation: This feature is being developed 
+# External storage installation: This feature is being developed
 #####################################################################
 set -eu
-. "$RDR/scripts/bash/shlibs/android/extstck.bash" 
+. "$RDR/scripts/bash/shlibs/android/extstck.bash"
 FILEDOSTRING="${0##*/} extstdo.bash"
 _EXTSTDO_() {
 _CK2EXTSTBD_() {
@@ -20,7 +20,7 @@ _CP2EXTSTTD_() {
 _TOUCHUP_() {
 	printf "%s" "Moving and linking directories : "
 	mv "$RDR/var/log" "$RDR/var/tmp"
-	ln -s "$EXTSTTD/buildAPKs/var/log" "$RDR/var/log" 
+	ln -s "$EXTSTTD/buildAPKs/var/log" "$RDR/var/log"
 	mv "$RDR/var/cache" "$RDR/var/tmp"
 	ln -s "$EXTSTTD/buildAPKs/var/cache" "$RDR/var/cache"
 	[[ -d $RDR/sources ]] && mv "$RDR/sources" "$RDR/var/tmp" || printf "%s\\n" "Signal generated at mv $RDR/sources ${0##*/} extstdo.bash : Continuing : "

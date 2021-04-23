@@ -1,4 +1,4 @@
-## [Shared BASH shell libraries](https://shlibs.github.io/shlibs.bash/) 
+## [Shared BASH shell libraries](https://shlibs.github.io/shlibs.bash/)
 
 [This repository](https://github.com/shlibs/shlibs.bash) is a submodule for [BuildAPKs' buildAPKs](https://github.com/BuildAPKs/buildAPKs) and [SDRausty's buildAPKs](https://github.com/SDRausty/buildAPKs).
 
@@ -27,7 +27,7 @@ cd && git clone https://github.com/SDRausty/buildAPKs
 ##### -rwxrwxrwx [setup.buildAPKs.bash](https://sdrausty.github.io/buildAPKs/setup.buildAPKs.bash)
 
 
-##### Information about shells: 
+##### Information about shells:
    * [https://developer.ibm.com/tutorials/l-linux-shells/](https://developer.ibm.com/tutorials/l-linux-shells/)
    * [http://tldp.org/guides.html](http://tldp.org/guides.html)
 
