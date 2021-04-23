@@ -6,14 +6,9 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 _COPYAPK_ () {
-	if [ -w "/storage/emulated/0/" ] || [ -w "/storage/emulated/legacy/" ]	# if either directory is writable
-	then	# do nothing
-		:
-	else
-		if [ ! -e /storage/emulated/0/Android/media/com.termux/builtAPKs ]
-		then
-				mkdir /storage/emulated/0/Android/media/com.termux/builtAPKs || printf "\\e[1;1;38;5;124m%s\\e[1;1;38;5;122m%s\\e[1;32m%s\\e[0m\\n" "Could not create directory Android/media/com.termux/builtAPKs to deposit APK files.  " "Please create this directory in Android" ":  Continuing..."
-		fi
+	if [ ! -e /storage/emulated/0/Android/media/com.termux/builtAPKs ]	# if directory does not exist
+	then	# create directory
+		mkdir -p /storage/emulated/0/Android/media/com.termux/builtAPKs || printf "\\e[1;1;38;5;124m%s\\e[1;1;38;5;122m%s\\e[1;32m%s\\e[0m\\n" "Could not create directory Android/media/com.termux/builtAPKs to deposit APK files.  " "Please create this directory in Android" ":  Continuing..."
 	fi
 	# if either directory is writable
 	if [ -w "/storage/emulated/0/" ] || [ -w "/storage/emulated/legacy/" ]
