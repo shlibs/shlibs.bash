@@ -16,7 +16,7 @@ find "$RDR/sources/" -path "$RDR/sources/github/*" -prune -o -type f -name "*.ap
 find "$JDR" -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible" ||:
 find "$JDR" -type f -name "*.apk" > "$TMPDIR/fa$$/built" ||:
 cd "$TMPDIR/fa$$"
-printf "\\e[1;1;38;5;119m%s\\e[0m\\n\\n" "The total increases as modules are added;  The build scripts add modules and create APKs on device.  Results for ~/${RDR##*/}/sources/:"
+printf "\\e[1;1;38;5;119m%s\\e[0m\\n\\n" "The total increases as modules and projects are added;  The build scripts add modules and projects and create APKs on device.  Results for ~/${RDR##*/}/sources/:"
 wc -l possible.total built.total | sed -n 1,2p # https://www.cyberciti.biz/faq/unix-linux-show-first-10-20-lines-of-file/
 printf "\\n\\e[1;1;38;5;120m%s\\e[0m\\n\\n" "Results for ~/${RDR##*/}/sources/$JID/:"
 wc -l possible built | sed -n 1,2p
