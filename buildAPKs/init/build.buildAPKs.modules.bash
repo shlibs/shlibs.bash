@@ -11,14 +11,13 @@ RDR="$HOME/buildAPKs"
 _2GSU_() {
 	if [[ "$SBMI" = "" ]]
 	then
- 		printf "To update the modules in ~/%s to the newest version remove these .git files:\\n\\n~/%s/scripts/bash/shlibs/.git\\n" "${RDR##*/}" "${RDR##*/}"
+ 		printf "To update the modules in '~/%s' to the newest version please run '~/%s/update.buildAPKs.sh' to remove these '.git' files:\\n\\n~/%s/scripts/bash/shlibs/.git\\n" "${RDR##*/}" "${RDR##*/}" "${RDR##*/}"
 		for GLOC in "${!GBMS[@]}"
 		do
 			printf "%s\\n" "~/${RDR##*/}/$GLOC/.git"
 		done
- 		printf "\\nUse find to update the modules in ~/buildAPKs/ to the newest version:\\n\\n"
- 		printf "	find ~/buildAPKs/ -type f -name .git -delete"
- 		printf "\\n\\nThen run %s again, and %s shall attempt to update them all.\\n" "${0##*/}" "${0##*/}"
+ 		printf "\\nTo update the modules in '~/%s' to the newest version please run '~/%s/update.buildAPKs.sh' to remove these '.git' files:\\n\\n~/%s/scripts/bash/shlibs/.git\\n" "${RDR##*/}" "${RDR##*/}" "${RDR##*/}"
+ 		printf "\\nThen run '%s' again, and '%s' shall attempt to update them all.\\n" "${0##*/}" "${0##*/}"
 	else
 		_GSMU_
 	fi
