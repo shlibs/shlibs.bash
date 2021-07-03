@@ -17,7 +17,7 @@ _2GSU_() {
 			printf "%s\\n" "~/${RDR##*/}/$GLOC/.git"
 		done
  		printf "\\nTo update the modules in '~/%s' to the newest version please run '~/%s/update.buildAPKs.sh' to remove these '.git' files:\\n\\n~/%s/scripts/bash/shlibs/.git\\n" "${RDR##*/}" "${RDR##*/}" "${RDR##*/}"
- 		printf "\\nThen run '%s' again, and '%s' shall attempt to update them all.\\n" "${0##*/}" "${0##*/}"
+ 		printf "\\nThen run '%s' again, and '%s' will attempt to update them all.\\n" "${0##*/}" "${0##*/}"
 	else
 		_GSMU_
 	fi
@@ -40,7 +40,7 @@ _GSA_() { # update submodules to latest version
 }
 
 _GSMU_() {
-	printf "\\e[1;7;38;5;114mUpdating buildAPKs; \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m shall attempt to load sources from git submodule repositories into \\e[1;7;38;5;113m~/%s\\e[1;7;38;5;114m.  This may take a little while to complete.  Please be patient while \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m downloads source code from \\e[1;7;38;5;113m%s:\\e[0m\\n" "${0##*/}" "${RDR##*/}" "${0##*/}" "$SIAD"
+	printf "\\e[1;7;38;5;114mUpdating buildAPKs; \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m will attempt to load sources from git submodule repositories into \\e[1;7;38;5;113m~/%s\\e[1;7;38;5;114m.  This may take a little while to complete.  Please be patient while \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m downloads source code from \\e[1;7;38;5;113m%s:\\e[0m\\n" "${0##*/}" "${RDR##*/}" "${0##*/}" "$SIAD"
 	. "$RDR"/scripts/bash/init/ushlibs.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
 	. "$RDR"/scripts/bash/shlibs/buildAPKs/prep.bash
