@@ -16,8 +16,7 @@ _2GSU_() {
 		do
 			printf "%s\\n" "~/${RDR##*/}/$GLOC/.git"
 		done
- 		printf "\\nTo update the modules in '~/%s' to the newest version please run '~/%s/update.buildAPKs.sh' to remove these '.git' files:\\n\\n~/%s/scripts/bash/shlibs/.git\\n" "${RDR##*/}" "${RDR##*/}" "${RDR##*/}"
- 		printf "\\nThen run '%s' again, and '%s' will attempt to update them all.\\n" "${0##*/}" "${0##*/}"
+ 		printf "\\nThen run '%s' again, and '%s' will attempt to update all them.\\n" "${0##*/}" "${0##*/}"
 	else
 		_GSMU_
 	fi
@@ -36,16 +35,16 @@ _CK4MS_() { # ChecKs 4 ModuleS
 }
 
 _GSA_() { # update submodules to latest version
-	((printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Adding $SIAD/${GBMS[$LOC]} to ~/buildAPKs/$LOC..." && git submodule add "$SIAD/${GBMS[$LOC]}" "$LOC") && (printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Updating ~/${RDR##*/}/$LOC..." && git submodule update --init --recursive --remote "$LOC" && _IAR_ "$JDR")) ||  (printf "\\e[1;7;38;5;66m%s\\e[0m\\n" "Cannot add and update ~/${RDR##*/}/$LOC: Continuing...")
+	((printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Adding $SIAD/${GBMS[$LOC]} to ~/${RDR##*/}/$LOC..." && git submodule add "$SIAD/${GBMS[$LOC]}" "$LOC") && (printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Updating ~/${RDR##*/}/$LOC..." && git submodule update --init --recursive --remote "$LOC" && _IAR_ "$JDR")) ||  (printf "\\e[1;7;38;5;66m%s\\e[0m\\n" "Cannot add and update ~/${RDR##*/}/$LOC: Continuing...")
 }
 
 _GSMU_() {
-	printf "\\e[1;7;38;5;114mUpdating buildAPKs; \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m will attempt to load sources from git submodule repositories into \\e[1;7;38;5;113m~/%s\\e[1;7;38;5;114m.  This may take a little while to complete.  Please be patient while \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m downloads source code from \\e[1;7;38;5;113m%s:\\e[0m\\n" "${0##*/}" "${RDR##*/}" "${0##*/}" "$SIAD"
-	. "$RDR"/scripts/bash/init/ushlibs.bash
-	. "$RDR"/scripts/bash/shlibs/buildAPKs/at.bash
-	. "$RDR"/scripts/bash/shlibs/buildAPKs/prep.bash
-	. "$RDR"/scripts/bash/shlibs/buildAPKs/init/mod.bash 0
-	. "$RDR"/scripts/bash/shlibs/lock.bash
+	printf "\\e[1;7;38;5;114mUpdating %s; \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m will attempt to load sources from git submodule repositories into \\e[1;7;38;5;113m~/%s\\e[1;7;38;5;114m.  This may take a little while to complete.  Please be patient while \\e[1;7;38;5;112m%s\\e[1;7;38;5;114m downloads source code from \\e[1;7;38;5;113m%s:\\e[0m\\n" "${RDR##*/}" "${0##*/}" "${RDR##*/}" "${0##*/}" "$SIAD"
+	. "$RDR/scripts/bash/init/ushlibs.bash"
+	. "$RDR/scripts/bash/shlibs/buildAPKs/at.bash"
+	. "$RDR/scripts/bash/shlibs/buildAPKs/prep.bash"
+	. "$RDR/scripts/bash/shlibs/buildAPKs/init/mod.bash" 0
+	. "$RDR/scripts/bash/shlibs/lock.bash"
 	[[ ! -d "$RDR/sources" ]] && mkdir -p "$RDR/sources"
 	for LOC in "${!GBMS[@]}"
 	do
@@ -58,7 +57,7 @@ _GSMU_() {
 }
 
 _GSU_() { # update submodules to latest version
-	((printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Updating ~/buildAPKs/$LOC..." && git submodule update --init --recursive --remote "$LOC" && _IAR_ "$JDR") || ( _GSA_ || (JAD="${!GBMS[@]}" ; JID="${LOC##*/}" ; _UMODS_ ; _GTSAM_ ))) ||  (printf "\\e[1;7;38;5;66m%s\\e[0m\\n" "Cannot update ~/buildAPKs/$LOC: Continuing...") # https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/
+	((printf "\\e[1;7;38;5;96m%s\\e[0m\\n" "Updating ~/${RDR##*/}/$LOC..." && git submodule update --init --recursive --remote "$LOC" && _IAR_ "$JDR") || ( _GSA_ || (JAD="${!GBMS[@]}" ; JID="${LOC##*/}" ; _UMODS_ ; _GTSAM_ ))) ||  (printf "\\e[1;7;38;5;66m%s\\e[0m\\n" "Cannot update ~/${RDR##*/}/$LOC: Continuing...") # https://www.tecmint.com/chaining-operators-in-linux-with-practical-examples/
 	[[ -f "$JDR"/ma.bash ]] && . "$JDR"/ma.bash
 }
 
