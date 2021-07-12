@@ -16,7 +16,7 @@ _2GSU_() {
 		do
 			printf "%s\\n" "~/${RDR##*/}/$GLOC/.git"
 		done
- 		printf "\\nThen run '%s' again, and '%s' will attempt to update all them.\\n" "${0##*/}" "${0##*/}"
+ 		printf "\\nThen run '%s' again, and '%s' will attempt to update them all.\\n" "${0##*/}" "${0##*/}"
 	else
 		_GSMU_
 	fi
