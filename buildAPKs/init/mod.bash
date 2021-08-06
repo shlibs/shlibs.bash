@@ -66,7 +66,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	# create directories in RDR if not exist
-	_MKDIRS_ "bin" "opt" "tmp" "var/cache/lib" "var/cache/lib/res-appcompat" "var/cache/lib/res-cardview" "var/cache/lib/res-design" "var/cache/lib/res-recyclerview" "var/cache/stash" "var/cache/tarballs" "var/db" "var/db/log" "var/lock" "var/log/github/orgs" "var/log/github/users" "var/log/messages" "var/log/messages" "var/run/lock/auth" "var/run/lock/wake" "var/tmp"                              
+	_MKDIRS_ "bin" "opt" "tmp" "var/cache/lib" "var/cache/lib/res-appcompat" "var/cache/lib/res-cardview" "var/cache/lib/res-design" "var/cache/lib/res-recyclerview" "var/cache/stash" "var/cache/tarballs" "var/db" "var/db/log" "var/lock" "var/log/github/orgs" "var/log/github/users" "var/log/messages" "var/log/messages" "var/run/lock/auth" "var/run/lock/wake" "var/tmp"
 	# create files in RDR/var if not exist
 	_MKVFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
 	# create symlinks in RDR if not exist
@@ -84,7 +84,7 @@ _MAINMODS_ () {
 }
 
 _PRINTUMODS_() {
-	printf "\\e[1;2;38;5;180m%s \\e[1;2;38;5;190m%s \\e[1;2;38;5;180m%s%s\\e[0m\\n\\n" "Updating buildAPKs: '${0##*/} mod.bash' is" "loading sources from repository submodule https://$JAD" "into buildAPKs.  This may take a little while to complete.  Please be patient if this script wants to download source code from https://github.com:"
+	printf "\\e[1;2;38;5;190m%s \\e[1;2;38;5;194m%s \\e[1;2;38;5;190m%s%s\\e[0m\\n\\n" "Updating buildAPKs: '${0##*/}' is loading sources from repository submodule" "https://$JAD" "into buildAPKs.  This may take a little while to complete:"
 }
 
 _PRINTUSAGE_() {
