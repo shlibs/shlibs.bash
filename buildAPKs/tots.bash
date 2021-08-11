@@ -9,6 +9,7 @@ shopt -s nullglob globstar
 . "$RDR"/scripts/bash/shlibs/buildAPKs/calib.bash
 BBSL="$(find "$RDR/scripts/" -name build -exec ls {} \;)"
 printf "\\n\\e[1;1;38;5;108m%s\\n%s\\e[0m\\n\\n" "Build APKs (Android Package Kits) with scripts in ~/${RDR##*/}/scripts/{bash,sh,zsh}/build/:" "$BBSL"
+. "$RDR/scripts/bash/shlibs/buildAPKs/bnchn.bash" bch.gt
 mkdir -p "$TMPDIR/fa$$"
 printf "\\e[1;1;38;5;118m%s\\e[0m\\n\\n" "Calculating for ~/${RDR##*/}/.  This may take a while;  Please be patient..."
 find "$RDR/sources/" -path "$RDR/sources/github/*" -prune -o -type f -name AndroidManifest.xml > "$TMPDIR/fa$$/possible.total"
