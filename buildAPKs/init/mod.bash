@@ -79,8 +79,8 @@ _MAINMODS_ () {
 		_UMODS_
 	fi
 	_ANDB_ "$JDR"
-	. "$RDR/scripts/bash/shlibs/buildAPKs/tots.bash"
 	. "$RDR/scripts/bash/shlibs/buildAPKs/bnchn.bash" bch.gt
+	. "$RDR/scripts/bash/shlibs/buildAPKs/tots.bash"
 }
 
 _PRINTUMODS_() {
