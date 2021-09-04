@@ -41,4 +41,5 @@ else
 	printf "\\n\\e[1;1;38;5;124m%s\\e[1;32m%s\\e[0m\\n" "Could not tally all the results for builtAPKs:  " "Continuing..."
 fi
 rm -rf "$TMPDIR/fa$$"
+printf '%s\n' "You can share information about projects that build at https://github.com/BuildAPKs/db.BuildAPKs/issues and https://github.com/BuildAPKs/db.BuildAPKs/pulls to help develop this project."
 # tots.bash EOF
