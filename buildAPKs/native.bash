@@ -44,9 +44,7 @@ if [ -d jni ]
 then
 	_LIBDIR_
 	cd jni
-	NATEFILE="$(find . -type f -name "*.c")"
-	_CLANGDO_
-	NATEFILE="$(find . -type f -name "*.cpp")"
+	NATEFILE="$(find . -type f -name "*.c*")"
 	_CLANGDO_
 	cd ..
 	printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/$LIBDIR)"
