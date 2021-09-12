@@ -4,11 +4,12 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
+. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
 _CLANGDO_() {
 	for NCFILE in $NATEFILE
 	do
-	printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/${NCFILE//.c}.so $NCFILE:  "
-	( clang -Os -shared -o ../output/lib/"$LIBDIR"/"${NCFILE//.c*}".so "$NCFILE" && printf "%s\\n" "DONE" ) || printf "%s\\n" "ERROR FOUND:  Continuing..."
+		printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/${NCFILE//.c}.so $NCFILE:  "
+		( clang -Os -shared -o ../output/lib/"$LIBDIR"/"${NCFILE//.c*}".so "$NCFILE" && printf "%s\\n" "DONE" ) || printf "%s\\n" "ERROR FOUND:  Continuing..."
 	done
 	unset NATEFILE
 }
