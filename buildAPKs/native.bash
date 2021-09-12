@@ -48,5 +48,7 @@ then
 	_CLANGDO_
 	cd ..
 	printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/$LIBDIR)"
+else
+	printf "%s\\n" "No 'jni' directory found in directory '$PWD':  Continuing..."
 fi
 # native.sh EOF
