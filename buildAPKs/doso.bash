@@ -27,12 +27,12 @@ _DOMAKES_() {
 			printf "%s\\n" "Processing ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
 			UNUM="$(date +%s)"
 			sleep 1
-			mkdir -p "$JDR/bin/lib/$CPUABI/$UNUM"
-			cp -ar "${FAMK%/*}"/* "$JDR/bin/lib/$CPUABI/$UNUM"
-			cd "$JDR/bin/lib/$CPUABI/$UNUM"
+			mkdir -p "$JDR/output/lib/$CPUABI/$UNUM"
+			cp -ar "${FAMK%/*}"/* "$JDR/output/lib/$CPUABI/$UNUM"
+			cd "$JDR/output/lib/$CPUABI/$UNUM"
 			find -type f -name "A*k"
 			[[ $(head -n 1 "$RDR/.conf/DOSON") = 0 ]] && _DNINJA_ || _DMAKE_
-			find . -type f -name "*.so" -exec mv {} "$JDR/bin/lib/$CPUABI" \; || printf "\\e[1;48;5;168m%s\\e[0m\\n" "Signal 46 generated in find -name *.so ${0##*/} doso.bash"
+			find . -type f -name "*.so" -exec mv {} "$JDR/output/lib/$CPUABI" \; || printf "\\e[1;48;5;168m%s\\e[0m\\n" "Signal 46 generated in find -name *.so ${0##*/} doso.bash"
 			printf "%s\\n" "Finished cmake and make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/."
 			cd "$JDR"
 	done
