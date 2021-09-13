@@ -83,7 +83,7 @@ _MAINMODS_ () {
 }
 
 _PRINTUMODS_() {
-	printf "\\e[1;2;38;5;190m%s \\e[1;2;38;5;194m%s \\e[1;2;38;5;190m%s%s\\e[0m\\n\\n" "Updating buildAPKs: '${0##*/}' is loading sources from repository submodule" "'https://$JAD'" "into buildAPKs.  This may take a little while to complete:"
+	printf "\\e[1;2;38;5;190m%s \\e[1;2;38;5;158m%s \\e[1;2;38;5;190m%s%s\\e[0m\\n\\n" "Updating buildAPKs: '${0##*/}' is loading sources from repository submodule" "'https://$JAD'" "into buildAPKs.  This may take a little while to complete:"
 }
 
 _PRINTUSAGE_() {
