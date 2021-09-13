@@ -116,7 +116,7 @@ _GRUP_() {	# clone submodule as git repository
 		git pull || _SIGNAL_ "36" "git pull _GTGF_ _UMODS_"
 	fi
 }
-	printf "\\e[1;1;38;5;191m%s\\e[0m\\n" "Updating module ~/${RDR##*/}/sources/$JID to the newest version... "
+	printf "\\e[1;1;38;5;158m%s\\e[0m\\n" "Updating module ~/${RDR##*/}/sources/$JID to the newest version... "
 	if grep -w "$JID" .gitmodules 1>/dev/null
 	then
 		( git submodule update --init --recursive --remote "sources/${JDR##*/}" && _IAR_ || _GRUP_ ) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT UPDATE ~/${RDR##*/}/sources/$JID:  Continuing..." # chaining operators
