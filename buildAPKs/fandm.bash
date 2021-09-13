@@ -8,7 +8,7 @@ shopt -s nullglob globstar
 _ANDB_() { # find and process AndroidManifest.xml file
 	# if undefined, then define as the first arguement
 	[[ -z "${JDR:-}" ]] && JDR=$1
-	printf "\\e[1;7;38;5;222m%s\\e[0m\\n" "Searching for job directories in $JDR: Please be patient..."
+	printf "\\e[1;7;38;5;158m%s\\e[0m\\n" "Searching for job directories in $JDR: Please be patient..."
 	# create array of found AndroidManifest.xml files
 	AMFS=($(find "$JDR/" -type f -name AndroidManifest.xml))
 	# if the number of elements in the array is one, use the singular noun form of the word files, otherwise use the plural form
