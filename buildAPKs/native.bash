@@ -8,8 +8,10 @@ shopt -s nullglob globstar
 _CLANGDOC_() {
 	for NCFILE in $NATEFILES
 	do
-		printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/${NCFILE//.c}.so $NCFILE:  "
-		( clang -Os -shared -o ../output/lib/"$LIBDIR"/"${NCFILE//.c*}".so "$NCFILE" && printf "%s\\n" "DONE" ) || printf "%s\\n" "ERROR FOUND:  Continuing..."
+		NATEFILE="${NCFILE//.\/}"
+		NATEFILE="${NATEFILE//.c*}"
+		printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/$NATEFILE.so $NCFILE:  "
+		( clang -Os -shared -o ../output/lib/"$LIBDIR"/"$NATEFILE".so "$NCFILE" && printf "%s\\n" "DONE" ) || printf "%s\\n" "ERROR FOUND:  Continuing..."
 	done
 	unset NATEFILES
 }
