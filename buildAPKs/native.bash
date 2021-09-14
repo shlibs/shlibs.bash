@@ -18,7 +18,6 @@ _CLANGDOC_() {
 _JNIDIR_() {
 	if [ -d jni ]
 	then
-		_LIBDIR_
 		cd jni
 		NATEFILES="$(find . -type f -name "*.c*")"
 		_CLANGDOC_
@@ -56,6 +55,7 @@ _LIBDIR_() {
 	fi
 	[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
 }
+_LIBDIR_
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
