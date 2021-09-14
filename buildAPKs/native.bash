@@ -27,7 +27,7 @@ _JNIDIR_() {
 	printf "%s\\n" "No 'jni' directory found: Continuing..."
 fi
 }
-. "$RDR"/scripts/bash/shlibs/libdir.sh
+. "$RDR"/scripts/bash/shlibs/libdir.bash
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
