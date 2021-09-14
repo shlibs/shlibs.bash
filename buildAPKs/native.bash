@@ -4,7 +4,6 @@
 #####################################################################
 set -Eeuo pipefail
 shopt -s nullglob globstar
-. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
 _CLANGDOC_() {
 	for NCFILE in $NATEFILES
 	do
