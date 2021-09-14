@@ -31,5 +31,5 @@ _LIBDIR_() {
 	fi
 	[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
 }
-_LIBDIR_
+# _LIBDIR_
 # libdir.bash EOF

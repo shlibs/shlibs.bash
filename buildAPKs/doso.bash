@@ -19,6 +19,7 @@ _DNINJA_() {
 	cmake . && ninja || printf "\\e[1;48;5;167m%s\\e[0m\\n" "Signal 42 generated in cmake && ninja ${0##*/} doso.bash"
 }
 . "$RDR"/scripts/bash/shlibs/libdir.bash
+_LIBDIR_
 printf "\\e[1;38;5;113m%s\\n" "Searching for 'CMakeLists.txt' files in ~/$(cut -d"/" -f7-99 <<< "$JDR")/; Please be patient..."
 AMKFS=("$(find "$JDR" -type f -name CMakeLists.txt)")
 _DOMAKES_() {

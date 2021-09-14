@@ -28,6 +28,7 @@ _JNIDIR_() {
 fi
 }
 . "$RDR"/scripts/bash/shlibs/libdir.bash
+_LIBDIR_
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
