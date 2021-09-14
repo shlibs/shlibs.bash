@@ -60,11 +60,13 @@ ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
 	printf "%s\\n" "No 'Android.mk' files were found:  Continuing..."
+	_JNIDIR_
 else
 	printf "%s\\n" "File 'Android.mk' found:  Continuing..."
 	. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
-	_SLWTTSWN_ "$ANDROIDMK" | grep := | sort
-# 	ADMKVARS=( LOCAL_32_BIT_ONLY LOCAL_ADDITIONAL_DEPENDENCIES LOCAL_ARM_MODE LOCAL_CERTIFICATE LOCAL_CFLAGS LOCAL_CLANG LOCAL_CPPFLAGS LOCAL_CXX_STL LOCAL_C_INCLUDES LOCAL_EXPORT_C_INCLUDE_DIRS LOCAL_HAL_STATIC_LIBRARIES LOCAL_JNI_SHARED_LIBRARIES LOCAL_LDFLAGS LOCAL_MODULE LOCAL_MODULE_CLASS LOCAL_MODULE_PATH LOCAL_MODULE_RELATIVE_PATH LOCAL_MODULE_STEM_32 LOCAL_MODULE_STEM_64 LOCAL_MODULE_TAGS LOCAL_MULTILIB LOCAL_PACKAGE_NAME LOCAL_PATH LOCAL_PROTOC_OPTIMIZE_TYPE LOCAL_REQUIRED_MODULES LOCAL_SDK_VERSION LOCAL_SHARED_LIBRARIES LOCAL_SRC_FILES LOCAL_STATIC_LIBRARIES LOCAL_WHOLE_STATIC_LIBRARIES TOP_LOCAL_PATH )
+	LOCAL_SRC_FILES="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_SRC_FILES | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional //' | paste -s -d ' ' )"
+	LOCAL_MODULE="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_MODULE | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional //' | paste -s -d ' ' )"
+	printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/$LOCAL_MODULE.so $LOCAL_SRC_FILES:  "
+	( clang -Os -shared -o ../output/lib/"$LIBDIR/$LOCAL_MODULE".so "$LOCAL_SRC_FILES" && printf "%s\\n" "DONE" ) || ( printf "%s\\n" "ERROR FOUND:  Continuing..." && _JNIDIR_ )
 fi
-_JNIDIR_
 # native.sh EOF
