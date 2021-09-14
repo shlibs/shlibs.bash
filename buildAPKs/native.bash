@@ -63,8 +63,8 @@ then
 else
 	printf "%s\\n" "File 'Android.mk' found: Continuing..."
 	. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
-	LOCAL_SRC_FILES="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_SRC_FILES | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional //' | paste -s -d ' ' )"
-	LOCAL_MODULE="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_MODULE | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional //' | paste -s -d ' ' )"
+	LOCAL_SRC_FILES="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_SRC_FILES | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional//' | paste -s -d ' ' )"
+	LOCAL_MODULE="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_MODULE | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional//' | paste -s -d ' ' )"
 	printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/$LOCAL_MODULE.so $LOCAL_SRC_FILES:  "
 	( clang -Os -shared -o ../output/lib/"$LIBDIR/$LOCAL_MODULE".so "$LOCAL_SRC_FILES" && printf "%s\\n" "DONE" ) || ( printf "%s\\n" "ERROR FOUND: Continuing..." && _JNIDIR_ )
 fi
