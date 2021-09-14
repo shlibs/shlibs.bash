@@ -10,7 +10,7 @@ _CLANGDOC_() {
 		NATEFILE="${NCFILE//.\/}"
 		NATEFILE="${NATEFILE//.c*}"
 		printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/$NATEFILE.so $NCFILE:  "
-		( clang -Os -shared -o ../output/lib/"$LIBDIR"/"$NATEFILE".so "$NCFILE" && printf "%s\\n" "DONE" ) || printf "%s\\n" "ERROR FOUND:  Continuing..."
+		( clang -Os -shared -o ../output/lib/"$LIBDIR"/"$NATEFILE".so "$NCFILE" && printf "%s\\n" "DONE" ) || printf "%s\\n" "ERROR FOUND: Continuing..."
 	done
 	unset NATEFILES
 }
@@ -24,7 +24,7 @@ _JNIDIR_() {
 		cd ..
 		printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/$LIBDIR)"
 	else
-	printf "%s\\n" "No 'jni' directory found:  Continuing..."
+	printf "%s\\n" "No 'jni' directory found: Continuing..."
 fi
 }
 
@@ -59,14 +59,14 @@ _LIBDIR_
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
-	printf "%s\\n" "No 'Android.mk' files were found:  Continuing..."
+	printf "%s\\n" "No 'Android.mk' files were found: Continuing..."
 	_JNIDIR_
 else
-	printf "%s\\n" "File 'Android.mk' found:  Continuing..."
+	printf "%s\\n" "File 'Android.mk' found: Continuing..."
 	. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
 	LOCAL_SRC_FILES="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_SRC_FILES | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional //' | paste -s -d ' ' )"
 	LOCAL_MODULE="$(_SLWTTSWN_ "$ANDROIDMK" | grep LOCAL_MODULE | cut -f2 -d "=" | cut -f2 -d " " | sed 's/$(call//' | sed 's/optional //' | paste -s -d ' ' )"
 	printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/$LOCAL_MODULE.so $LOCAL_SRC_FILES:  "
-	( clang -Os -shared -o ../output/lib/"$LIBDIR/$LOCAL_MODULE".so "$LOCAL_SRC_FILES" && printf "%s\\n" "DONE" ) || ( printf "%s\\n" "ERROR FOUND:  Continuing..." && _JNIDIR_ )
+	( clang -Os -shared -o ../output/lib/"$LIBDIR/$LOCAL_MODULE".so "$LOCAL_SRC_FILES" && printf "%s\\n" "DONE" ) || ( printf "%s\\n" "ERROR FOUND: Continuing..." && _JNIDIR_ )
 fi
 # native.sh EOF

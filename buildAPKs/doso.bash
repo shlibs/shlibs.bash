@@ -39,9 +39,9 @@ _DOMAKES_() {
 }
 if [[ -z "${AMKFS[@]:-}" ]] # is undefined
 then # no CMakeLists.txt files are found
-	printf "%s\\n" "No CMakeLists.txt files were found: Continuing..."
+	printf "%s\\n" "No 'CMakeLists.txt' files were found: Continuing..."
 else # call cmake and make/ninja to build shared objects
-	[[ "${#AMKFS[@]}" = 1 ]] && printf "%s\\n" "Found ${#AMKFS[@]} CMakeLists.txt file."
+	[[ "${#AMKFS[@]}" = 1 ]] && printf "%s\\n" "Found ${#AMKFS[@]} 'CMakeLists.txt' file."
 	_DOMAKES_
 fi
 # doso.bash EOF
