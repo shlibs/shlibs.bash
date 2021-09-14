@@ -18,7 +18,33 @@ _DNINJA_() {
 	printf "%s\\n" "Beginning cmake and ninja in ~/$(cut -d"/" -f7-99 <<< "$PWD"):"
 	cmake . && ninja || printf "\\e[1;48;5;167m%s\\e[0m\\n" "Signal 42 generated in cmake && ninja ${0##*/} doso.bash"
 }
-. "$RDR"/scripts/bash/shlibs/libdir.bash
+_LIBDIR_() {
+	UNAMEM="$(uname -m)"
+	if [[ "$UNAMEM" = aarch64 ]]
+	then
+		LIBDIR="arm64-v8a"
+	elif [[ "$UNAMEM" = *armv5* ]]
+	then
+		LIBDIR="armeabi-v5a"
+	elif [[ "$UNAMEM" = *armv7* ]]
+	then
+		LIBDIR="armeabi-v7a"
+	elif [[ "$UNAMEM" = *armv8* ]]
+	then
+		LIBDIR="armeabi-v7a"
+	elif [[ "$UNAMEM" = i686 ]]
+	then
+		LIBDIR="x86"
+	elif [[ "$UNAMEM" = x86_64 ]]
+	then
+		LIBDIR="x86_64"
+	else
+		printf "%s\\n" "Unknown architecture '$UNAMEM'"
+		LIBDIR="$UNAMEM"
+		[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
+	fi
+	[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
+}
 _LIBDIR_
 printf "\\e[1;38;5;113m%s\\n" "Searching for 'CMakeLists.txt' files in ~/$(cut -d"/" -f7-99 <<< "$JDR")/; Please be patient..."
 AMKFS=("$(find "$JDR" -type f -name CMakeLists.txt)")
