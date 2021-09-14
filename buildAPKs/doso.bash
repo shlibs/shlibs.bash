@@ -18,21 +18,19 @@ _DNINJA_() {
 	printf "%s\\n" "Beginning cmake and ninja in ~/$(cut -d"/" -f7-99 <<< "$PWD"):"
 	cmake . && ninja || printf "\\e[1;48;5;167m%s\\e[0m\\n" "Signal 42 generated in cmake && ninja ${0##*/} doso.bash"
 }
-CPUABI="$(getprop ro.product.cpu.abi)"
+. "$RDR"/scripts/bash/shlibs/libdir.sh
 printf "\\e[1;38;5;113m%s\\n" "Searching for 'CMakeLists.txt' files in ~/$(cut -d"/" -f7-99 <<< "$JDR")/; Please be patient..."
 AMKFS=("$(find "$JDR" -type f -name CMakeLists.txt)")
 _DOMAKES_() {
 	for FAMK in ${AMKFS[@]}
 	do
 			printf "%s\\n" "Processing ~/$(cut -d"/" -f7-99 <<< "$FAMK")."
-			UNUM="$(date +%s)"
-			sleep 1
-			mkdir -p "$JDR/output/lib/$CPUABI/$UNUM"
-			cp -ar "${FAMK%/*}"/* "$JDR/output/lib/$CPUABI/$UNUM"
-			cd "$JDR/output/lib/$CPUABI/$UNUM"
+			mkdir -p "$JDR/output/lib/$LIBDIR"
+			cp -ar "${FAMK%/*}"/* "$JDR/output/lib/$LIBDIR"
+			cd "$JDR/output/lib/$LIBDIR"
 			find -type f -name "A*k"
 			[[ $(head -n 1 "$RDR/.conf/DOSON") = 0 ]] && _DNINJA_ || _DMAKE_
-			find . -type f -name "*.so" -exec mv {} "$JDR/output/lib/$CPUABI" \; || printf "\\e[1;48;5;168m%s\\e[0m\\n" "Signal 46 generated in find -name *.so ${0##*/} doso.bash"
+			find . -type f -name "*.so" -exec mv {} "$JDR/output/lib/$LIBDIR" \; || printf "\\e[1;48;5;168m%s\\e[0m\\n" "Signal 46 generated in find -name *.so ${0##*/} doso.bash"
 			printf "%s\\n" "Finished cmake and make in ~/$(cut -d"/" -f7-99 <<< "$PWD")/."
 			cd "$JDR"
 	done

@@ -27,35 +27,7 @@ _JNIDIR_() {
 	printf "%s\\n" "No 'jni' directory found: Continuing..."
 fi
 }
-
-_LIBDIR_() {
-	UNAMEM="$(uname -m)"
-	if [[ "$UNAMEM" = aarch64 ]]
-	then
-		LIBDIR="arm64-v8a"
-	elif [[ "$UNAMEM" = *armv5* ]]
-	then
-		LIBDIR="armeabi-v5a"
-	elif [[ "$UNAMEM" = *armv7* ]]
-	then
-		LIBDIR="armeabi-v7a"
-	elif [[ "$UNAMEM" = *armv8* ]]
-	then
-		LIBDIR="armeabi-v7a"
-	elif [[ "$UNAMEM" = i686 ]]
-	then
-		LIBDIR="x86"
-	elif [[ "$UNAMEM" = x86_64 ]]
-	then
-		LIBDIR="x86_64"
-	else
-		printf "%s\\n" "Unknown architecture '$UNAMEM'"
-		LIBDIR="$UNAMEM"
-		[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
-	fi
-	[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
-}
-_LIBDIR_
+. "$RDR"/scripts/bash/shlibs/libdir.sh
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
@@ -69,4 +41,4 @@ else
 	printf "%s" "Running command: clang -Os -shared -o ../output/lib/$LIBDIR/$LOCAL_MODULE.so $LOCAL_SRC_FILES:  "
 	( clang -Os -shared -o ../output/lib/"$LIBDIR/$LOCAL_MODULE".so "$LOCAL_SRC_FILES" && printf "%s\\n" "DONE" ) || ( printf "%s\\n" "ERROR FOUND: Continuing..." && _JNIDIR_ )
 fi
-# native.sh EOF
+# native.bash EOF
