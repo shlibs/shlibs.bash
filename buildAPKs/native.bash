@@ -16,6 +16,20 @@ _CLANGDOC_() {
 	unset NATEFILES
 }
 
+_JNIDIR_() {
+	if [ -d jni ]
+	then
+		_LIBDIR_
+		cd jni
+		NATEFILES="$(find . -type f -name "*.c*")"
+		_CLANGDOC_
+		cd ..
+		printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/$LIBDIR)"
+	else
+	printf "%s\\n" "No 'jni' directory found:  Continuing..."
+fi
+}
+
 _LIBDIR_() {
 	UNAMEM="$(uname -m)"
 	if [[ "$UNAMEM" = aarch64 ]]
@@ -46,22 +60,12 @@ _LIBDIR_() {
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
-	printf "%s\\n" "No 'Android.mk' files were found in directory '$PWD':  Continuing..."
+	printf "%s\\n" "No 'Android.mk' files were found:  Continuing..."
 else
-	printf "%s\\n" "File 'Android.mk' found in directory '$PWD':  Continuing..."
+	printf "%s\\n" "File 'Android.mk' found:  Continuing..."
 	. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
 	_SLWTTSWN_ "$ANDROIDMK" | grep := | sort
 # 	ADMKVARS=( LOCAL_32_BIT_ONLY LOCAL_ADDITIONAL_DEPENDENCIES LOCAL_ARM_MODE LOCAL_CERTIFICATE LOCAL_CFLAGS LOCAL_CLANG LOCAL_CPPFLAGS LOCAL_CXX_STL LOCAL_C_INCLUDES LOCAL_EXPORT_C_INCLUDE_DIRS LOCAL_HAL_STATIC_LIBRARIES LOCAL_JNI_SHARED_LIBRARIES LOCAL_LDFLAGS LOCAL_MODULE LOCAL_MODULE_CLASS LOCAL_MODULE_PATH LOCAL_MODULE_RELATIVE_PATH LOCAL_MODULE_STEM_32 LOCAL_MODULE_STEM_64 LOCAL_MODULE_TAGS LOCAL_MULTILIB LOCAL_PACKAGE_NAME LOCAL_PATH LOCAL_PROTOC_OPTIMIZE_TYPE LOCAL_REQUIRED_MODULES LOCAL_SDK_VERSION LOCAL_SHARED_LIBRARIES LOCAL_SRC_FILES LOCAL_STATIC_LIBRARIES LOCAL_WHOLE_STATIC_LIBRARIES TOP_LOCAL_PATH )
 fi
-if [ -d jni ]
-then
-	_LIBDIR_
-	cd jni
-	NATEFILES="$(find . -type f -name "*.c*")"
-	_CLANGDOC_
-	cd ..
-	printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/$LIBDIR)"
-else
-	printf "%s\\n" "No 'jni' directory found in directory '$PWD':  Continuing..."
-fi
+_JNIDIR_
 # native.sh EOF
