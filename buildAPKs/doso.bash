@@ -65,6 +65,8 @@ _DOMAKES_() {
 if [[ -z "${AMKFS[@]:-}" ]] # is undefined
 then # no CMakeLists.txt files are found
 	printf "%s\\n" "No 'CMakeLists.txt' files were found: Continuing..."
+	. "$RDR"/scripts/bash/shlibs/buildAPKs/native.bash || printf "\\e[1;48;5;166m%s\\e[0m\\n" "Signal generated native.bash ${0##*/} doso.bash: Continuing..."
+        cd "$JDR"/output
 else # call cmake and make/ninja to build shared objects
 	[[ "${#AMKFS[@]}" = 1 ]] && printf "%s\\n" "Found ${#AMKFS[@]} 'CMakeLists.txt' file."
 	_DOMAKES_
