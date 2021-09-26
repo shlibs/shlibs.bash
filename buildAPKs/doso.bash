@@ -70,5 +70,6 @@ then # no CMakeLists.txt files are found
 else # call cmake and make/ninja to build shared objects
 	[[ "${#AMKFS[@]}" = 1 ]] && printf "%s\\n" "Found ${#AMKFS[@]} 'CMakeLists.txt' file."
 	_DOMAKES_
+	cd "$JDR"
 fi
 # doso.bash EOF
