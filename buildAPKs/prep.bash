@@ -33,14 +33,14 @@ _AFR_ () { # finds and removes superfluous directories and files
 	printf "\\e[?25h\\n\\e[1;48;5;102mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash: Processing elements in directory $WDIR: Please wait..."
 	for NAME in "${DLIST[@]}"
 	do
- 		find "$WDIR" -type d -name "$NAME" -exec rm -rf {} \; 2>/dev/null ||:
-		[ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum"
+ 		find "$WDIR" -type d -name "$NAME" -exec rm -rf {} \; 2>/dev/null
 	done
 	for NAME in "${FLIST[@]}"
 	do
-		(find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null && ([ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum" )) || :
+		(find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null && ([ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum" ))
 	done
-	printf "\\e[?25h\\n\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
+	[ -f "$JDR/sha512.sum" ] && { CWDIRPWD="$PWD" && cd "$JDR" && printf "\\e[1;2m%s" "Running 'sha512sum --quiet -c sha512.sum'; " && sha512sum --quiet -c sha512.sum && cd "$CWDIRPWD" && printf "\\e[1;32mDONE\\e[0m\\n" ; }
+	printf "\\e[?25h\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
 }
 
 _SIGNAL_ () {
