@@ -39,7 +39,7 @@ _AFR_ () { # finds and removes superfluous directories and files
 	do
 		(find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null && ([ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum" ))
 	done
-	[ ! -f "$RDR/var/lock/$JID.sha512.lock" ] && [ -f "$JDR/sha512.sum" ] && { CWDIRPWD="$PWD" && cd "$JDR" && printf "\\e[1;2m%s" "Running 'sha512sum --quiet -c sha512.sum' in directory '$PWD': $(sha512sum --quiet -c sha512.sum)" && cd "$CWDIRPWD" && touch "$RDR/var/lock/$JID.sha512.lock" && printf "\\e[1;32mDONE\\e[0m\\n" ; }
+	[ ! -f "$RDR/var/tmp/$JID.sha512.0" ] && [ -f "$JDR/sha512.sum" ] && { CWDIRPWD="$PWD" && cd "$JDR" && printf "\\e[1;2m%s" "Running 'sha512sum --quiet -c sha512.sum' in directory '$PWD': $(sha512sum --quiet -c sha512.sum)" && cd "$CWDIRPWD" && touch "$RDR/var/lock/$JID.sha512.lock" && printf "\\e[1;32mDONE\\e[0m\\n" ; }
 	printf "\\e[?25h\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
 }
 
@@ -58,6 +58,6 @@ _SIGNAL_ () {
 
 declare -a DLIST # declare array for all superfluous directories
 declare -a FLIST # declare array for all superfluous files
-DLIST=(".idea" "bin" "gen" "gradle" "obj" "out")
+DLIST=(".idea" "bin" "gen" "gradle" "obj" "out" "output")
 FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" ".gitignore" ".project" ".settings" "Android.kpf" "ant.properties" "app.iml" "build.gradle" "build.properties" "build.xml" "default.properties" "gradle-wrapper.jar" "gradle-wrapper.properties" "gradlew" "gradlew.bat" "gradle.properties" "gradle.xml" "lint.xml" "local.properties" "makefile.linux_pc" "org.eclipse.jdt.core.prefs" "pom.xml" "proguard.cfg" "proguard-project.txt" "proguard-rules.pro" "project.properties" "R.java" "settings.gradle" "WebRTCSample.iml")
 # prep.bash EOF
