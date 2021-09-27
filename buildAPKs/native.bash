@@ -22,11 +22,12 @@ _JNIDIR_() {
 		NATEFILES="$(find . -type f -name "*.c*")"
 		_CLANGDOC_
 		cd ..
-		printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/$LIBDIR)"
+		printf "%s\\n" "Running command 'ls output/lib/$LIBDIR': $(ls output/lib/"$LIBDIR")"
 	else
 	printf "%s\\n" "No 'jni' directory found: Continuing..."
 fi
 }
+
 _LIBDIR_() {
 	UNAMEM="$(uname -m)"
 	if [[ "$UNAMEM" = aarch64 ]]
@@ -54,12 +55,22 @@ _LIBDIR_() {
 	fi
 	[ -d output/lib/"$LIBDIR" ] || mkdir -p output/lib/"$LIBDIR"
 }
+
+_MAKEFILE_() {
+	MAKEFILES="$(find . -name "Makefile")"
+	for MAKEFILE in $MAKEFILES
+	do
+		MAKEFILEDIR="${MAKEFILE%/*}"
+		cd "$MAKEFILEDIR" && make linux
+	done
+}
 _LIBDIR_
 ANDROIDMK="$(find . -name "Android.mk")"
 if [ -z "$ANDROIDMK" ]
 then
 	printf "%s\\n" "No 'Android.mk' files were found: Continuing..."
 	_JNIDIR_
+	_MAKEFILE_
 else
 	printf "%s\\n" "File 'Android.mk' found: Continuing..."
 	. "$RDR"/scripts/sh/shlibs/trim.newline.slash.sh
