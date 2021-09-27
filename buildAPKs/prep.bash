@@ -39,7 +39,7 @@ _AFR_ () { # finds and removes superfluous directories and files
 	do
 		(find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null && ([ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum" ))
 	done
-	[ -f "$JDR/sha512.sum" ] && { CWDIRPWD="$PWD" && cd "$JDR" && printf "\\e[1;2m%s" "Running 'sha512sum --quiet -c sha512.sum' in derectory '$PWD': $(sha512sum --quiet -c sha512.sum)" && cd "$CWDIRPWD" && printf "\\e[1;32mDONE\\e[0m\\n" ; }
+	[ -f "$JDR/sha512.sum" ] && { CWDIRPWD="$PWD" && cd "$JDR" && printf "\\e[1;2m%s" "Running 'sha512sum --quiet -c sha512.sum' in directory '$PWD': $(sha512sum --quiet -c sha512.sum)" && cd "$CWDIRPWD" && printf "\\e[1;32mDONE\\e[0m\\n" ; }
 	printf "\\e[?25h\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
 }
 
