@@ -10,7 +10,7 @@ _IAR_ () {
 	then
 		if [[ -z "${WDIR:-}" ]]
 		then
-			if [[ ! -z "${JDR:-}" ]] && [[ ! -z "${SFX:-}" ]]
+			if [[ -n "${JDR:-}" ]] && [[ -n "${SFX:-}" ]]
 			then
 				export WDIR="$JDR/$SFX"
 			fi
@@ -34,10 +34,11 @@ _AFR_ () { # finds and removes superfluous directories and files
 	for NAME in "${DLIST[@]}"
 	do
  		find "$WDIR" -type d -name "$NAME" -exec rm -rf {} \; 2>/dev/null ||:
+		[ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum"
 	done
 	for NAME in "${FLIST[@]}"
 	do
-		find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null || : # _SIGNAL_ "87" "find \${FLIST[@]} _AFR_"
+		(find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null && ([ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum" )) || :
 	done
 	printf "\\e[?25h\\n\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
 }
