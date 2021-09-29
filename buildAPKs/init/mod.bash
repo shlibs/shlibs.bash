@@ -125,7 +125,7 @@ _GRUP_() {	# clone submodule as git repository
 			. "$JDR/ma.bash"
 		fi
 	else
-		( git submodule add --init --depth 1 https://"$JAD" "sources/${JDR##*/}" && _IAR_ || _GTSAM_ ) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
+		( ( git submodule update --init --depth 1 https://"$JAD" "sources/${JDR##*/}" || git submodule add --depth 1 https://"$JAD" "sources/${JDR##*/}" ) && _IAR_ || _GTSAM_ ) || printf "\\n\\n\\e[1;1;38;5;190m%s%s\\e[0m\\n" "CANNOT ADD ~/${RDR##*/}/sources/$JID:  Continuing..."
 		if [[ -f "$JDR/ma.bash" ]]
 		then
 			. "$JDR/ma.bash"
