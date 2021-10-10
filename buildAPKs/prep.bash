@@ -81,16 +81,17 @@ ONEDEP="${ONEDEP//\"/}"
 ONEDEP="${ONEDEP//\:/ }"
 _MCLOOKUP_ "$ONEDEP"
 done
-for DEPFILE in $(find . -maxdepth 1 -type f -name "*.*ar")
+ARTFILES="$(find . -maxdepth 1 -type f -name "*.*ar")"
+for DEPFILE in $ARTFILES
 do
 	if ! grep "Error 404" "$DEPFILE" 1>/dev/null
 	then
-		DEPFILELIST+=(${DEPFILE//.\//})
+		DEPFILELIST+=("${DEPFILE//.\//}")
 	fi
 done
 for DDEPFILE in "${DEPFILELIST[@]}"
 do
-	DEPDIR="res-$(cut -d"-" -f1 <<< $DDEPFILE)"
+	DEPDIR="res-$(cut -d"-" -f1 <<< "$DDEPFILE")"
 	[ -d "$RDR/var/cache/lib/$DEPDIR" ] || mkdir -p "$RDR/var/cache/lib/$DEPDIR" && cd "$RDR/var/cache/lib/$DEPDIR"
 	unzip -oqq "$RDR/var/cache/artifacts/$DDEPFILE" || :
 done
