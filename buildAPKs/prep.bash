@@ -67,7 +67,6 @@ _MCLOOKUP_(){
 GROUPID="$(cut -d" " -f1 <<< "$ONEDEP")"
 ARTIFACTID="$(cut -d" " -f2 <<< "$ONEDEP")"
 VERSION="$(cut -d" " -f3 <<< "$ONEDEP")"
-grep \$ <<< "$VERSION" 1>/dev/null && VERSION='latest'
 [ -f "${ARTIFACTID}-${VERSION}.aar" ] || curl -OL "https://maven.google.com/${GROUPID%%\.*}/${ARTIFACTID}/${ARTIFACTID}/${VERSION}/${ARTIFACTID}-${VERSION}.aar"
 [ -f "${ARTIFACTID}-${VERSION}.jar" ] || curl -OL "https://maven.google.com/${GROUPID%%\.*}/${ARTIFACTID}/${ARTIFACTID}/${VERSION}/${ARTIFACTID}-${VERSION}.jar"
 }
@@ -81,6 +80,18 @@ ONEDEP="${ONEDEP//\'/}"
 ONEDEP="${ONEDEP//\"/}"
 ONEDEP="${ONEDEP//\:/ }"
 _MCLOOKUP_ "$ONEDEP"
+done
+for DEPFILE in $(find . -maxdepth 1 -type f -name "*.*ar")
+do
+	if ! grep "Error 404" "$DEPFILE" 1>/dev/null
+	then
+		cp "$DEPFILE" "$RDR/var/cache/lib/"
+	fi
+done
+cd  "$RDR/var/cache/lib/"
+for DEPFILE in $(find . -maxdepth 1 -type f -name "*.*ar")
+do
+	unzip -oqq "$DEPFILE" || :
 done
 cd "$WDR"
 fi
