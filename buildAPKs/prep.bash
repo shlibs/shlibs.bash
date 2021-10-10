@@ -63,8 +63,10 @@ FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" ".gitignore" ".project" ".set
 LIBAU="$(awk 'NR==1' "$RDR/.conf/LIBAUTH")" # load true/false from .conf/LIBAUTH file.  File LIBAUTH has information about loading artifacts and libraries into the build process.
 if [[ "$LIBAU" == true ]]
 then	# find artifacts and libraries for the build process
-DEPSLIST=($(find . -name build.gradle -exec grep implementation {} \; | grep -v \/\/ | grep -v fileTree\( | grep -v project\( | grep -v Class | grep -v Deps | grep -v \= | sort | uniq))
-DEPSLIST=($(find . -name build.gradle -exec grep implementation {} \; | grep -v \/\/ | grep -v fileTree\( | grep -v project\( | grep -v Class | grep -v Deps | grep -v \= | sort | uniq))
-printf "%s\\n" "${DEPSLIST[@]}"
+DEPSLIST="$(find . -name build.gradle -exec grep implementation {} \; | grep -v \/\/ | grep -v fileTree\ \( | grep -v project\ \( | grep -v fileTree\( | grep -v project\( | grep -v Class | grep -v Deps | grep -v \= | sort | uniq)"
+DEPSLIST="${DEPSLIST//implementation/}"
+DEPSLIST="${DEPSLIST//\'/}"
+DEPSLIST="${DEPSLIST//\"/}"
+printf "%s\\n" "$DEPSLIST"
 fi
 # prep.bash EOF
