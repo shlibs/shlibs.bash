@@ -63,10 +63,25 @@ FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" ".gitignore" ".project" ".set
 LIBAU="$(awk 'NR==1' "$RDR/.conf/LIBAUTH")" # load true/false from .conf/LIBAUTH file.  File LIBAUTH has information about loading artifacts and libraries into the build process.
 if [[ "$LIBAU" == true ]]
 then	# find artifacts and libraries for the build process
+_MCLOOKUP_(){
+GROUPID="$(cut -d" " -f1 <<< "$ONEDEP")"
+ARTIFACTID="$(cut -d" " -f2 <<< "$ONEDEP")"
+VERSION="$(cut -d" " -f3 <<< "$ONEDEP")"
+grep \$ <<< "$VERSION" 1>/dev/null && VERSION='latest'
+[ -f "${ARTIFACTID}-${VERSION}.aar" ] || curl -OL "https://maven.google.com/${GROUPID%%\.*}/${ARTIFACTID}/${ARTIFACTID}/${VERSION}/${ARTIFACTID}-${VERSION}.aar"
+[ -f "${ARTIFACTID}-${VERSION}.jar" ] || curl -OL "https://maven.google.com/${GROUPID%%\.*}/${ARTIFACTID}/${ARTIFACTID}/${VERSION}/${ARTIFACTID}-${VERSION}.jar"
+}
 DEPSLIST="$(find . -name build.gradle -exec grep implementation {} \; | grep -v \/\/ | grep -v fileTree\ \( | grep -v project\ \( | grep -v fileTree\( | grep -v project\( | grep -v Class | grep -v Deps | grep -v \= | sort | uniq)"
-DEPSLIST="${DEPSLIST//implementation/}"
-DEPSLIST="${DEPSLIST//\'/}"
-DEPSLIST="${DEPSLIST//\"/}"
-printf "%s\\n" "$DEPSLIST"
+WDR="$PWD"
+([ -d "$RDR/var/cache/artifacts" ] || mkdir -p "$RDR/var/cache/artifacts") && cd "$RDR/var/cache/artifacts"
+for ONEDEP in $DEPSLIST
+do
+ONEDEP="${ONEDEP//implementation/}"
+ONEDEP="${ONEDEP//\'/}"
+ONEDEP="${ONEDEP//\"/}"
+ONEDEP="${ONEDEP//\:/ }"
+_MCLOOKUP_ "$ONEDEP"
+done
+cd "$WDR"
 fi
 # prep.bash EOF
