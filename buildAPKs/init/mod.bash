@@ -66,7 +66,7 @@ _MAINMODS_ () {
 	. "$RDR"/scripts/sh/shlibs/mkfiles.sh
 	. "$RDR"/scripts/sh/shlibs/mkdirs.sh
 	# create directories in RDR if not exist
-	_MKDIRS_ "bin" "opt" "tmp" "var/cache/lib" "var/cache/lib/res-appcompat" "var/cache/lib/res-cardview" "var/cache/lib/res-design" "var/cache/lib/res-recyclerview" "var/cache/stash" "var/cache/tarballs" "var/db" "var/db/log" "var/lock" "var/log/github/orgs" "var/log/github/users" "var/log/messages" "var/log/messages" "var/run/lock/auth" "var/run/lock/wake" "var/tmp"
+	_MKDIRS_ "bin" "opt" "tmp"  "var/cache/artifacts" "var/cache/lib" "var/cache/lib/res-appcompat" "var/cache/lib/res-cardview" "var/cache/lib/res-design" "var/cache/lib/res-recyclerview" "var/cache/stash" "var/cache/tarballs" "var/db" "var/db/log" "var/lock" "var/log/github/orgs" "var/log/github/users" "var/log/messages" "var/log/messages" "var/run/lock/auth" "var/run/lock/wake" "var/tmp"
 	# create files in RDR/var if not exist
 	_MKVFILES_ "db/BNAMES" "db/B10NAMES" "db/B100NAMES" "db/ENAMES" "db/GNAMES" "db/QNAMES" "db/XNAMES" "db/YNAMES" "db/ZNAMES"
 	# create symlinks in RDR if not exist
