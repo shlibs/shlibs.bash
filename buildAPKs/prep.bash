@@ -70,7 +70,7 @@ VERSION="$(cut -d" " -f3 <<< "$ONEDEP")"
 [ -f "${ARTIFACTID}-${VERSION}.aar" ] || curl -OL "https://maven.google.com/${GROUPID%%\.*}/${ARTIFACTID}/${ARTIFACTID}/${VERSION}/${ARTIFACTID}-${VERSION}.aar"
 [ -f "${ARTIFACTID}-${VERSION}.jar" ] || curl -OL "https://maven.google.com/${GROUPID%%\.*}/${ARTIFACTID}/${ARTIFACTID}/${VERSION}/${ARTIFACTID}-${VERSION}.jar"
 }
-DEPSLIST="$(find . -name build.gradle -exec grep implementation {} \; | grep -v \/\/ | grep -v fileTree\ \( | grep -v project\ \( | grep -v fileTree\( | grep -v project\( | grep -v Class | grep -v Deps | grep -v \= | sort | uniq)"
+DEPSLIST="$(find . -name build.gradle -exec grep -e compile -e implementation {} \; | grep -v \/\/ | grep -v fileTree\ \( | grep -v project\ \( | grep -v fileTree\( | grep -v project\( | grep -v Class | grep -v Deps | grep -v \= | sort | uniq)"
 WDR="$PWD"
 ([ -d "$RDR/var/cache/artifacts" ] || mkdir -p "$RDR/var/cache/artifacts") && cd "$RDR/var/cache/artifacts"
 for ONEDEP in $DEPSLIST
