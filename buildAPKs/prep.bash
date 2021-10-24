@@ -69,7 +69,7 @@ _SIGNAL_ () {
 declare -a DLIST # declare array for all superfluous directories
 declare -a FLIST # declare array for all superfluous files
 DLIST=(".idea" "bin" "gen" "gradle" "obj" "out" "output")
-FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" ".gitignore" ".project" ".settings" "Android.kpf" "ant.properties" "app.iml" "build.properties" "build.xml" "default.properties" "gradle-wrapper.jar" "gradle-wrapper.properties" "gradlew" "gradlew.bat" "gradle.properties" "gradle.xml" "lint.xml" "local.properties" "makefile.linux_pc" "org.eclipse.jdt.core.prefs" "pom.xml" "proguard.cfg" "proguard-project.txt" "proguard-rules.pro" "project.properties" "R.java" "settings.gradle" "WebRTCSample.iml")
+FLIST=("*-debug.key" "*.apk"  "*.aar" ".classpath" ".gitignore" ".project" ".settings" "Android.kpf" "ant.properties" "app.iml" "build.properties" "default.properties" "gradle-wrapper.jar" "gradle-wrapper.properties" "gradlew" "gradlew.bat" "gradle.properties" "gradle.xml" "lint.xml" "local.properties" "makefile.linux_pc" "org.eclipse.jdt.core.prefs" "pom.xml" "proguard.cfg" "proguard-project.txt" "proguard-rules.pro" "project.properties" "R.java" "settings.gradle" "WebRTCSample.iml")
 LIBAU="$(awk 'NR==1' "$RDR/.conf/LIBAUTH")" # load true/false from .conf/LIBAUTH file.  File LIBAUTH has information about loading artifacts and libraries into the build process.
 if [[ "$LIBAU" == true ]]
 then	# find and download artifacts and libraries for the build process
