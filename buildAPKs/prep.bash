@@ -37,7 +37,7 @@ _AFR_ () { # finds and removes superfluous directories and files
 	done
 	for NAME in "${FLIST[@]}"
 	do
-		[ -n "${JDR:-}" ] && (find "$WDIR" -type f -name "$NAME" -delete 2>/dev/null && ([ -f "$JDR/sha512.sum" ] && grep "$NAME" "$JDR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$JDR/sha512.sum" ))
+		find "$WDIR" -type f -name "$NAME" -delete && ([ -f "$WDIR/sha512.sum" ] && grep "$NAME" "$WDIR/sha512.sum" 1>/dev/null && sed -i "/$NAME/d" "$WDIR/sha512.sum" )
 	done
 	[ -n "${JDR:-}" ] && [ ! -f "$RDR/var/tmp/$JID.sha512.0" ] && [ -f "$JDR/sha512.sum" ] && { CWDIRPWD="$PWD" && cd "$JDR" && printf "\\e[1;2m%s" "Running 'sha512sum --quiet -c sha512.sum' in directory '$PWD': $(sha512sum --quiet -c sha512.sum)" && cd "$CWDIRPWD" && touch "$RDR/var/tmp/$JID.sha512.0" && printf "\\e[1;32mDONE\\e[0m\\n" ; }
 	_DLGDIRS_ || _SIGNAL_ "84" "_DLGDIRS_ _IAR_"
