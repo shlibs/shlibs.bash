@@ -27,6 +27,7 @@ _IAR_ () {
 		export WDIR="$1"
 	fi
 	_AFR_ || _SIGNAL_ "84" "_AFR_ _IAR_"
+	_DLGDIRS_ || _SIGNAL_ "84" "_DLGDIRS_ _IAR_"
 }
 
 _AFR_ () { # finds and removes superfluous directories and files
@@ -44,12 +45,12 @@ _AFR_ () { # finds and removes superfluous directories and files
 }
 
 _DLGDIRS_ () {	# delete '.git' directories
-	find "$RDR"/sources/ -type d -name \.git > "$RDR"/tmp/del.dirs.file
-	grep -v '^ *#' < "$RDR"/tmp/del.dirs.file | while IFS= read -r DELDIR
+	find "$WDIR" -type d -name \.git > "$RDR"/tmp/del.dirs.$$.file
+	grep -v '^ *#' < "$RDR"/tmp/del.dirs.$$.file | while IFS= read -r DELDIR
 	do
-	rm -rf "$DELDIR" && printf '%s\n' "Deleted directory '$DELDIR '."
+		rm -rf "$DELDIR" && printf '%s\n' "Deleted directory '$DELDIR '."
 	done
-	rm  -f "$RDR"/tmp/del.dirs.file
+	rm  -f "$RDR"/tmp/del.dirs.$$.file
 }
 
 _SIGNAL_ () {
