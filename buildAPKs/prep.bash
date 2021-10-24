@@ -43,6 +43,15 @@ _AFR_ () { # finds and removes superfluous directories and files
 	printf "\\e[?25h\\e[1;48;5;101mBuildAPKs %s\\e[0m\\n" "${0##*/} prep.bash $WDIR: DONE"
 }
 
+_DLGDIRS_ () {	# delete '.git' directories
+	find "$RDR"/sources/ -type d -name \.git > "$RDR"/tmp/del.dirs.file
+	grep -v '^ *#' < "$RDR"/tmp/del.dirs.file | while IFS= read -r DELDIR
+	do
+	rm -rf "$DELDIR" && printf '%s\n' "Deleted directory '$DELDIR '."
+	done
+	rm  -f "$RDR"/tmp/del.dirs.file
+}
+
 _SIGNAL_ () {
  	if [[ -z ${3:-} ]]
 	then
