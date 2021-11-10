@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+# Copyright 2017-2021 by SDRausty. All rights reserved, see LICENSE 🌎 🌍 🌏
+# Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
+# https://sdrausty.github.io/TermuxArch/README has info about this project.
+# https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+### Example usage: 'cams 0 255 16 2048 r 90 2'
+### Loop example: 'while true ; do cams ; done'
+### Semantics: [camid [totalframes+1 [framespersecond [threshold [r[otate] [degrees [exitwait]]]]]]]
+### Please run 'pkg install ffmpeg imagemagick termux-api' before running this script.  Also ensure that Termux-api is installed, which is available at this https://github.com/termux/termux-api/actions/workflows/debug_build.yml webpage.
+### VLC media player APK can be downloaded from these https://www.videolan.org/vlc/download-android.html and https://get.videolan.org/vlc-android/3.3.4/ webpages.
+### More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
+### All seven arguments are listed below, including their default values;  If run with no arguments, the default values will be used:
+##############################################################################
+
+set -Eeuo pipefail
+shopt -s nullglob globstar
+unset LD_PRELOAD
+VERSIONID=2.0.1355
+
+_TRPERR_() {  # run on script error
+	local RV="$?"
+	printf "\\e[?25h\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "TermuxArch WARNING:  Generated script signal ${RV:-UNKNOWN} near or at line number ${1:-UNKNOWN} by '${2:-UNKNOWNCOMMAND}'!"
+	exit 201
+}
+
+
+_TRPET_() {  # run on exit
+	local RV="$?"
+	printf ""
+	if [[ "$RV" = 0 ]]
+	then
+		printf "\\e[0;32m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $ARGS $VERSIONID" "DONE 🏁 "
+		printf "\\e]2; %s: %s \007" "${0##*/} $ARGS" "DONE 🏁 "
+	else
+		printf "\\e[0;32m%s \\e[0m%s\\e[1;34m: \\e[1;32m%s\\e[0m\\n\\e[0m" "${0##*/} $ARGS $VERSIONID" "[Exit Signal $RV]" "DONE  🏁 "
+		printf "\033]2; %s: %s %s \007" "${0##*/} $ARGS" "[Exit Signal $RV]" "DONE 🏁 "
+	fi
+	printf "\e[?25h\e[0m"
+	set +Eeuo pipefail
+	exit
+}
+
+_TRPSIG_() {  # run on signal
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Signal %s received!\\e[0m\\n" "$?"
+	exit 211
+}
+
+_TRPQ_() {  # run on quit
+	printf "\\e[?25h\\e[1;7;38;5;0mTermuxArch WARNING:  Quit signal %s received!\\e[0m\\n" "$?"
+	exit 221
+}
+ARGS="$@"
+trap '_TRPERR_ $LINENO $BASH_COMMAND $?' ERR
+trap _TRPET_ EXIT
+trap _TRPSIG_ HUP INT TERM
+trap _TRPQ_ QUIT
+
+[[ -n "${1:-}" ]] && { [[ "${1//-}" = [\/]* ]] || [[ "${1//-}" = [?]* ]] || [[ "${1//-}" = [Hh]* ]] ; } && { printf '\e[1;32m%s\n' "Help for '${0##*/}':" && TSFILE="($(grep '##\ ' "$0"))" && printf '\e[0;32m%s\e[1;32m\n%s\n' "$(for HL in "${TSFILE[@]}" ; do cut -d\) -f1 <<< "${HL//###/	}" | cut -f 2 ; done )" "Help for '${0##*/}': DONE" ; exit ; }
+[[ -n "${1:-}" ]] && { [[ "${1//-}" = [Pp]* ]] && POCKET=0 && CAMID=2 && echo pocket || CAMID=${1:-2} ; }
+[[ -z "${1:-}" ]] && CAMID=2 ### [1] default 2:  One camera 0 1 2 3 4 5 6 7 id,
+FRAMECTOT=${2:-11} ### [2] default 11:  Total frame count + 1,
+FRAMERATE=${3:-1} ### [3] default 1:  Video 0.5 1 2 4 8 16 32 frames per second rendered in the mpg file,
+THRESHOLDSET=${4:-256} ### [4] default 256:  Byte difference 64 128 256 512 1024 2048 4096 8192 16384 32768 65536 between last two picture frames taken;  Can be used for motion detection.  The greater the number, the lesser the sensitivity.  Camera resolution also affects this argument,
+_CAMS_ () {
+while [ "$FRAMECOUNT" -le "$FRAMECTOT" ]
+do
+{ [[ "${POCKET:-}" == 0 ]] && _CAMSSENSORS_ "$@" ; } || _CAMSCORE_ "$@"
+done
+}
+_CAMSSENSORS_ () {
+ITSENSOR="$(termux-sensor -n 1 -s "IN_POCKET" | grep 1|| printf 0)"
+PYSENSOR="$(termux-sensor -n 1 -s "PROXIMITY" | grep 1|| printf 0)"
+if [ "${ITSENSOR//,}" -eq 1 ] || [ "$PYSENSOR" -eq 1 ]
+then
+_CAMSCORE_ "$@"
+else
+printf '\e[0;36m%s\e[0m\n' "IM sensors wait; sleeping."
+sleep 4
+fi
+}
+_CAMSCORE_ () {
+FRAMENAME="camid$(printf '%s.%04d.jpg' "$CAMID" "$FRAMECOUNT")"
+printf '\e[0;32m%s\e[1;32m%s\e[0;32m%s\e[1;32m%s\e[0;32m%s\n\e[0;32m%s' "IT " "$((FRAMECOUNT + 1))/$((FRAMECTOT + 1))" " frame count: " "${THRESHOLDSET:-}" " threshold set" "IP camid $CAMID taking picture $FRAMENAME: "
+touch "$PWD/$FRAMENAME"
+sleep 0.42 # Adjust for device being used; This sleep may be unnecessary.
+"${PREFIX:-/data/data/com.termux/files/usr}"/libexec/termux-api CameraPhoto --es camera "$CAMID" --es file "$PWD/$FRAMENAME"
+printf '\e[0;32m%s\n' "DONE"
+_ISZERO_ "$@"
+}
+_CHECKMOTIONDIFF_() {
+if [ "$FRAMECOUNT" -ne 0 ]
+then
+THRESHOLD="$((LASTZERO - ISZERO))"
+THRESHOLD="${THRESHOLD//-}"
+if [ "$THRESHOLD" -le "$THRESHOLDSET" ]
+then
+printf '\e[0;2m%s\n' "ID $THRESHOLD/$THRESHOLDSET threshold: deleting file $FRAMENAME"
+rm -f "$FRAMENAME"
+OLDISZERO="$ISZERO"
+fi
+fi
+}
+_ISZERO_ () {
+if [ -n "${ISZERO:-}" ]
+then
+LASTZERO="$ISZERO"
+fi
+ISZERO="$(find . -type f -name "$FRAMENAME" -printf "%s")"
+printf '\e[0;36m%s\e[1;36m%s\n' "IS framename $FRAMENAME size: " "$ISZERO"
+if [ "$ISZERO" -eq 0 ]
+then
+ISZERO="${OLDISZERO:-}"
+printf '\e[0;33m%s' "E0 deleting zero size file $FRAMENAME: "
+rm -f "$FRAMENAME"
+printf '\e[0;32m%s\n' "DONE"
+E0VAR=1
+fi
+if [[ ${E0VAR:-} == 0 ]]
+then
+_CHECKMOTIONDIFF_
+_MAGICKCK_ "$@"
+else
+E0VAR=0
+fi
+}
+_MAKEDIRS_ () {
+CAMD="camid$CAMID"
+[ -e "output/$CAMD/$CAMD$TIMESTAMP" ] || { printf '\e[0;36m%s' "IM mkdir -p output/$CAMD/$CAMD$TIMESTAMP: " && mkdir -p output/"$CAMD/$CAMD$TIMESTAMP" && printf '\e[0;32m%s\n' "DONE"; }
+[ -e output/gifs/"$CAMD" ] || { printf '\e[0;36m%s' "IM mkdir -p output/gifs/$CAMD: " && mkdir -p output/gifs/"$CAMD" && printf '\e[0;32m%s\n' "DONE"; }
+[ -e output/webms/"$CAMD" ] || { printf '\e[0;36m%s' "IM mkdir -p output/webms/$CAMD: " && mkdir -p output/webms/"$CAMD" && printf '\e[0;32m%s\n' "DONE"; }
+printf '\e[0;36m%s' "IM cd output/$CAMD/$CAMD$TIMESTAMP: " && cd output/"$CAMD/$CAMD$TIMESTAMP" && printf '\e[0;32m%s\n' "DONE"
+}
+_MAGICKCK_ () {
+if [ -e "$FRAMENAME" ]
+then
+printf '\e[0;36m%s' "IC checking file $FRAMENAME for errors: "
+MAGICKCK="$(nice -n 20 magick identify "$FRAMENAME" 2>&1 ||:)"
+if grep -i error <<< "$MAGICKCK"
+then
+printf '\e[0;31m%s\e[0m\n' "ERROR"
+rm -f "$FRAMENAME"
+printf '\e[0;31m%s\n\e[0;36m%s\n' "ED deleted file $FRAMENAME: ERROR" "IR redoing file $FRAMENAME..."
+else
+printf '\e[0;32m%s\n' "DONE"
+FRAMECOUNT="$((FRAMECOUNT + 1))"
+printf '\e[0;32m%s\e[1;32m%s\e[0;32m%s\n' "IF " "file $FRAMENAME added" " to que."
+if [ -n "${5:-}" ]
+then
+if [[ "${5//-}" = [Rr]* ]] ### [5] default no rotation:  R|r[otate]: useful for portrait orientation.  You can use R or r to activate rotation which is preset to 90° rotation.  The sixth argument can be used to enter a rotation angle instead of the preset 90° rotation,
+then
+printf '\e[0;36m%s' "IR rotating file $FRAMENAME by ${6:-90}°: " ### [6] default 90°:  Enter desired picture rotation angle in digits if you want to use 180° and 270° degree rotation.  Other rotation angles can also be used,
+nice -n 20 magick "$FRAMENAME" -rotate "${6:-90}" "$FRAMENAME".jpg
+mv "$FRAMENAME".jpg "$FRAMENAME"
+printf '\e[0;32m%s\n' "DONE"
+fi
+fi
+fi
+fi
+}
+_MECONVERT_ () {
+printf '\e[0;36m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.gif: This job will complete in the background..." && nice -n 20 convert -delay "$((FRAMERATE * 100))" -loop 0 "$CAMD."*.jpg "$CAMD.$TIMESTAMP".gif && { ls -al "$CAMD.$TIMESTAMP".gif && printf '\e[0;32m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.gif: DONE" ; } || printf '\e[1;31m%s\e[0m\n' "EM creating camid$CAMID.$TIMESTAMP.gif: ERROR"
+printf '\e[0;36m%s' "IM mv camid$CAMID.$TIMESTAMP.gif ../../gifs/$CAMD: " && mv "$CAMD.$TIMESTAMP".gif ../../gifs/$CAMD && printf '\e[0;32m%s\e[0m\n' "DONE"
+}
+_MEFFMPEG_ () {
+# To start at frame 20 and finish at frame 420: ffmpeg -start_number 20 -i filename%04d.jpg -vframes 400 video.webm
+printf '\e[0;36m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.webm: This job will complete in the background..." && nice -n 20 ffmpeg -framerate "$FRAMERATE" -i "$CAMD."%04d.jpg -movflags +faststart -c:v libvpx-vp9 -g 25 "$CAMD.$TIMESTAMP".webm && { ls -al "$CAMD.$TIMESTAMP".webm && printf '\e[0;32m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.webm: DONE" ; } || printf '\e[1;31m%s\e[0m\n' "EM creating camid$CAMID.$TIMESTAMP.webm: ERROR"
+printf '\e[0;36m%s' "IM mv camid$CAMID.$TIMESTAMP.webm ../../webm/$CAMD : " && mv "$CAMD.$TIMESTAMP".webm ../../webms/$CAMD && printf '\e[0;32m%s\e[0m\n' "DONE"
+}
+printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s' "Starting command " "termux-wake-lock" ": "
+printf '%s' "Created by ${0##*/}, available at https://github.com/TermuxArch/TermuxArch/blob/master/archlinuxconfig.bash#L58" > "$TMPDIR/${0##*/}".wake.lock
+am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null && printf '\e[0;32m%s\n\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "DONE" "Command " "termux-wake-unlock" " stops the wake lock." || printf '\e[0;33m%s\e[0m\n' "UTP am startservice: Continuing..."
+E0VAR=0
+FRAMECOUNT=0
+TIMESTAMP="$(date +%Y%m%d%H%M%S)"
+_MAKEDIRS_ "${1:-2}"
+_CAMS_ "$@"
+_MECONVERT_ &
+_MEFFMPEG_ &
+sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Programs 'convert' and 'ffmpeg' will continue to run in the background until their jobs of producing animated gif and webm files ends.  This sleep is used so the jpg files can be read by 'convert' and 'ffmpeg' if this script is used within a loop, as in the example above.
+PSAUX="($(ps aux))"
+PSAUX="$(grep -e convert -e ffmpeg <<< "${PSAUX[@]}" | cut -d":" -f 2-9999 | cut -d " " -f 2-9999 ||:)"
+printf '\e[0;34m%s\e[1;36m%s\n\e[1;32m%s\n' "IM " "running these background jobs:" "${PSAUX[@]}"
+printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "IM " "ps aux" " shows processes running."
+printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "The command " "termux-wake-unlock" " stops the wake lock."
+# cams EOF
