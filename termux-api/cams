@@ -145,6 +145,7 @@ then
 if [[ "${5//-}" = [Rr]* ]] ### [5] default no rotation:  R|r[otate]: useful for portrait orientation.  You can use R or r to activate rotation which is preset to 90° rotation.  The sixth argument can be used to enter a rotation angle instead of the preset 90° rotation,
 then
 printf '\e[0;36m%s' "IR rotating file $FRAMENAME by ${6:-90}°: " ### [6] default 90°:  Enter desired picture rotation angle in digits if you want to use 180° and 270° degree rotation.  Other rotation angles can also be used,
+# More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
 nice -n 20 magick "$FRAMENAME" -rotate "${6:-90}" "$FRAMENAME".jpg
 mv "$FRAMENAME".jpg "$FRAMENAME"
 printf '\e[0;32m%s\n' "DONE"
@@ -164,10 +165,9 @@ printf '\e[0;36m%s' "IM mv camid$CAMID.$TIMESTAMP.webm ../../webm/$CAMD : " && m
 }
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s' "Starting command " "termux-wake-lock" ": "
 am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null && printf '\e[0;32m%s\n\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "DONE" "Command " "termux-wake-unlock" " stops the wake lock." || printf '\e[0;33m%s\e[0m\n' "UTP am startservice: Continuing..."
-## Please run 'pkg install ffmpeg imagemagick termux-api' before running this script.  Also ensure that Termux-api is installed, which is available at this https://github.com/termux/termux-api/actions/workflows/debug_build.yml webpage.
-## VLC media player APK can be downloaded from these https://www.videolan.org/vlc/download-android.html and https://get.videolan.org/vlc-android/3.3.4/ webpages.
-## More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
-{ command -v magick 1>/dev/null && command -v ffmpeg 1>/dev/null && ls $PREFIX/libexec/termux-api 1>/dev/null 2>/dev/null ; } || pkg install ffmpeg imagemagick termux-api
+# Please run 'pkg install ffmpeg imagemagick termux-api' before running this script.  Also ensure that Termux-api is installed, which is available at this https://github.com/termux/termux-api/actions/workflows/debug_build.yml webpage.
+{ command -v magick 1>/dev/null && command -v ffmpeg 1>/dev/null && ls $PREFIX/libexec/termux-api >/dev/null 2>&1 ; } || pkg install ffmpeg imagemagick termux-api
+# VLC media player APK can be downloaded from these https://www.videolan.org/vlc/download-android.html and https://get.videolan.org/vlc-android/3.3.4/ webpages.
 E0VAR=0
 FRAMECOUNT=0
 TIMESTAMP="$(date +%Y%m%d%H%M%S)"
