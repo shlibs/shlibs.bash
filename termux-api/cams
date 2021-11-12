@@ -5,11 +5,7 @@
 # https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
 ### Example usage: 'cams 0 255 16 2048 r 90 2'
 ### Loop example: 'while true ; do cams ; done'
-### Semantics: [camid [totalframes+1 [framespersecond [threshold [r[otate] [degrees [exitwait]]]]]]]
-### Please run 'pkg install ffmpeg imagemagick termux-api' before running this script.  Also ensure that Termux-api is installed, which is available at this https://github.com/termux/termux-api/actions/workflows/debug_build.yml webpage.
-### VLC media player APK can be downloaded from these https://www.videolan.org/vlc/download-android.html and https://get.videolan.org/vlc-android/3.3.4/ webpages.
-### More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
-### All seven arguments are listed below, including their default values;  If run with no arguments, the default values will be used:
+### All seven arguments are listed here, including their default values;  If run with no arguments, the default values will be used:
 ##############################################################################
 
 set -Eeuo pipefail
@@ -167,8 +163,11 @@ printf '\e[0;36m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.webm: This job will
 printf '\e[0;36m%s' "IM mv camid$CAMID.$TIMESTAMP.webm ../../webm/$CAMD : " && mv "$CAMD.$TIMESTAMP".webm ../../webms/$CAMD && printf '\e[0;32m%s\e[0m\n' "DONE"
 }
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s' "Starting command " "termux-wake-lock" ": "
-printf '%s' "Created by ${0##*/}, available at https://github.com/TermuxArch/TermuxArch/blob/master/archlinuxconfig.bash#L58" > "$TMPDIR/${0##*/}".wake.lock
 am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null && printf '\e[0;32m%s\n\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "DONE" "Command " "termux-wake-unlock" " stops the wake lock." || printf '\e[0;33m%s\e[0m\n' "UTP am startservice: Continuing..."
+## Please run 'pkg install ffmpeg imagemagick termux-api' before running this script.  Also ensure that Termux-api is installed, which is available at this https://github.com/termux/termux-api/actions/workflows/debug_build.yml webpage.
+## VLC media player APK can be downloaded from these https://www.videolan.org/vlc/download-android.html and https://get.videolan.org/vlc-android/3.3.4/ webpages.
+## More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
+{ command -v magick 1>/dev/null && command -v ffmpeg 1>/dev/null && ls $PREFIX/libexec/termux-api 1>/dev/null 2>/dev/null ; } || pkg install ffmpeg imagemagick termux-api
 E0VAR=0
 FRAMECOUNT=0
 TIMESTAMP="$(date +%Y%m%d%H%M%S)"
@@ -182,4 +181,5 @@ printf '\e[0;34m%s\e[1;36m%s\n\e[1;32m%s\n' "IM " "running these background jobs
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "IM " "ps aux" " shows processes running."
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\e[0m\n' "The command " "termux-wake-unlock" " stops the wake lock."
 sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Programs 'convert' and 'ffmpeg' will continue to run in the background until their jobs of producing animated gif and webm files ends.  This sleep is used so the jpg files can be read by 'convert' and 'ffmpeg' if this script is used within a loop, as in the example above.
+### Semantics: [camid [totalframes+1 [framespersecond [threshold [r[otate] [degrees [exitwait]]]]]]]
 # cams EOF
