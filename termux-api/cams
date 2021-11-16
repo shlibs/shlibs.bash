@@ -167,14 +167,14 @@ fi
 fi
 }
 _MECONVERT_ () {
-printf '\e[0;36m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.gif: This job will complete in the background..." && nice -n 20 ffmpeg -i "$CAMD."%04d.jpg camid"$CAMD.$TIMESTAMP".gif && { ls -al camid"$CAMD.$TIMESTAMP".gif && printf '\e[0;32m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.gif: DONE" ; } || printf '\e[1;31m%s\e[0m\n' "EM creating camid$CAMID.$TIMESTAMP.gif: ERROR"
-printf '\e[0;36m%s' "IM mv camid$CAMID.$TIMESTAMP.gif ../gifs/: " && mv camid"$CAMD.$TIMESTAMP".gif ../gifs/ && printf '\e[0;32m%s\e[0m\n' "DONE"
+printf '\e[0;36m%s\e[0m\n' "IM making $CAMID.$TIMESTAMP.gif: This job will complete in the background..." && nice -n 20 convert -delay "$((FRAMERATE * 100))" -loop 0 "$CAMD."*.jpg "$CAMD.$TIMESTAMP".gif && { ls -al "$CAMD.$TIMESTAMP".gif && printf '\e[0;32m%s\e[0m\n' "IM making $CAMID.$TIMESTAMP.gif: DONE" ; } || printf '\e[1;31m%s\e[0m\n' "EM creating $CAMID.$TIMESTAMP.gif: ERROR"
+printf '\e[0;36m%s' "IM mv $CAMID.$TIMESTAMP.gif ../gifs/: " && mv "$CAMD.$TIMESTAMP".gif ../gifs/ && printf '\e[0;32m%s\e[0m\n' "DONE"
 }
 _MEFFMPEG_ () {
 #ffmpeg -i "$CAMD."%04d.jpg -c:v libx264 -preset veryslow -crf 0 output.mkv
 # To start at frame 20 and finish at frame 420: ffmpeg -start_number 20 -i filename%04d.jpg -vframes 400 video.webm
-printf '\e[0;36m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.mp4: This job will complete in the background..." && nice -n 20 ffmpeg -framerate "$FRAMERATE" -i "$CAMD."%04d.jpg  -c:v libx264 -preset veryslow -crf 0 -g 1 camid"$CAMD.$TIMESTAMP".mp4 && { ls -al camid"$CAMD.$TIMESTAMP".mp4 && printf '\e[0;32m%s\e[0m\n' "IM making camid$CAMID.$TIMESTAMP.mp4: DONE" ; } || printf '\e[1;31m%s\e[0m\n' "EM creating camid$CAMID.$TIMESTAMP.mp4: ERROR"
-printf '\e[0;36m%s' "IM mv camid$CAMID.$TIMESTAMP.mp4 ../mp4s/: " && mv camid"$CAMD.$TIMESTAMP".mp4 ../mp4s/ && printf '\e[0;32m%s\e[0m\n' "DONE"
+printf '\e[0;36m%s\e[0m\n' "IM making $CAMID.$TIMESTAMP.mp4: This job will complete in the background..." && nice -n 20 ffmpeg -framerate "$FRAMERATE" -i "$CAMD."%04d.jpg  -c:v libx264 -preset veryslow -crf 0 -g 1 "$CAMD.$TIMESTAMP".mp4 && { ls -al "$CAMD.$TIMESTAMP".mp4 && printf '\e[0;32m%s\e[0m\n' "IM making $CAMID.$TIMESTAMP.mp4: DONE" ; } || printf '\e[1;31m%s\e[0m\n' "EM creating $CAMID.$TIMESTAMP.mp4: ERROR"
+printf '\e[0;36m%s' "IM mv $CAMID.$TIMESTAMP.mp4 ../mp4s/: " && mv "$CAMD.$TIMESTAMP".mp4 ../mp4s/ && printf '\e[0;32m%s\e[0m\n' "DONE"
 }
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s' "Starting command " "termux-wake-lock" ": "
 am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null && printf '\e[0;32m%s\n\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "DONE" "Command " "termux-wake-unlock" " stops the wake lock." || printf '\e[0;33m%s\e[0m\n' "UTP am startservice: Continuing..."
