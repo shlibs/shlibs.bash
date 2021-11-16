@@ -194,5 +194,5 @@ printf '\e[0;34m%s\e[1;36m%s\n\e[1;32m%s\n' "IM " "running these background jobs
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "IM " "ps aux" " shows processes running."
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\e[0m\n' "The command " "termux-wake-unlock" " stops the wake lock."
 sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Program 'ffmpeg' will continue to run in the background until its job of producing an animated gif and mpg file ends.
-### Semantics: [camid [totalframes+1 [framespersecond [threshold [r[otate] [degrees [exitwait]]]]]]]
+### Semantics: camid totalframes+1 framespersecond threshold rotate degrees exitwait
 # cams EOF
