@@ -54,13 +54,13 @@ trap _TRPQ_ QUIT
 # show help
 [[ -n "${1:-}" ]] && { [[ "${1//-}" = [\/]* ]] || [[ "${1//-}" = [?]* ]] || [[ "${1//-}" = [Hh]* ]] ; } && { printf '\e[1;32m%s\n' "Help for '${0##*/}':" && TSFILE="($(grep '##\ ' "$0"))" && printf '\e[0;32m%s\e[1;32m\n%s\n' "$(for HL in "${TSFILE[@]}" ; do cut -d\) -f1 <<< "${HL//###/	}" | cut -f 2 ; done )" "Help for '${0##*/}': DONE" ; exit ; }
 # use pocket mode
-[[ -n "${1:-}" ]] && { [[ "${1//-}" = [Pp]* ]] && POCKET=0 && CAMID=2 && echo using pocket mode || CAMID=${1:-2} ; }
+[[ -n "${1:-}" ]] && { [[ "${1//-}" = [Pp]* ]] && POCKET=0 && CAMID=2 && printf '\e[0;34m%s\n' "IM pocket mode enabled." || CAMID=${1:-2} ; }
 _DEFCAM_ () { # set default camera id
 for CAMID in $(termux-camera-info | grep -w "id" | cut -d"\"" -f 4)
 do
 if [ "$CAMID" == 2 ]
 then
-CAMID=2 
+CAMID=2
 break
 fi
 done
