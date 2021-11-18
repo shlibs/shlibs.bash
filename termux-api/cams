@@ -210,7 +210,7 @@ printf '\e[0;34m%s\e[1;36m%s\n\e[1;32m%s\n' "IM " "running these background jobs
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "IM " "ps aux" " shows processes running."
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\e[0m\n' "The command " "termux-wake-unlock" " stops the wake lock."
 sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Programs 'convert' and 'ffmpeg' will continue to run in the background until they are done.
-### More options in addition to image checking and rotation can be added by editing this file by using the magick command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
+### More options than image checking and rotation can be added by editing magick commands in this file;  Command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
 ### Loop example: 'while : ; do cams 2 11 2 256 r 90 2 ; done'
 ### Semantics: 'cams camid totalframes+1 framespersecond threshold rotate degrees exitwait'
 ### Usage: 'cams 2 11 2 256 r 90 2'
