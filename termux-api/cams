@@ -3,9 +3,11 @@
 # Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
 # https://sdrausty.github.io/TermuxArch/README has info about this project.
 # https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
+### Take pictures from device cameras and create a timelapse moving sequence of images.
 ### Example usage: 'cams 2 11 2 256 r 90 2'
 ### Loop example: 'while true ; do cams ; done'
-### All seven arguments are listed here, including their default values;  If run with no arguments, the default values will be used:
+### Semantics: camid totalframes+1 framespersecond threshold rotate degrees exitwait
+### All seven arguments are listed here, including their default values;  If run without any arguments, the default values will be used tobcreate a timelapse moving sequence of images:
 ##############################################################################
 
 set -Eeuo pipefail
@@ -155,7 +157,7 @@ FRAMECOUNT="$((FRAMECOUNT + 1))"
 printf '\e[0;32m%s\e[1;32m%s\e[0;32m%s\n' "IF " "file $FRAMENAME added" " to que."
 if [ -n "${5:-}" ]
 then
-if [[ "${5//-}" = [Rr]* ]] ### [5] default no rotation:  R|r[otate]: useful for portrait orientation.  You can use R or r to activate rotation which is preset to 90° rotation.  The sixth argument can be used to enter a rotation angle instead of the preset 90° rotation,
+if [[ "${5//-}" = [Rr]* ]] ### [5] default no rotation:  R|r[otate]: useful for using device orientation.  You can use R or r to activate picture rotation which is preset to 0°, 90°, 180° and 270° rotation.  The sixth argument can be used to enter a desired rotation angle instead of the preset rotation,
 then
 # More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
 if [ "$OTSENSOR" -eq 0 ] || [ "$OTSENSOR" -eq -1 ]
