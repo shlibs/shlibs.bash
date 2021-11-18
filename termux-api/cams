@@ -4,10 +4,7 @@
 # https://sdrausty.github.io/TermuxArch/README has info about this project.
 # https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
 ### Take pictures from device cameras and create a timelapse moving sequence of images.
-### Example usage: 'cams 2 11 2 256 r 90 2'
-### Loop example: 'while true ; do cams ; done'
-### Semantics: camid totalframes+1 framespersecond threshold rotate degrees exitwait
-### All seven arguments are listed here, including their default values;  If run without any arguments, the default values will be used tobcreate a timelapse moving sequence of images:
+### All seven arguments are listed here, including their default values;  If run without any arguments, the default values will be used to create a timelapse moving sequence of images:
 ##############################################################################
 
 set -Eeuo pipefail
@@ -213,5 +210,7 @@ printf '\e[0;34m%s\e[1;36m%s\n\e[1;32m%s\n' "IM " "running these background jobs
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "IM " "ps aux" " shows processes running."
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\e[0m\n' "The command " "termux-wake-unlock" " stops the wake lock."
 sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Program 'ffmpeg' will continue to run in the background until its job of producing an animated gif and mpg file ends.
+### Example usage: 'cams 2 11 2 256 r 90 2'
+### Loop example: 'while true ; do cams ; done'
 ### Semantics: camid totalframes+1 framespersecond threshold rotate degrees exitwait
 # cams EOF
