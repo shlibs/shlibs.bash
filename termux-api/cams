@@ -180,7 +180,7 @@ printf '\e[0;36m%s' "IM mv $CAMID.$TIMESTAMP.mp4 ../mp4s/: " && mv "$CAMD.$TIMES
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s' "Starting command " "termux-wake-lock" ": "
 am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null && printf '\e[0;32m%s\n\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "DONE" "Command " "termux-wake-unlock" " stops the wake lock." || printf '\e[0;33m%s\e[0m\n' "UTP am startservice: Continuing..."
 # Please run 'pkg install ffmpeg imagemagick termux-api' before running this script.  Also ensure that Termux-api is installed, which is available at this https://github.com/termux/termux-api/actions/workflows/debug_build.yml webpage.
-{ command -v magick 1>/dev/null && command -v ffmpeg 1>/dev/null && ls "${PREFIX:-/data/data/com.termux/files/usr}"/libexec/termux-api >/dev/null 2>&1 ; } || pkg install ffmpeg imagemagick termux-api
+{ command -v magick 1>/dev/null && command -v ffmpeg 1>/dev/null && ls "${PREFIX:-/data/data/com.termux/files/usr}"/libexec/termux-api >/dev/null 2>&1 ; } || { command -v pkg 1>/dev/null && printf '\e[0;34m%s\e[0m' "IM running 'pkg install ffmpeg imagemagick termux-api': " && pkg install ffmpeg imagemagick termux-api ; } || { printf '\e[0;31m%s\n' "E Please run 'pkg install ffmpeg imagemagick termux-api' before running '${0##*/} $ARGS'." && exit 1 ; }
 # VLC media player APK can be downloaded from these https://www.videolan.org/vlc/download-android.html and https://get.videolan.org/vlc-android/3.3.4/ webpages.
 E0VAR=0
 FRAMECOUNT=0
