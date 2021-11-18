@@ -3,8 +3,7 @@
 # Hosting sdrausty.github.io/TermuxArch courtesy https://pages.github.com.
 # https://sdrausty.github.io/TermuxArch/README has info about this project.
 # https://sdrausty.github.io/TermuxArch/CONTRIBUTORS Thank you for your help.
-### Take pictures from device cameras and create a timelapse moving sequence of images.
-### All seven arguments are listed here, including their default values;  If run without any arguments, the default values will be used to create a timelapse moving sequence of images:
+### Take pictures from device cameras and create a timelapse moving sequence of images.  All seven arguments are listed here, including their default values;  If run without any arguments, the default values will be used to create a timelapse moving sequence of images:
 ##############################################################################
 
 set -Eeuo pipefail
@@ -152,14 +151,16 @@ else
 printf '\e[0;32m%s\n' "DONE"
 FRAMECOUNT="$((FRAMECOUNT + 1))"
 printf '\e[0;32m%s\e[1;32m%s\e[0;32m%s\n' "IF " "file $FRAMENAME added" " to que."
+### [5] default no rotation:  R|r[otate]: useful for using device orientation.  You can use R or r as the fifth argument to activate picture rotation which is preset to 0°, 90°, 180° and 270° rotation.  The sixth argument can be used to enter a desired rotation angle instead of the preset rotation,
+### [6] default none:  Enter desired picture rotation angle in digits if you want to use a set rotation angle,
+# More options in addition to image checking and rotation can be added by editing this file by using the magick command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
 if [ -n "${5:-}" ]
 then
-if [[ "${5//-}" = [Rr]* ]] ### [5] default no rotation:  R|r[otate]: useful for using device orientation.  You can use R or r to activate picture rotation which is preset to 0°, 90°, 180° and 270° rotation.  The sixth argument can be used to enter a desired rotation angle instead of the preset rotation,
+if [[ "${5//-}" = [Rr]* ]]
 then
-# More options in addition to image checking and rotation can be added by editing this file at the magick rotation command;  The command line options for magick are listed at this https://imagemagick.org/script/command-line-options.php webpage.
 if [ "$OTSENSOR" -eq 0 ] || [ "$OTSENSOR" -eq -1 ]
 then
-printf '\e[0;36m%s' "IR rotating file $FRAMENAME by ${6:-90}°: " ### [6] defaults 0°, 90°, 180° and 270°:  Enter desired picture rotation angle in digits if you want to use another rotation angle,
+printf '\e[0;36m%s' "IR rotating file $FRAMENAME by ${6:-90}°: "
 nice -n 20 magick "$FRAMENAME" -rotate "${6:-90}" "$FRAMENAME".jpg
 mv "$FRAMENAME".jpg "$FRAMENAME"
 printf '\e[0;32m%s\n' "DONE"
@@ -209,8 +210,8 @@ PSAUX="$(grep -e convert -e ffmpeg <<< "${PSAUX[@]}" | cut -d":" -f 2-9999 | cut
 printf '\e[0;34m%s\e[1;36m%s\n\e[1;32m%s\n' "IM " "running these background jobs:" "${PSAUX[@]}"
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\n' "IM " "ps aux" " shows processes running."
 printf '\e[0;34m%s\e[1;36m%s\e[0;34m%s\e[0m\n' "The command " "termux-wake-unlock" " stops the wake lock."
-sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Program 'ffmpeg' will continue to run in the background until its job of producing an animated gif and mpg file ends.
-### Example usage: 'cams 2 11 2 256 r 90 2'
-### Loop example: 'while : ; do cams ; done'
-### Semantics: camid totalframes+1 framespersecond threshold rotate degrees exitwait
+sleep "${7:-2}" ### [7] default of two seconds:  Time before exit;  Programs 'convert' and 'ffmpeg' will continue to run in the background until they are done.
+### Loop example: 'while : ; do cams 2 11 2 256 r 90 2 ; done'
+### Semantics: 'cams camid totalframes+1 framespersecond threshold rotate degrees exitwait'
+### Usage: 'cams 2 11 2 256 r 90 2'
 # cams EOF
