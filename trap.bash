@@ -80,7 +80,7 @@ _WAKELOCK_() {
 	if [[ -z "${WAKEST:-}" ]]
 	then
 		_PRINTWLA_
-		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null || printf "%s\\n" "Unable to process am startservice: Continuing..."
+		am startservice --user 0 -a com.termux.service_wake_lock com.termux/com.termux.app.TermuxService 1>/dev/null || printf "%s" "Unable to process am startservice: Continuing..."
 		[ ! -e "$RDR/var/lock" ] && mkdir -p "$RDR/var/lock"
 		touch "$RDR/var/lock/wake.$PPID.lock"
 		_PRINTDONE_
@@ -112,7 +112,7 @@ _WAKEUNLOCK_() { # check for state, locks and unlock if lock files are not found
 			_PRINTHELP_
 		else 	# release wake lock when there are no lock files found
 			cd "$RDR"
-			am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService > /dev/null || printf "%s\\n" "Unable to process am startservice: Continuing..."
+			am startservice --user 0 -a com.termux.service_wake_unlock com.termux/com.termux.app.TermuxService > /dev/null || printf "%s" "Unable to process am startservice: Continuing..."
 			_PRINTDONE_
 			_PRINTHELP_
 		fi
@@ -139,7 +139,7 @@ _PRINTWLD_() {
 }
 
 _INITLOCK_ () {
-	COMMANDIF="$(command -v am)" || printf "%s\\n" "Unable to process am startservice: Continuing..."
+	COMMANDIF="$(command -v am)" || printf "%s" "Unable to process am startservice: Continuing..."
 	if [[ "$COMMANDIF" = "" ]]
 	then
 		printf "\\n\\e[1;48;5;138m %s\\e[0m\\n\\n" "BuildAPKs WARNING: File ${0##*/} trap.bash cannot use wake lock!"
