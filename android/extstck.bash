@@ -3,7 +3,7 @@
 # https://sdrausty.github.io hosted courtesy https://pages.github.com
 # Detect external storage: This feature is being developed
 #####################################################################
-set -eu
+set -eux
 EXTSTST="$(ls /storage/)"
 EXTSTST="${EXTSTST/self/}"
 EXTSTST="${EXTSTST/emulated/}"
@@ -20,4 +20,5 @@ _EXTSTCK_() {
 	[[ -w "$EXTSTTD" ]] &&  printf "%s" "Detected writable external $EXTSTTD storage space : $FILECKSTRING continuing : " && export EXTSTCK=0
 	printf "%s" "Check external storage installation $FILECKSTRING : DONE : "
 }
+_EXTSTCK_
 # extstck.bash EOF
