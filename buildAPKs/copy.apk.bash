@@ -6,7 +6,7 @@
 set -Eeuo pipefail
 shopt -s nullglob globstar
 _COPYAPK_ () {
-	if [ ! -e /storage/emulated/0/Android/media/com.termux/builtAPKs ]	#  directory does not exist
+	if [ ! -d /storage/emulated/0/Android/media/com.termux/builtAPKs ]	#  directory does not exist
 	then	# create directory
 		if [ -d /storage/emulated/0/Android/media/com.termux ]
 		then
@@ -15,8 +15,9 @@ _COPYAPK_ () {
 			cd /storage/emulated/0/Android/media/com.termux
 			mkdir -p builtAPKs || _PRINTCDMSG_
 			cd "$MPWD"
-	else
-			_PRINTCDMSG_
+		else
+				_PRINTCDMSG_
+		fi
 	fi
 	# if either directory is writable
 	if [ -w "/storage/emulated/0/" ] || [ -w "/storage/emulated/legacy/" ]
