@@ -8,7 +8,15 @@ shopt -s nullglob globstar
 _COPYAPK_ () {
 	if [ ! -e /storage/emulated/0/Android/media/com.termux/builtAPKs ]	#  directory does not exist
 	then	# create directory
-		mkdir -p /storage/emulated/0/Android/media/com.termux/builtAPKs || printf "\\e[1;1;38;5;124m%s\\e[1;1;38;5;122m%s\\e[1;32m%s\\e[0m\\n" "Could not create directory Android/media/com.termux/builtAPKs to deposit APK files.  " "Please create this directory in Android" ":  Continuing..."
+		if [ -d /storage/emulated/0/Android/media/com.termux ]
+		then
+			_PRINTCDMSG_() { printf "\\e[1;1;38;5;124m%s\\e[1;1;38;5;122m%s\\e[1;32m%s\\e[0m\\n" "Could not create directory /storage/emulated/0/Android/media/com.termux/builtAPKs to deposit APK files.  " "Please create this directory in Android:  " "Continuing..." ; }
+			MPWD="$PWD"
+			cd /storage/emulated/0/Android/media/com.termux
+			mkdir -p builtAPKs || _PRINTCDMSG_
+			cd "$MPWD"
+	else
+			_PRINTCDMSG_
 	fi
 	# if either directory is writable
 	if [ -w "/storage/emulated/0/" ] || [ -w "/storage/emulated/legacy/" ]
